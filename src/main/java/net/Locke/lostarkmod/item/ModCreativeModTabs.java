@@ -1,6 +1,7 @@
 package net.Locke.lostarkmod.item;
 
 import net.Locke.lostarkmod.LostArkMod;
+import net.Locke.lostarkmod.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -23,7 +24,8 @@ public class ModCreativeModTabs{
                 pOutput.accept(Moditems.SILLING_BOX.get());
                 pOutput.accept(Moditems.GOLD_LOSTARK.get());
 
-
+                pOutput.accept(ModBlocks.SILLING_BLOCK.get());
+                pOutput.accept(ModBlocks.GOLD_BLOCK.get());
 
                 pOutput.accept(Items.RAW_GOLD);
 

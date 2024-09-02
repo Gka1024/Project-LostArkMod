@@ -3,5 +3,9 @@
     "item.lostarkmod.silling_box" : "Silling Box",
     "item.lostarkmod.gold_lostark" : "Gold",
     
+    "block.lostarkmod.silling_block" : "Block of Silling",
+    "block.lostarkmod.gold_block" : "Block of gold",
+
+    
     "creativetab.lostark_tab" : "LostArk Mod Tab"
 }

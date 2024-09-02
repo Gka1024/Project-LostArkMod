@@ -2,6 +2,7 @@ package net.Locke.lostarkmod;
 
 import com.mojang.logging.LogUtils;
 
+import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.Moditems;
 import net.minecraft.client.Minecraft;
@@ -46,6 +47,7 @@ public class LostArkMod {
         ModCreativeModTabs.register(modEventBus);
 
         Moditems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);

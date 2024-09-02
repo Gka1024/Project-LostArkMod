@@ -8,8 +8,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;;
 
 public class Moditems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
-            LostArkMod.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, LostArkMod.MOD_ID);
 
     public static final RegistryObject<Item> SILLING = ITEMS.register("silling",
             () -> new Item(new Item.Properties()));
