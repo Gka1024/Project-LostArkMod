@@ -5,6 +5,7 @@ import net.Locke.lostarkmod.block.ModBlocks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,9 +24,25 @@ public class ModCreativeModTabs{
                 pOutput.accept(Moditems.SILLING.get());
                 pOutput.accept(Moditems.SILLING_BOX.get());
                 pOutput.accept(Moditems.GOLD_LOSTARK.get());
+                pOutput.accept(Moditems.DESTRUCTION_STONE.get());
+                pOutput.accept(Moditems.DESTRUCTION_STONE_HONOR.get());
+                pOutput.accept(Moditems.DESTRUCTION_STONE_GREAT_HONOR_.get());
+                pOutput.accept(Moditems.GUARDIAN_STONE.get());
+                pOutput.accept(Moditems.GUARDIAN_STONE_HONOR.get());
+                pOutput.accept(Moditems.GUARDIAN_STONE_GREAT_HONOR.get());
+                pOutput.accept(Moditems.HONOR_SHARD.get());
+                pOutput.accept(Moditems.HONOR_SHARD_PACK_SMALL.get());
+                pOutput.accept(Moditems.HONOR_SHARD_PACK_MEDIUM.get());
+                pOutput.accept(Moditems.HONOR_SHARD_PACK_LARGE.get());
+                pOutput.accept(Moditems.HONOR_LEAPSTONE.get());
+                pOutput.accept(Moditems.HONOR_LEAPSTONE_GREAT.get());
+                pOutput.accept(Moditems.HONOR_LEAPSTONE_MARVELOUS.get());
+                pOutput.accept(Moditems.HONOR_LEAPSTONE_SPLENDID.get());
 
                 pOutput.accept(ModBlocks.SILLING_BLOCK.get());
                 pOutput.accept(ModBlocks.GOLD_BLOCK.get());
+                pOutput.accept(ModBlocks.DESTRUCTION_ORE.get());
+                pOutput.accept(ModBlocks.GUARDIAN_ORE.get());
 
                 pOutput.accept(Items.RAW_GOLD);
 

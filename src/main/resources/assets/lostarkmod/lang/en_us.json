@@ -1,10 +1,26 @@
 {
     "item.lostarkmod.silling" : "Silling",
     "item.lostarkmod.silling_box" : "Silling Box",
-    "item.lostarkmod.gold_lostark" : "Gold",
+    "item.lostarkmod.destruction_stone" : "Destruction Stone",
+    "item.lostarkmod.destruction_stone_honor" : "Honor Destruction Stone",
+    "item.lostarkmod.destruction_stone_great_honor" : "Great Honor Destruction Stone",
+    "item.lostarkmod.guardian_stone" : "Guardian Stone",
+    "item.lostarkmod.guardian_stone_honor" : "Honor Guardian Stone",
+    "item.lostarkmod.guardian_stone_great_honor" : "Great Honor Guardian Stone",
+    "item.lostarkmod.honor_shard" : "Honor Shard",
+    "item.lostarkmod.honor_shard_pack_small" : "Small Honor Shard Package",
+    "item.lostarkmod.honor_shard_pack_medium" : "Medium Honor Shard Package",
+    "item.lostarkmod.honor_shard_pack_large" : "Large Honor Shard Package",
+    "item.lostarkmod.honor_leapstone" : "Honor Leapstone",
+    "item.lostarkmod.honor_leapstone_great" : "Great Honor Leapstone",
+    "item.lostarkmod.honor_leapstone_marvelous" : "Marvelous Honor Leapstone",
+    "item.lostarkmod.honor_leapstone_splendid" : "Splendid Honor Leapstone",
+    
     
     "block.lostarkmod.silling_block" : "Block of Silling",
     "block.lostarkmod.gold_block" : "Block of gold",
+    "block.lostarkmod.destruction_ore" : "Destruction Ore",
+    "block.lostarkmod.guardian_ore" : "Guardian Ore",
 
     
     "creativetab.lostark_tab" : "LostArk Mod Tab"

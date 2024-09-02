@@ -1,0 +1,6 @@
+{
+    "parent" : "item/generated",
+    "textures" : {
+        "layer0": "lostarkmod:item/honor_leapstone_marvelous"
+    }
+}

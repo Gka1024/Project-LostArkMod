@@ -64,6 +64,20 @@ public class LostArkMod {
             event.accept(Moditems.SILLING);
             event.accept(Moditems.SILLING_BOX);
             event.accept(Moditems.GOLD_LOSTARK);
+            event.accept(Moditems.DESTRUCTION_STONE);
+            event.accept(Moditems.DESTRUCTION_STONE_HONOR);
+            event.accept(Moditems.DESTRUCTION_STONE_GREAT_HONOR_);
+            event.accept(Moditems.GUARDIAN_STONE);
+            event.accept(Moditems.GUARDIAN_STONE_HONOR);
+            event.accept(Moditems.GUARDIAN_STONE_GREAT_HONOR);
+            event.accept(Moditems.HONOR_SHARD);
+            event.accept(Moditems.HONOR_SHARD_PACK_SMALL);
+            event.accept(Moditems.HONOR_SHARD_PACK_MEDIUM);
+            event.accept(Moditems.HONOR_SHARD_PACK_LARGE);
+            event.accept(Moditems.HONOR_LEAPSTONE);
+            event.accept(Moditems.HONOR_LEAPSTONE_GREAT);
+            event.accept(Moditems.HONOR_LEAPSTONE_MARVELOUS);
+            event.accept(Moditems.HONOR_LEAPSTONE_SPLENDID);
             
 
         }
