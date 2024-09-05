@@ -21,6 +21,8 @@
     "block.lostarkmod.gold_block" : "Block of gold",
     "block.lostarkmod.destruction_ore" : "Destruction Ore",
     "block.lostarkmod.guardian_ore" : "Guardian Ore",
+    "block.lostarkmod.destruction_deepslate_ore" : "Destruction Deepslate Ore",
+    "block.lostarkmod.guardian_deepslate_ore" : "Guardian Deepslate Ore",
 
     
     "creativetab.lostark_tab" : "LostArk Mod Tab"

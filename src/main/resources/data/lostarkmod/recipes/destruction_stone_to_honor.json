@@ -1,0 +1,17 @@
+{
+    "type" : "minecraft:crafting_shaped",
+    "category" : "misc",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key":{
+        "#" : {
+            "item" : "lostarkmod:destruction_stone"
+        }
+    },
+    "result" : {
+        "item" : "lostarkmod:destruction_stone_honor"
+    }
+}

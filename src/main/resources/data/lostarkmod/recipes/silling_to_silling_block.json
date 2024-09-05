@@ -1,0 +1,17 @@
+{
+    "type" : "minecraft:crafting_shaped",
+    "category" : "misc",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key":{
+        "#" : {
+            "item" : "lostarkmod:silling"
+        }
+    },
+    "result" : {
+        "item" : "lostarkmod:silling_block"
+    }
+}

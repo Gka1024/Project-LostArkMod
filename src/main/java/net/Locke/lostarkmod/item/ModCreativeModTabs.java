@@ -43,6 +43,8 @@ public class ModCreativeModTabs{
                 pOutput.accept(ModBlocks.GOLD_BLOCK.get());
                 pOutput.accept(ModBlocks.DESTRUCTION_ORE.get());
                 pOutput.accept(ModBlocks.GUARDIAN_ORE.get());
+                pOutput.accept(ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get());
+                pOutput.accept(ModBlocks.GUARDIAN_DEEPSLATE_ORE.get());
 
                 pOutput.accept(Items.RAW_GOLD);
 

@@ -1,0 +1,13 @@
+{
+    "type" : "minecraft:crafting_shapeless",
+    "category" : "misc",
+    "ingredients" : [
+        {
+            "item" : "lostarkmod:destruction_stone_honor"
+        }
+    ],
+    "result": {
+        "item" : "lostarkmod:destruction_stone",
+        "count" : 9 
+    }
+}
