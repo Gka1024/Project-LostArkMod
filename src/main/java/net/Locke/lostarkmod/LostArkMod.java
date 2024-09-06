@@ -78,6 +78,20 @@ public class LostArkMod {
             event.accept(Moditems.HONOR_LEAPSTONE_GREAT);
             event.accept(Moditems.HONOR_LEAPSTONE_MARVELOUS);
             event.accept(Moditems.HONOR_LEAPSTONE_SPLENDID);
+            event.accept(Moditems.GOLD_BOX_LARGE);
+            event.accept(Moditems.GOLD_BOX);
+            event.accept(Moditems.GOLD_PILE);
+            event.accept(Moditems.GOLD_POCKET);
+            event.accept(Moditems.GOLDBAR_HUGE);
+            event.accept(Moditems.GOLDBAR_THICK);
+            event.accept(Moditems.GOLDBAR_THIN);
+            event.accept(Moditems.OREHA_FUSION_MATERIAL_ADVANCED);
+            event.accept(Moditems.OREHA_FUSION_MATERIAL_BASIC);
+            event.accept(Moditems.OREHA_FUSION_MATERIAL);
+            event.accept(Moditems.SOLAR_BLESSING);
+            event.accept(Moditems.SOLAR_GRACE);
+            event.accept(Moditems.SOLAR_PROTECTION);
+            
             
 
         }

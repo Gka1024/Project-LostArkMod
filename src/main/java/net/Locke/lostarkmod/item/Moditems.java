@@ -23,14 +23,16 @@ public class Moditems {
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> DESTRUCTION_STONE_HONOR = ITEMS.register("destruction_stone_honor",
                         () -> new Item(new Item.Properties()));
-        public static final RegistryObject<Item> DESTRUCTION_STONE_GREAT_HONOR_ = ITEMS.register("destruction_stone_great_honor",
+        public static final RegistryObject<Item> DESTRUCTION_STONE_GREAT_HONOR_ = ITEMS.register(
+                        "destruction_stone_great_honor",
                         () -> new Item(new Item.Properties()));
 
         public static final RegistryObject<Item> GUARDIAN_STONE = ITEMS.register("guardian_stone",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> GUARDIAN_STONE_HONOR = ITEMS.register("guardian_stone_honor",
                         () -> new Item(new Item.Properties()));
-        public static final RegistryObject<Item> GUARDIAN_STONE_GREAT_HONOR = ITEMS.register("guardian_stone_great_honor",
+        public static final RegistryObject<Item> GUARDIAN_STONE_GREAT_HONOR = ITEMS.register(
+                        "guardian_stone_great_honor",
                         () -> new Item(new Item.Properties()));
 
         public static final RegistryObject<Item> HONOR_SHARD = ITEMS.register("honor_shard",
@@ -49,6 +51,35 @@ public class Moditems {
         public static final RegistryObject<Item> HONOR_LEAPSTONE_MARVELOUS = ITEMS.register("honor_leapstone_marvelous",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> HONOR_LEAPSTONE_SPLENDID = ITEMS.register("honor_leapstone_splendid",
+                        () -> new Item(new Item.Properties()));
+
+        public static final RegistryObject<Item> GOLD_BOX_LARGE = ITEMS.register("gold_box_large",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> GOLD_BOX = ITEMS.register("gold_box",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> GOLD_PILE = ITEMS.register("gold_pile",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> GOLD_POCKET = ITEMS.register("gold_pocket",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> GOLDBAR_HUGE = ITEMS.register("goldbar_huge",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> GOLDBAR_THICK = ITEMS.register("goldbar_thick",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> GOLDBAR_THIN = ITEMS.register("goldbar_thin",
+                        () -> new Item(new Item.Properties()));
+
+        public static final RegistryObject<Item> OREHA_FUSION_MATERIAL_ADVANCED = ITEMS.register("oreha_fusion_material_advanced",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> OREHA_FUSION_MATERIAL_BASIC = ITEMS.register("oreha_fusion_material_basic",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> OREHA_FUSION_MATERIAL = ITEMS.register("oreha_fusion_material",
+                        () -> new Item(new Item.Properties()));
+                        
+        public static final RegistryObject<Item> SOLAR_BLESSING = ITEMS.register("solar_blessing",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> SOLAR_GRACE = ITEMS.register("solar_grace",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> SOLAR_PROTECTION = ITEMS.register("solar_protection",
                         () -> new Item(new Item.Properties()));
 
         public static void register(IEventBus eventbus) {

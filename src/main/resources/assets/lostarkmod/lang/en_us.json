@@ -15,6 +15,20 @@
     "item.lostarkmod.honor_leapstone_great" : "Great Honor Leapstone",
     "item.lostarkmod.honor_leapstone_marvelous" : "Marvelous Honor Leapstone",
     "item.lostarkmod.honor_leapstone_splendid" : "Splendid Honor Leapstone",
+    "item.lostarkmod.gold_box_large" : "Large Gold Box",
+    "item.lostarkmod.gold_box" : "Gold Box",
+    "item.lostarkmod.gold_pile" : "Gold Pile",
+    "item.lostarkmod.gold_pocket" : "Gold Pocket",
+    "item.lostarkmod.goldbar_huge" : "Huge Goldbar",
+    "item.lostarkmod.goldbar_thick" : "Thick Goldbar",
+    "item.lostarkmod.goldbar_thin" : "Thin Goldbar",
+    "item.lostarkmod.oreha_fusion_material_advanced" : "Advanced Oreha Fusion Material",
+    "item.lostarkmod.oreha_fusion_material_basic" : "Basic Oreha Fusion Material",
+    "item.lostarkmod.oreha_fusion_material" : "Oreha Fusion Material",
+    "item.lostarkmod.solar_blessing" : "Solar Blessing",
+    "item.lostarkmod.solar_grace" : "Solar Grace",
+    "item.lostarkmod.solar_protection" : "Solar Protection",
+    
     
     
     "block.lostarkmod.silling_block" : "Block of Silling",

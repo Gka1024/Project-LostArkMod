@@ -12,9 +12,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModCreativeModTabs{
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-        DeferredRegister.create(Registries.CREATIVE_MODE_TAB, LostArkMod.MOD_ID);
+public class ModCreativeModTabs {
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister
+            .create(Registries.CREATIVE_MODE_TAB, LostArkMod.MOD_ID);
 
     public static final RegistryObject<CreativeModeTab> LOSTARK_TAB = CREATIVE_MODE_TABS.register("lostark_tab",
         () -> CreativeModeTab.builder().icon(() -> new ItemStack(Moditems.SILLING.get()))
@@ -38,6 +38,19 @@ public class ModCreativeModTabs{
                 pOutput.accept(Moditems.HONOR_LEAPSTONE_GREAT.get());
                 pOutput.accept(Moditems.HONOR_LEAPSTONE_MARVELOUS.get());
                 pOutput.accept(Moditems.HONOR_LEAPSTONE_SPLENDID.get());
+                pOutput.accept(Moditems.GOLD_BOX_LARGE.get());
+                pOutput.accept(Moditems.GOLD_BOX.get());
+                pOutput.accept(Moditems.GOLD_PILE.get());
+                pOutput.accept(Moditems.GOLD_POCKET.get());
+                pOutput.accept(Moditems.GOLDBAR_HUGE.get());
+                pOutput.accept(Moditems.GOLDBAR_THICK.get());
+                pOutput.accept(Moditems.GOLDBAR_THIN.get());
+                pOutput.accept(Moditems.OREHA_FUSION_MATERIAL_ADVANCED.get());
+                pOutput.accept(Moditems.OREHA_FUSION_MATERIAL_BASIC.get());
+                pOutput.accept(Moditems.OREHA_FUSION_MATERIAL.get());
+                pOutput.accept(Moditems.SOLAR_BLESSING.get());
+                pOutput.accept(Moditems.SOLAR_GRACE.get());
+                pOutput.accept(Moditems.SOLAR_PROTECTION.get());
 
                 pOutput.accept(ModBlocks.SILLING_BLOCK.get());
                 pOutput.accept(ModBlocks.GOLD_BLOCK.get());
@@ -51,8 +64,7 @@ public class ModCreativeModTabs{
             })
         .build());
 
-    public static void register(IEventBus eventBus)
-    {
+    public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);
     }
 }
