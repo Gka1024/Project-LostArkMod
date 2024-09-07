@@ -91,7 +91,12 @@ public class LostArkMod {
             event.accept(Moditems.OREHA_FUSION_MATERIAL);
             event.accept(Moditems.SOLAR_BLESSING);
             event.accept(Moditems.SOLAR_GRACE);
-            event.accept(Moditems.SOLAR_PROTECTION);
+            event.accept(Moditems.NECKLACE);
+            
+            event.accept(Moditems.SALVATION_HELMET);
+            event.accept(Moditems.SALVATION_CHESTPLATE);
+            event.accept(Moditems.SALVATION_LEGGINGS);
+            event.accept(Moditems.SALVATION_BOOTS);
             
             
 

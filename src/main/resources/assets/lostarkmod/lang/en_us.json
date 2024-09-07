@@ -1,6 +1,8 @@
 {
+    "item.lostarkmod.mokoko" : "Mokoko",
     "item.lostarkmod.silling" : "Silling",
     "item.lostarkmod.silling_box" : "Silling Box",
+    "item.lostarkmod.gold_lostark" : "Gold",
     "item.lostarkmod.destruction_stone" : "Destruction Stone",
     "item.lostarkmod.destruction_stone_honor" : "Honor Destruction Stone",
     "item.lostarkmod.destruction_stone_great_honor" : "Great Honor Destruction Stone",
@@ -28,7 +30,13 @@
     "item.lostarkmod.solar_blessing" : "Solar Blessing",
     "item.lostarkmod.solar_grace" : "Solar Grace",
     "item.lostarkmod.solar_protection" : "Solar Protection",
+    "item.lostarkmod.necklace" : "necklace temp",
+
     
+    "item.lostarkmod.salvation_helmet" : "Salvation Helmet",
+    "item.lostarkmod.salvation_chestplate" : "Salvation Chestplate",
+    "item.lostarkmod.salvation_leggings" : "Salvation Leggings",
+    "item.lostarkmod.salvation_boots" : "Salvation Boots",
     
     
     "block.lostarkmod.silling_block" : "Block of Silling",

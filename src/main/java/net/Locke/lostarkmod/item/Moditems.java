@@ -1,7 +1,9 @@
 package net.Locke.lostarkmod.item;
 
 import net.Locke.lostarkmod.LostArkMod;
+import net.Locke.lostarkmod.item.custom.ModArmorItem;
 import net.Locke.lostarkmod.item.custom.SillingBoxItem;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -79,6 +81,8 @@ public class Moditems {
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> OREHA_FUSION_MATERIAL = ITEMS.register("oreha_fusion_material",
                         () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> NECKLACE = ITEMS.register("necklace",
+                        () -> new Item(new Item.Properties()));
 
         public static final RegistryObject<Item> SOLAR_BLESSING = ITEMS.register("solar_blessing",
                         () -> new Item(new Item.Properties()));
@@ -86,6 +90,17 @@ public class Moditems {
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> SOLAR_PROTECTION = ITEMS.register("solar_protection",
                         () -> new Item(new Item.Properties()));
+
+        public static final RegistryObject<Item> SALVATION_HELMET = ITEMS.register("salvation_helmet",
+                        () -> new ModArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.HELMET, new Item.Properties()));
+        public static final RegistryObject<Item> SALVATION_CHESTPLATE = ITEMS.register("salvation_chestplate",
+                        () -> new ArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.CHESTPLATE,
+                                        new Item.Properties()));
+        public static final RegistryObject<Item> SALVATION_LEGGINGS = ITEMS.register("salvation_leggings",
+                        () -> new ArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.LEGGINGS,
+                                        new Item.Properties()));
+        public static final RegistryObject<Item> SALVATION_BOOTS = ITEMS.register("salvation_boots",
+                        () -> new ArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.BOOTS, new Item.Properties()));
 
         public static void register(IEventBus eventbus) {
                 ITEMS.register(eventbus);

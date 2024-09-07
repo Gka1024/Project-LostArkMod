@@ -2,16 +2,15 @@
     "type" : "minecraft:crafting_shaped",
     "category" : "misc",
     "pattern": [
-        "###",
-        "###",
-        "###"
+        "##",
+        "##"
     ],
     "key":{
         "#" : {
-            "item" : "lostarkmod:gold_lostark"
+            "item" : "minecraft:wheat_seeds"
         }
     },
     "result" : {
-        "item" : "lostarkmod:gold_pile"
+        "item" : "lostarkmod:mokoko"
     }
 }
