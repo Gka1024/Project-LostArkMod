@@ -61,6 +61,7 @@ public class LostArkMod {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(Moditems.MOKOKO);
             event.accept(Moditems.SILLING);
             event.accept(Moditems.SILLING_BOX);
             event.accept(Moditems.GOLD_LOSTARK);

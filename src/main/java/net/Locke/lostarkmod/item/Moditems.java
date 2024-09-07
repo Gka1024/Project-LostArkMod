@@ -12,6 +12,9 @@ public class Moditems {
         public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS,
                         LostArkMod.MOD_ID);
 
+        public static final RegistryObject<Item> MOKOKO = ITEMS.register("mokoko",
+                        () -> new Item(new Item.Properties()));
+
         public static final RegistryObject<Item> SILLING = ITEMS.register("silling",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> SILLING_BOX = ITEMS.register("silling_box",
@@ -68,13 +71,15 @@ public class Moditems {
         public static final RegistryObject<Item> GOLDBAR_THIN = ITEMS.register("goldbar_thin",
                         () -> new Item(new Item.Properties()));
 
-        public static final RegistryObject<Item> OREHA_FUSION_MATERIAL_ADVANCED = ITEMS.register("oreha_fusion_material_advanced",
+        public static final RegistryObject<Item> OREHA_FUSION_MATERIAL_ADVANCED = ITEMS.register(
+                        "oreha_fusion_material_advanced",
                         () -> new Item(new Item.Properties()));
-        public static final RegistryObject<Item> OREHA_FUSION_MATERIAL_BASIC = ITEMS.register("oreha_fusion_material_basic",
+        public static final RegistryObject<Item> OREHA_FUSION_MATERIAL_BASIC = ITEMS.register(
+                        "oreha_fusion_material_basic",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> OREHA_FUSION_MATERIAL = ITEMS.register("oreha_fusion_material",
                         () -> new Item(new Item.Properties()));
-                        
+
         public static final RegistryObject<Item> SOLAR_BLESSING = ITEMS.register("solar_blessing",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> SOLAR_GRACE = ITEMS.register("solar_grace",

@@ -21,6 +21,7 @@ public class ModCreativeModTabs {
             .title(Component.translatable("creativetab.lostark_tab"))
             .displayItems((pParameters, pOutput) -> {
                 //모드에 등장하는 아이템의 경우에는 뒤에 .get()을 붙일것. 마인크래프트 내에 존재하는 경우에는 하지 않아도 됨.
+                pOutput.accept(Moditems.MOKOKO.get());
                 pOutput.accept(Moditems.SILLING.get());
                 pOutput.accept(Moditems.SILLING_BOX.get());
                 pOutput.accept(Moditems.GOLD_LOSTARK.get());
