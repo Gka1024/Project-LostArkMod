@@ -44,6 +44,10 @@ public class ModBlocks {
                         () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
                                         .strength(4.5f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)));
 
+        public static final RegistryObject<Block> STONE_CARVING_TABLE = registerBlock("stone_carving_table",
+                        () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
+                                        .strength(4.5f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)));
+
         private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
                 RegistryObject<T> toReturn = BLOCKS.register(name, block);
                 registerBlockItem(name, toReturn);

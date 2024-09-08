@@ -90,9 +90,14 @@ public class Moditems {
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> SOLAR_PROTECTION = ITEMS.register("solar_protection",
                         () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> ABILITY_STONE = ITEMS.register("ability_stone",
+                        () -> new Item(new Item.Properties()));
+        public static final RegistryObject<Item> ABILITY_STONE_CARVED = ITEMS.register("ability_stone_carved",
+                        () -> new Item(new Item.Properties()));
 
         public static final RegistryObject<Item> SALVATION_HELMET = ITEMS.register("salvation_helmet",
-                        () -> new ModArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.HELMET, new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.HELMET,
+                                        new Item.Properties()));
         public static final RegistryObject<Item> SALVATION_CHESTPLATE = ITEMS.register("salvation_chestplate",
                         () -> new ArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.CHESTPLATE,
                                         new Item.Properties()));

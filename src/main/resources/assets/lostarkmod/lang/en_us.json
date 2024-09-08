@@ -31,6 +31,9 @@
     "item.lostarkmod.solar_grace" : "Solar Grace",
     "item.lostarkmod.solar_protection" : "Solar Protection",
     "item.lostarkmod.necklace" : "necklace temp",
+    "item.lostarkmod.ability_stone" : "Uncarved Ability Stone",
+    "item.lostarkmod.ability_stone_carved" : "Carved Ability Stone",
+
 
     
     "item.lostarkmod.salvation_helmet" : "Salvation Helmet",
@@ -45,6 +48,7 @@
     "block.lostarkmod.guardian_ore" : "Guardian Ore",
     "block.lostarkmod.destruction_deepslate_ore" : "Destruction Deepslate Ore",
     "block.lostarkmod.guardian_deepslate_ore" : "Guardian Deepslate Ore",
+    "block.lostarkmod.stone_carving_table" : "Stone Carving Table",
 
     
     "creativetab.lostark_tab" : "LostArk Mod Tab"

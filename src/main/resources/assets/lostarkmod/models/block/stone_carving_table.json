@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+      "down": "lostarkmod:block/stone_carving_table_bottom",
+      "east": "lostarkmod:block/stone_carving_table_side",
+      "north": "lostarkmod:block/stone_carving_table_front",
+      "particle": "lostarkmod:block/stone_carving_table_front",
+      "south": "lostarkmod:block/stone_carving_table_front",
+      "up": "lostarkmod:block/stone_carving_table_top",
+      "west": "lostarkmod:block/stone_carving_table_side"
+    }
+  }

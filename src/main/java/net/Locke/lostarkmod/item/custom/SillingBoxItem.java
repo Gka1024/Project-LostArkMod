@@ -53,9 +53,6 @@ public class SillingBoxItem extends Item {
     }
     // 특정 범위의 랜덤한 정수를 생성하는 메서드
     public static int getRandomIntInRange(int min, int max) {
-        if (min > max) {
-            throw new IllegalArgumentException("최솟값이 최댓값보다 커야 합니다.");
-        }
         Random random = new Random();
         return random.nextInt((max - min) + 1) + min;
     }
