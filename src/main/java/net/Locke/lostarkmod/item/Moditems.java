@@ -5,6 +5,7 @@ import net.Locke.lostarkmod.item.custom.ModArmorItem;
 import net.Locke.lostarkmod.item.custom.SillingBoxItem;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

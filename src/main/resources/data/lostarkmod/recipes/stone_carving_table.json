@@ -3,18 +3,18 @@
     "category" : "misc",
     "pattern": [
         "###",
-        "@@@",
-        "@$@"
+        "PPP",
+        "P@P"
     ],
     "key":{
         "#" : {
             "item" : "minecraft:cobblestone"
         },
         "@" : {
-            "item" : "minecraft:planks"
-        },
-        "$" : {
             "item" : "lostarkmod:mokoko"
+        },
+        "P" : {
+            "tag" : "minecraft:planks"
         }
     },
     "result" : {

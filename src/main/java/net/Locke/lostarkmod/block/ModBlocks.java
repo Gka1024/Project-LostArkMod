@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.function.Supplier;
 
 import net.Locke.lostarkmod.LostArkMod;
+import net.Locke.lostarkmod.block.custom.StoneCarvingTable;
 import net.Locke.lostarkmod.item.Moditems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -45,8 +46,7 @@ public class ModBlocks {
                                         .strength(4.5f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)));
 
         public static final RegistryObject<Block> STONE_CARVING_TABLE = registerBlock("stone_carving_table",
-                        () -> new DropExperienceBlock(BlockBehaviour.Properties.copy(Blocks.STONE)
-                                        .strength(4.5f).requiresCorrectToolForDrops(), UniformInt.of(3, 7)));
+                        () -> new StoneCarvingTable(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
 
         private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
                 RegistryObject<T> toReturn = BLOCKS.register(name, block);
