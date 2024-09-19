@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "lostarkmod:item/ability_stone_carved"
+  }
+}

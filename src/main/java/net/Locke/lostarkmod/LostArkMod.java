@@ -3,9 +3,13 @@ package net.Locke.lostarkmod;
 import com.mojang.logging.LogUtils;
 
 import net.Locke.lostarkmod.block.ModBlocks;
+import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.screen.ModMenuTypes;
+import net.Locke.lostarkmod.screen.StoneCarvingTableScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
@@ -49,7 +53,11 @@ public class LostArkMod {
         Moditems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModBlockEntities.register(modEventBus);
+        ModMenuTypes.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
+
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
     }
@@ -67,7 +75,7 @@ public class LostArkMod {
             event.accept(Moditems.GOLD_LOSTARK);
             event.accept(Moditems.DESTRUCTION_STONE);
             event.accept(Moditems.DESTRUCTION_STONE_HONOR);
-            event.accept(Moditems.DESTRUCTION_STONE_GREAT_HONOR_);
+            event.accept(Moditems.DESTRUCTION_STONE_GREAT_HONOR);
             event.accept(Moditems.GUARDIAN_STONE);
             event.accept(Moditems.GUARDIAN_STONE_HONOR);
             event.accept(Moditems.GUARDIAN_STONE_GREAT_HONOR);
@@ -117,7 +125,7 @@ public class LostArkMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            MenuScreens.register(ModMenuTypes.STONE_CARVING_MENU.get(), StoneCarvingTableScreen::new);
         }
     }
 }

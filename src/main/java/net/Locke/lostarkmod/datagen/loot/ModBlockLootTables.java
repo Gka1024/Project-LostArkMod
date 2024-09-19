@@ -27,9 +27,19 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         this.dropSelf(ModBlocks.SILLING_BLOCK.get());
+        this.dropSelf(ModBlocks.GOLD_BLOCK.get());
+
+        this.dropSelf(ModBlocks.STONE_CARVING_TABLE.get());
+
         this.add(ModBlocks.DESTRUCTION_ORE.get(),
-            block -> createCopperLikeOreDrops(ModBlocks.DESTRUCTION_ORE.get(), Moditems.DESTRUCTION_STONE.get()));
-        
+                block -> createCopperLikeOreDrops(ModBlocks.DESTRUCTION_ORE.get(), Moditems.DESTRUCTION_STONE.get()));
+        this.add(ModBlocks.GUARDIAN_ORE.get(),
+                block -> createCopperLikeOreDrops(ModBlocks.GUARDIAN_ORE.get(), Moditems.GUARDIAN_STONE.get()));
+        this.add(ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get(),
+                block -> createCopperLikeOreDrops(ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get(), Moditems.DESTRUCTION_STONE.get()));
+        this.add(ModBlocks.GUARDIAN_DEEPSLATE_ORE.get(),
+                block -> createCopperLikeOreDrops(ModBlocks.GUARDIAN_DEEPSLATE_ORE.get(), Moditems.GUARDIAN_STONE.get()));
+
     }
 
     protected LootTable.Builder createCopperLikeOreDrops(Block pBlock, Item item) {

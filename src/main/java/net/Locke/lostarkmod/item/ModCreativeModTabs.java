@@ -34,7 +34,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(Moditems.GOLDBAR_HUGE.get());
                         pOutput.accept(Moditems.DESTRUCTION_STONE.get());
                         pOutput.accept(Moditems.DESTRUCTION_STONE_HONOR.get());
-                        pOutput.accept(Moditems.DESTRUCTION_STONE_GREAT_HONOR_.get());
+                        pOutput.accept(Moditems.DESTRUCTION_STONE_GREAT_HONOR.get());
                         pOutput.accept(Moditems.GUARDIAN_STONE.get());
                         pOutput.accept(Moditems.GUARDIAN_STONE_HONOR.get());
                         pOutput.accept(Moditems.GUARDIAN_STONE_GREAT_HONOR.get());

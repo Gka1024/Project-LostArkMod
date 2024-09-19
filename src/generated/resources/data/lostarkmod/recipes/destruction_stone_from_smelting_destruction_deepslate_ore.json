@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "destruction_stone",
+  "ingredient": {
+    "item": "lostarkmod:destruction_deepslate_ore"
+  },
+  "result": "lostarkmod:destruction_stone"
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "lostarkmod:guardian_stone_honor"
+    }
+  },
+  "pattern": [
+    "DD",
+    "DD"
+  ],
+  "result": {
+    "item": "lostarkmod:guardian_stone_great_honor"
+  },
+  "show_notification": true
+}

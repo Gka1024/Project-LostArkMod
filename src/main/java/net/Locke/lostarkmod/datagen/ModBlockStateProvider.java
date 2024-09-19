@@ -4,7 +4,8 @@ import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.block.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.client.model.generators.BlockStateProvider;    
+import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -23,7 +24,8 @@ public class ModBlockStateProvider extends BlockStateProvider{
         blockWithItem(ModBlocks.GUARDIAN_ORE);
         blockWithItem(ModBlocks.DESTRUCTION_DEEPSLATE_ORE);
         blockWithItem(ModBlocks.GUARDIAN_DEEPSLATE_ORE);
-        blockWithItem(ModBlocks.STONE_CARVING_TABLE);
+
+        simpleBlockWithItem(ModBlocks.STONE_CARVING_TABLE.get(), new ModelFile.UncheckedModelFile(modLoc("block/stone_carving_table")));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject)

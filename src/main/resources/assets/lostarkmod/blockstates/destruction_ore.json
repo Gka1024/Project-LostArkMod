@@ -1,7 +1,0 @@
-{
-    "variants":{
-        "" : {
-            "model": "lostarkmod:block/destruction_ore"
-        }
-    }
-}

@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_destruction_stone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "lostarkmod:destruction_stone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lostarkmod:destruction_stone_honor_from_stone"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_destruction_stone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lostarkmod:destruction_stone_honor_from_stone"
+    ]
+  },
+  "sends_telemetry_event": false
+}

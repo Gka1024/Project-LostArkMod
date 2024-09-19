@@ -1,6 +1,0 @@
-{
-    "parent" : "item/generated",
-    "textures" : {
-        "layer0": "lostarkmod:item/destruction_stone_great_honor"
-    }
-}

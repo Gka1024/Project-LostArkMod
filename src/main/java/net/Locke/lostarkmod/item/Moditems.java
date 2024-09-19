@@ -29,7 +29,7 @@ public class Moditems {
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> DESTRUCTION_STONE_HONOR = ITEMS.register("destruction_stone_honor",
                         () -> new Item(new Item.Properties()));
-        public static final RegistryObject<Item> DESTRUCTION_STONE_GREAT_HONOR_ = ITEMS.register(
+        public static final RegistryObject<Item> DESTRUCTION_STONE_GREAT_HONOR = ITEMS.register(
                         "destruction_stone_great_honor",
                         () -> new Item(new Item.Properties()));
 
