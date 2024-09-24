@@ -42,8 +42,8 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
         addPlayerInventory(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler ->{
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 11));
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, 80, 59));
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 71, -13));
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, -21, -13));
         });
         
     }
@@ -54,7 +54,7 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
         {
             for(int j = 0; j < 9; ++j)
             {
-                this.addSlot(new Slot(inv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlot(new Slot(inv, j + i * 9 + 9, -1 + j * 18, 111 + i * 18));
             }
         }
     }
@@ -63,7 +63,7 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
     {
         for(int i = 0; i < 9; i++)
         {
-            this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
+            this.addSlot(new Slot(inv, i, (i * 18) - 1, 169));
         }
     }
 
@@ -133,6 +133,11 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
         }
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
+    }
+
+
+    public BlockEntity getBlockEntity() {
+        return this.blockEntity;
     }
 
 }

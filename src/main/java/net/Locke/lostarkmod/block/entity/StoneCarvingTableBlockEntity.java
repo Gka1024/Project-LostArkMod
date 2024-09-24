@@ -68,6 +68,11 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
             }
         };
     }
+    public void removeItemFromSlot(int slot, int count) {
+        if (itemHandler.getStackInSlot(slot).getCount() >= count) {
+            itemHandler.extractItem(slot, count, false);  // 해당 슬롯에서 count만큼 아이템을 제거
+        }
+    }
 
     @Override
     public @NotNull <T> LazyOptional getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -123,57 +128,5 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         progress = pTag.getInt("stone_carving_table.progress");
     }
 
-    public void tick(Level pLevel1, BlockPos pPos, BlockState pState1) {
-        if (hasRecipe()) {
-            increaseCraftingChanges();
-            setChanged(pLevel1, pPos, pState1);
-
-            if (hasProgressFinished()) {
-                craftItem();
-                resetProgress();
-            }
-        } else {
-            resetProgress();
-        }
-
-    }
-
-    private void resetProgress() {
-        progress = 0;
-    }
-
-    private void craftItem() {
-        ItemStack result = new ItemStack(Moditems.SILLING.get(), 1);
-        this.itemHandler.extractItem(SILLING_SLOT, 1, false);
-
-        this.itemHandler.setStackInSlot(STONE_SLOT, new ItemStack(result.getItem(),
-                this.itemHandler.getStackInSlot(STONE_SLOT).getCount() + result.getCount()));
-    }
-
-    private boolean hasProgressFinished() {
-        return progress >= maxProgress;
-    }
-
-    private void increaseCraftingChanges() {
-        progress++;
-    }
-
-    private boolean hasRecipe() {
-        boolean hasCraftingItem = this.itemHandler.getStackInSlot(SILLING_SLOT).getItem() == Moditems.SILLING.get();
-        ItemStack result = new ItemStack(Moditems.SILLING_BOX.get());
-
-        return hasCraftingItem && canInsertAmountIntoOutputSlot(result.getCount())
-                && canInsertItemIntoOutputSlot(result.getItem());
-    }
-
-    private boolean canInsertItemIntoOutputSlot(Item item) {
-        return this.itemHandler.getStackInSlot(STONE_SLOT).isEmpty()
-                || this.itemHandler.getStackInSlot(STONE_SLOT).is(item);
-    }
-
-    private boolean canInsertAmountIntoOutputSlot(int count) {
-        return this.itemHandler.getStackInSlot(STONE_SLOT).getCount() + count <= this.itemHandler
-                .getStackInSlot(STONE_SLOT).getMaxStackSize();
-    }
 
 }

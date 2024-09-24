@@ -6,6 +6,7 @@ import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.network.ModMessages;
 import net.Locke.lostarkmod.screen.ModMenuTypes;
 import net.Locke.lostarkmod.screen.StoneCarvingTableScreen;
 import net.minecraft.client.Minecraft;
@@ -63,7 +64,7 @@ public class LostArkMod {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-
+        ModMessages.register();
     }
 
     // Add the example block item to the building blocks tab
