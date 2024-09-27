@@ -4,6 +4,7 @@ import net.Locke.lostarkmod.item.Moditems;
 import net.Locke.lostarkmod.screen.StoneCarvingTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
@@ -38,6 +39,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
+    private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); 
+
     protected final ContainerData data;
     private int progress = 0;
     private int maxProgress = 78;
@@ -69,8 +72,18 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         };
     }
     public void removeItemFromSlot(int slot, int count) {
-        if (itemHandler.getStackInSlot(slot).getCount() >= count) {
-            itemHandler.extractItem(slot, count, false);  // 해당 슬롯에서 count만큼 아이템을 제거
+        ItemStack stack = items.get(slot); // 슬롯에서 아이템을 가져옴
+        if (!stack.isEmpty() && stack.getCount() >= count) {
+            // 아이템이 충분할 때만 제거
+            stack.shrink(count); // 지정된 개수만큼 아이템을 줄임
+            if (stack.isEmpty()) {
+                items.set(slot, ItemStack.EMPTY); // 아이템이 모두 소모되었을 때 빈 슬롯으로 설정
+            }
+            setChanged(); // 블록 엔티티가 변경되었음을 알림 (클라이언트와 동기화)
+        } else {
+            // 아이템이 부족하거나 없는 경우 처리
+            System.out.println("Not enough items to remove from slot " + slot);
+            // 필요시 추가 로직: 서버에서 플레이어에게 알림을 보내거나 다른 작업 수행
         }
     }
 
