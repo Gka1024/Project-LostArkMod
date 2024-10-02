@@ -7,6 +7,7 @@ import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.Moditems;
 import net.Locke.lostarkmod.network.ModMessages;
+import net.Locke.lostarkmod.screen.CustomInventoryScreen;
 import net.Locke.lostarkmod.screen.ModMenuTypes;
 import net.Locke.lostarkmod.screen.StoneCarvingTableScreen;
 import net.minecraft.client.Minecraft;
@@ -127,6 +128,7 @@ public class LostArkMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STONE_CARVING_MENU.get(), StoneCarvingTableScreen::new);
+            MenuScreens.register(ModMenuTypes.CUSTOM_INVENTORY_MENU.get(), CustomInventoryScreen::new);
         }
     }
 }

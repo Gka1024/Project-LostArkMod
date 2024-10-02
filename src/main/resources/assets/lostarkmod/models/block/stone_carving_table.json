@@ -255,18 +255,28 @@
 		}
 	],
 	"display": {
+		"thirdperson_righthand": {
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"thirdperson_lefthand": {
+			"scale": [0.25, 0.25, 0.255]
+		},
 		"firstperson_righthand": {
-			"translation": [0.25, 0, 1]
+			"rotation": [0, 140, 0],
+			"translation": [0, -1, 1.5],
+			"scale": [0.5, 0.5, 0.5]
 		},
 		"firstperson_lefthand": {
-			"translation": [0.25, 0, 1]
+			"rotation": [0, 140, 0],
+			"translation": [1, -0.25, 1.5],
+			"scale": [0.5, 0.5, 0.5]
 		},
 		"ground": {
 			"scale": [0.5, 0.5, 0.5]
 		},
 		"gui": {
-			"rotation": [25, 26, 0],
-			"scale": [0.75, 0.75, 0.8]
+			"rotation": [27, 147, 0],
+			"scale": [0.65, 0.65, 0.65]
 		}
 	},
 	"groups": [
@@ -301,11 +311,5 @@
 			"color": 0,
 			"children": [14, 15, 16, 17, 18]
 		}
-	],
-	"variants": {
-    "facing=north": { "model": "lostarkmod:block/stone_carving_table_texture" },
-    "facing=south": { "model": "lostarkmod:block/stone_carving_table_texture", "y": 180 },
-    "facing=west":  { "model": "lostarkmod:block/stone_carving_table_texture", "y": 270 },
-    "facing=east":  { "model": "lostarkmod:block/stone_carving_table_texture", "y": 90 }
-  }
+	]
 }

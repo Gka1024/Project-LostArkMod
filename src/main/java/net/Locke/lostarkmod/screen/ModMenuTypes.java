@@ -17,13 +17,15 @@ public class ModMenuTypes {
     public static final RegistryObject<MenuType<StoneCarvingTableMenu>> STONE_CARVING_MENU = registerMenuType(
             "stone_carving_menu", StoneCarvingTableMenu::new);
 
-    private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>>  registerMenuType(String name,
+            public static final RegistryObject<MenuType<CustomInventoryMenu>> CUSTOM_INVENTORY_MENU = registerMenuType(
+                "custom_inventory_menu", CustomInventoryMenu::new);
+
+    private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name,
             IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }
 
-    public static void register(IEventBus eventBus)
-    {
+    public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
     }
 }

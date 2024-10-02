@@ -71,21 +71,22 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
             }
         };
     }
+    public boolean hasEnoughItems(int slot, int count) {
+        ItemStack stack = itemHandler.getStackInSlot(slot); // 지정한 슬롯에서 아이템 가져오기
+        return !stack.isEmpty() && stack.getCount() >= count; // 아이템이 있고, 수량이 충분한지 여부 반환
+    }
+
     public void removeItemFromSlot(int slot, int count) {
-        ItemStack stack = items.get(slot); // 슬롯에서 아이템을 가져옴
+        ItemStack stack = itemHandler.getStackInSlot(slot); // itemHandler에서 슬롯 아이템을 가져옴
         if (!stack.isEmpty() && stack.getCount() >= count) {
-            // 아이템이 충분할 때만 제거
             stack.shrink(count); // 지정된 개수만큼 아이템을 줄임
             if (stack.isEmpty()) {
-                items.set(slot, ItemStack.EMPTY); // 아이템이 모두 소모되었을 때 빈 슬롯으로 설정
+                itemHandler.setStackInSlot(slot, ItemStack.EMPTY); // 아이템이 모두 소모되었을 때 빈 슬롯으로 설정
             }
             setChanged(); // 블록 엔티티가 변경되었음을 알림 (클라이언트와 동기화)
-        } else {
-            // 아이템이 부족하거나 없는 경우 처리
-            System.out.println("Not enough items to remove from slot " + slot);
-            // 필요시 추가 로직: 서버에서 플레이어에게 알림을 보내거나 다른 작업 수행
         }
     }
+    
 
     @Override
     public @NotNull <T> LazyOptional getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {

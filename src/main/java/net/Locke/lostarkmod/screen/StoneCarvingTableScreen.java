@@ -1,7 +1,5 @@
 package net.Locke.lostarkmod.screen;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.network.chat.Component;
 import net.Locke.lostarkmod.LostArkMod;
@@ -25,6 +23,8 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(LostArkMod.MOD_ID,
             "textures/gui/stone_carving_table_gui.png");
+    private static final ResourceLocation ICON_TEXTURE = new ResourceLocation(LostArkMod.MOD_ID,
+            "textures/gui/buff_icon.png");
 
     private String currentProbString = "75%";
     private int currentProbInt = 75;
@@ -55,8 +55,38 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
 
     private void onButtonClick(int buttonId) {
 
+        StoneCarvingTableBlockEntity blockEntity = (StoneCarvingTableBlockEntity) this.menu.getBlockEntity();
+
+        // 슬롯 1번에 아이템이 5개 이상 있는지 확인
+        if (!blockEntity.hasEnoughItems(1, 5)) {
+            // 아이템이 충분하지 않으면 알림을 출력하고 함수 종료
+            Minecraft.getInstance().player.displayClientMessage(
+                    Component.literal("Not enough items to proceed."), true);
+            return;
+        }
+
         int ranInt = (int) (Math.random() * 100) + 1;
         boolean isSuccess = false;
+
+        switch (buttonId) {
+            case 1:
+                if (opt1Index == 10)
+                    return;
+                break;
+
+            case 2:
+                if (opt2Index == 10)
+                    return;
+                break;
+
+            case 3:
+                if (opt3Index == 10)
+                    return;
+                break;
+
+            default:
+                break;
+        }
 
         if (ranInt <= currentProbInt) {
             isSuccess = true;
@@ -68,23 +98,18 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
                 currentProbInt += 10;
             }
         }
-        playButtonSound(isSuccess);
         sendRemoveItemPacket(1, 5);
         currentProbString = String.valueOf(currentProbInt) + "%";
 
-
         switch (buttonId) {
             case 1:
-                if (opt1Index == 10) {
-                    return;
-                }
                 if (isSuccess) {
                     stoneArray[0][opt1Index++] = 1;
                     opt1Cur++;
                 } else {
                     stoneArray[0][opt1Index++] = 2;
                 }
-
+                playButtonSound(isSuccess, false);
                 break;
 
             case 2:
@@ -97,7 +122,7 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
                 } else {
                     stoneArray[1][opt2Index++] = 2;
                 }
-
+                playButtonSound(isSuccess, false);
                 break;
 
             case 3:
@@ -110,6 +135,7 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
                 } else {
                     stoneArray[2][opt3Index++] = 2;
                 }
+                playButtonSound(isSuccess, true);
                 break;
 
             default:
@@ -125,13 +151,21 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
         ModMessages.INSTANCE.sendToServer(new RemoveItemPacket(blockPos, slot, count));
     }
 
-    private void playButtonSound(boolean isSuccess) {
+    private void playButtonSound(boolean isSuccess, boolean is3rd) {
         BlockPos pos = this.menu.getBlockEntity().getBlockPos();
 
-        Minecraft.getInstance().level.playSound(
-                Minecraft.getInstance().player, pos, 
-                isSuccess? SoundEvents.AMETHYST_BLOCK_BREAK : SoundEvents.GLASS_BREAK,
-                net.minecraft.sounds.SoundSource.BLOCKS);
+        if (!is3rd) {
+            Minecraft.getInstance().level.playSound(
+                    Minecraft.getInstance().player, pos,
+                    isSuccess ? SoundEvents.AMETHYST_BLOCK_BREAK : SoundEvents.GLASS_BREAK,
+                    net.minecraft.sounds.SoundSource.BLOCKS);
+        } else {
+            Minecraft.getInstance().level.playSound(
+                    Minecraft.getInstance().player, pos,
+                    isSuccess ? SoundEvents.DEEPSLATE_BREAK : SoundEvents.GLASS_BREAK,
+                    net.minecraft.sounds.SoundSource.BLOCKS);
+        }
+
     }
 
     @Override
@@ -216,13 +250,10 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
         guiGraphics.drawString(this.font, Component.literal(currentProbString), 164, 3, 16777215); // 확률 표시
         guiGraphics.drawString(this.font, Component.literal("5 Silling"), 10, -13, 16777215); // 실링 표시
 
-        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(opt1Cur)), 142, 13, 41961); // 1번 진행률
-                                                                                                               // 표시
-        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(opt2Cur)), 142, 35, 41961); // 2번 진행률
-                                                                                                               // 표시
-        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(opt3Cur)), 142, 65, 15602975); // 3번
-                                                                                                                  // 진행률
-                                                                                                                  // 표시
+        // 진행률 표시
+        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(opt1Cur)), 142, 13, 41961);
+        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(opt2Cur)), 142, 35, 41961);
+        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(opt3Cur)), 142, 65, 15602975);
 
     }
 
