@@ -1,6 +1,6 @@
 package net.Locke.lostarkmod.block.entity;
 
-import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.screen.StoneCarvingTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

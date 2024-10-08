@@ -1,7 +1,7 @@
 package net.Locke.lostarkmod.datagen;
 
 import net.Locke.lostarkmod.LostArkMod;
-import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -19,44 +19,44 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(Moditems.MOKOKO);
-        simpleItem(Moditems.SILLING);
-        simpleItem(Moditems.SILLING_BOX);
-        simpleItem(Moditems.GOLD_LOSTARK);
-        simpleItem(Moditems.DESTRUCTION_STONE);
-        simpleItem(Moditems.DESTRUCTION_STONE_HONOR);
-        simpleItem(Moditems.DESTRUCTION_STONE_GREAT_HONOR);
-        simpleItem(Moditems.GUARDIAN_STONE);
-        simpleItem(Moditems.GUARDIAN_STONE_HONOR);
-        simpleItem(Moditems.GUARDIAN_STONE_GREAT_HONOR);
-        simpleItem(Moditems.HONOR_SHARD);
-        simpleItem(Moditems.HONOR_SHARD_PACK_SMALL);
-        simpleItem(Moditems.HONOR_SHARD_PACK_MEDIUM);
-        simpleItem(Moditems.HONOR_SHARD_PACK_LARGE);
-        simpleItem(Moditems.HONOR_LEAPSTONE);
-        simpleItem(Moditems.HONOR_LEAPSTONE_GREAT);
-        simpleItem(Moditems.HONOR_LEAPSTONE_MARVELOUS);
-        simpleItem(Moditems.HONOR_LEAPSTONE_SPLENDID);
-        simpleItem(Moditems.GOLD_BOX_LARGE);
-        simpleItem(Moditems.GOLD_BOX);
-        simpleItem(Moditems.GOLD_PILE);
-        simpleItem(Moditems.GOLD_POCKET);
-        simpleItem(Moditems.GOLDBAR_HUGE);
-        simpleItem(Moditems.GOLDBAR_THICK);
-        simpleItem(Moditems.GOLDBAR_THIN);
-        simpleItem(Moditems.OREHA_FUSION_MATERIAL_ADVANCED);
-        simpleItem(Moditems.OREHA_FUSION_MATERIAL_BASIC);
-        simpleItem(Moditems.OREHA_FUSION_MATERIAL);
-        simpleItem(Moditems.NECKLACE);
-        simpleItem(Moditems.SOLAR_BLESSING);
-        simpleItem(Moditems.SOLAR_GRACE);
-        simpleItem(Moditems.SOLAR_PROTECTION);
-        simpleItem(Moditems.ABILITY_STONE);
-        simpleItem(Moditems.ABILITY_STONE_CARVED);
-        simpleItem(Moditems.SALVATION_HELMET);
-        simpleItem(Moditems.SALVATION_CHESTPLATE);
-        simpleItem(Moditems.SALVATION_LEGGINGS);
-        simpleItem(Moditems.SALVATION_BOOTS);
+        simpleItem(ModItems.MOKOKO);
+        simpleItem(ModItems.SILLING);
+        simpleItem(ModItems.SILLING_BOX);
+        simpleItem(ModItems.GOLD_LOSTARK);
+        simpleItem(ModItems.DESTRUCTION_STONE);
+        simpleItem(ModItems.DESTRUCTION_STONE_HONOR);
+        simpleItem(ModItems.DESTRUCTION_STONE_GREAT_HONOR);
+        simpleItem(ModItems.GUARDIAN_STONE);
+        simpleItem(ModItems.GUARDIAN_STONE_HONOR);
+        simpleItem(ModItems.GUARDIAN_STONE_GREAT_HONOR);
+        simpleItem(ModItems.HONOR_SHARD);
+        simpleItem(ModItems.HONOR_SHARD_PACK_SMALL);
+        simpleItem(ModItems.HONOR_SHARD_PACK_MEDIUM);
+        simpleItem(ModItems.HONOR_SHARD_PACK_LARGE);
+        simpleItem(ModItems.HONOR_LEAPSTONE);
+        simpleItem(ModItems.HONOR_LEAPSTONE_GREAT);
+        simpleItem(ModItems.HONOR_LEAPSTONE_MARVELOUS);
+        simpleItem(ModItems.HONOR_LEAPSTONE_SPLENDID);
+        simpleItem(ModItems.GOLD_BOX_LARGE);
+        simpleItem(ModItems.GOLD_BOX);
+        simpleItem(ModItems.GOLD_PILE);
+        simpleItem(ModItems.GOLD_POCKET);
+        simpleItem(ModItems.GOLDBAR_HUGE);
+        simpleItem(ModItems.GOLDBAR_THICK);
+        simpleItem(ModItems.GOLDBAR_THIN);
+        simpleItem(ModItems.OREHA_FUSION_MATERIAL_ADVANCED);
+        simpleItem(ModItems.OREHA_FUSION_MATERIAL_BASIC);
+        simpleItem(ModItems.OREHA_FUSION_MATERIAL);
+        simpleItem(ModItems.NECKLACE);
+        simpleItem(ModItems.SOLAR_BLESSING);
+        simpleItem(ModItems.SOLAR_GRACE);
+        simpleItem(ModItems.SOLAR_PROTECTION);
+        simpleItem(ModItems.ABILITY_STONE);
+        simpleItem(ModItems.ABILITY_STONE_CARVED);
+        simpleItem(ModItems.SALVATION_HELMET);
+        simpleItem(ModItems.SALVATION_CHESTPLATE);
+        simpleItem(ModItems.SALVATION_LEGGINGS);
+        simpleItem(ModItems.SALVATION_BOOTS);
 
     }
 

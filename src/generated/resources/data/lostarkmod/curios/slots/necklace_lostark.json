@@ -1,0 +1,8 @@
+{
+  "add_cosmetic": false,
+  "drop_rule": "ALWAYS_KEEP",
+  "icon": "lostarkmod:slot/necklace_lostark_icon",
+  "order": 2,
+  "render_toggle": false,
+  "size": 1
+}

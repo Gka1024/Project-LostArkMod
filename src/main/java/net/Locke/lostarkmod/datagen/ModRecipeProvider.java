@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 
 import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.block.ModBlocks;
-import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
-    private static final List<ItemLike> DESTRUCTION_SMELTABLES = List.of(Moditems.DESTRUCTION_STONE.get(),
+    private static final List<ItemLike> DESTRUCTION_SMELTABLES = List.of(ModItems.DESTRUCTION_STONE.get(),
             ModBlocks.DESTRUCTION_ORE.get(), ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get());
-    private static final List<ItemLike> GUARDIAN_SMELTABLES = List.of(Moditems.GUARDIAN_STONE.get(),
+    private static final List<ItemLike> GUARDIAN_SMELTABLES = List.of(ModItems.GUARDIAN_STONE.get(),
             ModBlocks.GUARDIAN_ORE.get(), ModBlocks.GUARDIAN_DEEPSLATE_ORE.get());
 
     public ModRecipeProvider(PackOutput pOutput) {
@@ -30,23 +30,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
-        oreSmelting(pWriter, DESTRUCTION_SMELTABLES, RecipeCategory.MISC, Moditems.DESTRUCTION_STONE.get(), 0.25f, 200,
+        oreSmelting(pWriter, DESTRUCTION_SMELTABLES, RecipeCategory.MISC, ModItems.DESTRUCTION_STONE.get(), 0.25f, 200,
                 "destruction_stone");
-        oreBlasting(pWriter, DESTRUCTION_SMELTABLES, RecipeCategory.MISC, Moditems.DESTRUCTION_STONE.get(), 0.25f, 200,
+        oreBlasting(pWriter, DESTRUCTION_SMELTABLES, RecipeCategory.MISC, ModItems.DESTRUCTION_STONE.get(), 0.25f, 200,
                 "destruction_stone");
-        oreSmelting(pWriter, GUARDIAN_SMELTABLES, RecipeCategory.MISC, Moditems.GUARDIAN_STONE.get(), 0.25f, 200,
-                "destruction_stone");
-        oreBlasting(pWriter, GUARDIAN_SMELTABLES, RecipeCategory.MISC, Moditems.GUARDIAN_STONE.get(), 0.25f, 200,
-                "destruction_stone");
+        oreSmelting(pWriter, GUARDIAN_SMELTABLES, RecipeCategory.MISC, ModItems.GUARDIAN_STONE.get(), 0.25f, 200,
+                "guardian_stone");
+        oreBlasting(pWriter, GUARDIAN_SMELTABLES, RecipeCategory.MISC, ModItems.GUARDIAN_STONE.get(), 0.25f, 200,
+                "guardian_stone");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Moditems.MOKOKO.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.MOKOKO.get())
                 .pattern("SS")
                 .pattern("SS")
                 .define('S', Items.WHEAT_SEEDS)
                 .unlockedBy("has_wheat_seeds", has(Items.WHEAT_SEEDS))
                 .save(pWriter);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Moditems.SILLING.get(), 9)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.SILLING.get(), 9)
                 .requires(ModBlocks.SILLING_BLOCK.get())
                 .unlockedBy(getHasName(ModBlocks.SILLING_BLOCK.get()), has(ModBlocks.SILLING_BLOCK.get()))
                 .save(pWriter);
@@ -55,75 +55,75 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("DDD")
                 .pattern("DDD")
                 .pattern("DDD")
-                .define('D', Moditems.SILLING.get())
-                .unlockedBy(getHasName(Moditems.SILLING.get()), has(Moditems.SILLING.get()))
+                .define('D', ModItems.SILLING.get())
+                .unlockedBy(getHasName(ModItems.SILLING.get()), has(ModItems.SILLING.get()))
                 .save(pWriter);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Moditems.DESTRUCTION_STONE_HONOR.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DESTRUCTION_STONE_HONOR.get())
                 .pattern("DDD")
                 .pattern("DDD")
                 .pattern("DDD")
-                .define('D', Moditems.DESTRUCTION_STONE.get())
-                .unlockedBy(getHasName(Moditems.DESTRUCTION_STONE.get()), has(Moditems.DESTRUCTION_STONE.get()))
+                .define('D', ModItems.DESTRUCTION_STONE.get())
+                .unlockedBy(getHasName(ModItems.DESTRUCTION_STONE.get()), has(ModItems.DESTRUCTION_STONE.get()))
                 .save(pWriter, LostArkMod.MOD_ID + ":destruction_stone_honor_from_stone");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Moditems.DESTRUCTION_STONE_GREAT_HONOR.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.DESTRUCTION_STONE_GREAT_HONOR.get())
                 .pattern("DD")
                 .pattern("DD")
-                .define('D', Moditems.DESTRUCTION_STONE_HONOR.get())
-                .unlockedBy(getHasName(Moditems.DESTRUCTION_STONE.get()), has(Moditems.DESTRUCTION_STONE.get()))
+                .define('D', ModItems.DESTRUCTION_STONE_HONOR.get())
+                .unlockedBy(getHasName(ModItems.DESTRUCTION_STONE.get()), has(ModItems.DESTRUCTION_STONE.get()))
                 .save(pWriter);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Moditems.DESTRUCTION_STONE.get(), 9)
-                .requires(Moditems.DESTRUCTION_STONE_HONOR.get())
-                .unlockedBy(getHasName(Moditems.DESTRUCTION_STONE_HONOR.get()),
-                        has(Moditems.DESTRUCTION_STONE_HONOR.get()))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DESTRUCTION_STONE.get(), 9)
+                .requires(ModItems.DESTRUCTION_STONE_HONOR.get())
+                .unlockedBy(getHasName(ModItems.DESTRUCTION_STONE_HONOR.get()),
+                        has(ModItems.DESTRUCTION_STONE_HONOR.get()))
                 .save(pWriter);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Moditems.DESTRUCTION_STONE_HONOR.get(), 4)
-                .requires(Moditems.DESTRUCTION_STONE_GREAT_HONOR.get())
-                .unlockedBy(getHasName(Moditems.DESTRUCTION_STONE_GREAT_HONOR.get()),
-                        has(Moditems.DESTRUCTION_STONE_GREAT_HONOR.get()))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.DESTRUCTION_STONE_HONOR.get(), 4)
+                .requires(ModItems.DESTRUCTION_STONE_GREAT_HONOR.get())
+                .unlockedBy(getHasName(ModItems.DESTRUCTION_STONE_GREAT_HONOR.get()),
+                        has(ModItems.DESTRUCTION_STONE_GREAT_HONOR.get()))
                 .save(pWriter, LostArkMod.MOD_ID + ":destruction_stone_honor_from_great");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Moditems.GUARDIAN_STONE_HONOR.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GUARDIAN_STONE_HONOR.get())
                 .pattern("DDD")
                 .pattern("DDD")
                 .pattern("DDD")
-                .define('D', Moditems.GUARDIAN_STONE.get())
-                .unlockedBy(getHasName(Moditems.GUARDIAN_STONE.get()), has(Moditems.GUARDIAN_STONE.get()))
+                .define('D', ModItems.GUARDIAN_STONE.get())
+                .unlockedBy(getHasName(ModItems.GUARDIAN_STONE.get()), has(ModItems.GUARDIAN_STONE.get()))
                 .save(pWriter, LostArkMod.MOD_ID + ":guardian_stone_honor_from_stone");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Moditems.GUARDIAN_STONE_GREAT_HONOR.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GUARDIAN_STONE_GREAT_HONOR.get())
                 .pattern("DD")
                 .pattern("DD")
-                .define('D', Moditems.GUARDIAN_STONE_HONOR.get())
-                .unlockedBy(getHasName(Moditems.GUARDIAN_STONE.get()), has(Moditems.GUARDIAN_STONE.get()))
+                .define('D', ModItems.GUARDIAN_STONE_HONOR.get())
+                .unlockedBy(getHasName(ModItems.GUARDIAN_STONE.get()), has(ModItems.GUARDIAN_STONE.get()))
                 .save(pWriter);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Moditems.GUARDIAN_STONE.get(), 9)
-                .requires(Moditems.GUARDIAN_STONE_HONOR.get())
-                .unlockedBy(getHasName(Moditems.GUARDIAN_STONE_HONOR.get()),
-                        has(Moditems.GUARDIAN_STONE_HONOR.get()))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.GUARDIAN_STONE.get(), 9)
+                .requires(ModItems.GUARDIAN_STONE_HONOR.get())
+                .unlockedBy(getHasName(ModItems.GUARDIAN_STONE_HONOR.get()),
+                        has(ModItems.GUARDIAN_STONE_HONOR.get()))
                 .save(pWriter);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Moditems.GUARDIAN_STONE_HONOR.get(), 4)
-                .requires(Moditems.GUARDIAN_STONE_GREAT_HONOR.get())
-                .unlockedBy(getHasName(Moditems.GUARDIAN_STONE_GREAT_HONOR.get()),
-                        has(Moditems.GUARDIAN_STONE_GREAT_HONOR.get()))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.GUARDIAN_STONE_HONOR.get(), 4)
+                .requires(ModItems.GUARDIAN_STONE_GREAT_HONOR.get())
+                .unlockedBy(getHasName(ModItems.GUARDIAN_STONE_GREAT_HONOR.get()),
+                        has(ModItems.GUARDIAN_STONE_GREAT_HONOR.get()))
                 .save(pWriter, LostArkMod.MOD_ID + ":guardian_stone_honor_from_great");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, Moditems.GOLD_PILE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ModItems.GOLD_PILE.get())
                 .pattern("DDD")
                 .pattern("DDD")
                 .pattern("DDD")
-                .define('D', Moditems.GOLD_LOSTARK.get())
-                .unlockedBy(getHasName(Moditems.GOLD_LOSTARK.get()), has(Moditems.GOLD_LOSTARK.get()))
+                .define('D', ModItems.GOLD_LOSTARK.get())
+                .unlockedBy(getHasName(ModItems.GOLD_LOSTARK.get()), has(ModItems.GOLD_LOSTARK.get()))
                 .save(pWriter);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Moditems.GOLD_LOSTARK.get(), 9)
-                .requires(Moditems.GOLD_PILE.get())
-                .unlockedBy(getHasName(Moditems.GOLD_PILE.get()), has(Moditems.GOLD_PILE.get()))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.GOLD_LOSTARK.get(), 9)
+                .requires(ModItems.GOLD_PILE.get())
+                .unlockedBy(getHasName(ModItems.GOLD_PILE.get()), has(ModItems.GOLD_PILE.get()))
                 .save(pWriter);
 
     }

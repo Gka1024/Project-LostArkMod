@@ -1,0 +1,8 @@
+{
+  "add_cosmetic": false,
+  "drop_rule": "ALWAYS_KEEP",
+  "icon": "lostarkmod:slot/ability_stone_icon",
+  "order": 5,
+  "render_toggle": false,
+  "size": 1
+}

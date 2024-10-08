@@ -50,6 +50,8 @@
     "block.lostarkmod.guardian_deepslate_ore" : "Guardian Deepslate Ore",
     "block.lostarkmod.stone_carving_table" : "Stone Carving Table",
 
+    "curios.identifier.ability_stone": "Ability Stone Slot",
+
     
     "creativetab.lostark_tab" : "LostArk Mod Tab"
 }

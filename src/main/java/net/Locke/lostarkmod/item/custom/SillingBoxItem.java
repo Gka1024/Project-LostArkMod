@@ -1,7 +1,7 @@
 package net.Locke.lostarkmod.item.custom;
 
 import java.util.Random;
-import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -29,7 +29,7 @@ public class SillingBoxItem extends Item {
             ItemStack itemInHand = player.getItemInHand(hand);
 
             // 특정 아이템 생성
-            ItemStack itemToGive = new ItemStack(Moditems.SILLING.get(), randomAmount); // 원하는 아이템으로 변경
+            ItemStack itemToGive = new ItemStack(ModItems.SILLING.get(), randomAmount); // 원하는 아이템으로 변경
             ItemStack leftoverItem = itemToGive.copy(); // 남은 아이템을 저장
 
             // 아이템 지급 시도

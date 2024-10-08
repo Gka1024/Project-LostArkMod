@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 
 import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.block.custom.StoneCarvingTable;
-import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -55,7 +55,7 @@ public class ModBlocks {
         }
 
         private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block) {
-                return Moditems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+                return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
         }
 
         public static void register(IEventBus eventBus) {

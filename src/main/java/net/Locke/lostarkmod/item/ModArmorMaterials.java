@@ -11,7 +11,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public enum ModArmorMaterials implements ArmorMaterial {
     SALVATION("salvation", 26, new int[] { 5, 7, 5, 4 },
-            25, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, () -> Ingredient.of(Moditems.SILLING.get()));
+            25, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, () -> Ingredient.of(ModItems.SILLING.get()));
 
     private final String name;
     private final int durabilityMultiplier;

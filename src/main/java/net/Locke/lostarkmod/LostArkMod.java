@@ -5,15 +5,17 @@ import com.mojang.logging.LogUtils;
 import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
-import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.network.ModMessages;
-import net.Locke.lostarkmod.screen.CustomInventoryScreen;
 import net.Locke.lostarkmod.screen.ModMenuTypes;
 import net.Locke.lostarkmod.screen.StoneCarvingTableScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -52,7 +54,7 @@ public class LostArkMod {
 
         ModCreativeModTabs.register(modEventBus);
 
-        Moditems.register(modEventBus);
+        ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
@@ -71,46 +73,44 @@ public class LostArkMod {
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(Moditems.MOKOKO);
-            event.accept(Moditems.SILLING);
-            event.accept(Moditems.SILLING_BOX);
-            event.accept(Moditems.GOLD_LOSTARK);
-            event.accept(Moditems.DESTRUCTION_STONE);
-            event.accept(Moditems.DESTRUCTION_STONE_HONOR);
-            event.accept(Moditems.DESTRUCTION_STONE_GREAT_HONOR);
-            event.accept(Moditems.GUARDIAN_STONE);
-            event.accept(Moditems.GUARDIAN_STONE_HONOR);
-            event.accept(Moditems.GUARDIAN_STONE_GREAT_HONOR);
-            event.accept(Moditems.HONOR_SHARD);
-            event.accept(Moditems.HONOR_SHARD_PACK_SMALL);
-            event.accept(Moditems.HONOR_SHARD_PACK_MEDIUM);
-            event.accept(Moditems.HONOR_SHARD_PACK_LARGE);
-            event.accept(Moditems.HONOR_LEAPSTONE);
-            event.accept(Moditems.HONOR_LEAPSTONE_GREAT);
-            event.accept(Moditems.HONOR_LEAPSTONE_MARVELOUS);
-            event.accept(Moditems.HONOR_LEAPSTONE_SPLENDID);
-            event.accept(Moditems.GOLD_BOX_LARGE);
-            event.accept(Moditems.GOLD_BOX);
-            event.accept(Moditems.GOLD_PILE);
-            event.accept(Moditems.GOLD_POCKET);
-            event.accept(Moditems.GOLDBAR_HUGE);
-            event.accept(Moditems.GOLDBAR_THICK);
-            event.accept(Moditems.GOLDBAR_THIN);
-            event.accept(Moditems.OREHA_FUSION_MATERIAL_ADVANCED);
-            event.accept(Moditems.OREHA_FUSION_MATERIAL_BASIC);
-            event.accept(Moditems.OREHA_FUSION_MATERIAL);
-            event.accept(Moditems.SOLAR_BLESSING);
-            event.accept(Moditems.SOLAR_GRACE);
-            event.accept(Moditems.NECKLACE);
-            event.accept(Moditems.ABILITY_STONE);
-            event.accept(Moditems.ABILITY_STONE_CARVED);
-            
-            event.accept(Moditems.SALVATION_HELMET);
-            event.accept(Moditems.SALVATION_CHESTPLATE);
-            event.accept(Moditems.SALVATION_LEGGINGS);
-            event.accept(Moditems.SALVATION_BOOTS);
-            
-            
+            event.accept(ModItems.MOKOKO);
+            event.accept(ModItems.SILLING);
+            event.accept(ModItems.SILLING_BOX);
+            event.accept(ModItems.GOLD_LOSTARK);
+            event.accept(ModItems.DESTRUCTION_STONE);
+            event.accept(ModItems.DESTRUCTION_STONE_HONOR);
+            event.accept(ModItems.DESTRUCTION_STONE_GREAT_HONOR);
+            event.accept(ModItems.GUARDIAN_STONE);
+            event.accept(ModItems.GUARDIAN_STONE_HONOR);
+            event.accept(ModItems.GUARDIAN_STONE_GREAT_HONOR);
+            event.accept(ModItems.HONOR_SHARD);
+            event.accept(ModItems.HONOR_SHARD_PACK_SMALL);
+            event.accept(ModItems.HONOR_SHARD_PACK_MEDIUM);
+            event.accept(ModItems.HONOR_SHARD_PACK_LARGE);
+            event.accept(ModItems.HONOR_LEAPSTONE);
+            event.accept(ModItems.HONOR_LEAPSTONE_GREAT);
+            event.accept(ModItems.HONOR_LEAPSTONE_MARVELOUS);
+            event.accept(ModItems.HONOR_LEAPSTONE_SPLENDID);
+            event.accept(ModItems.GOLD_BOX_LARGE);
+            event.accept(ModItems.GOLD_BOX);
+            event.accept(ModItems.GOLD_PILE);
+            event.accept(ModItems.GOLD_POCKET);
+            event.accept(ModItems.GOLDBAR_HUGE);
+            event.accept(ModItems.GOLDBAR_THICK);
+            event.accept(ModItems.GOLDBAR_THIN);
+            event.accept(ModItems.OREHA_FUSION_MATERIAL_ADVANCED);
+            event.accept(ModItems.OREHA_FUSION_MATERIAL_BASIC);
+            event.accept(ModItems.OREHA_FUSION_MATERIAL);
+            event.accept(ModItems.SOLAR_BLESSING);
+            event.accept(ModItems.SOLAR_GRACE);
+            event.accept(ModItems.NECKLACE);
+            event.accept(ModItems.ABILITY_STONE);
+            event.accept(ModItems.ABILITY_STONE_CARVED);
+
+            event.accept(ModItems.SALVATION_HELMET);
+            event.accept(ModItems.SALVATION_CHESTPLATE);
+            event.accept(ModItems.SALVATION_LEGGINGS);
+            event.accept(ModItems.SALVATION_BOOTS);
 
         }
     }
@@ -128,7 +128,6 @@ public class LostArkMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STONE_CARVING_MENU.get(), StoneCarvingTableScreen::new);
-            MenuScreens.register(ModMenuTypes.CUSTOM_INVENTORY_MENU.get(), CustomInventoryScreen::new);
         }
     }
 }

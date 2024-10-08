@@ -3,7 +3,7 @@
   "category": "misc",
   "cookingtime": 200,
   "experience": 0.25,
-  "group": "destruction_stone",
+  "group": "guardian_stone",
   "ingredient": {
     "item": "lostarkmod:guardian_deepslate_ore"
   },

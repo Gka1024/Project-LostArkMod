@@ -11,21 +11,20 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModMenuTypes {
-    public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES,
-            LostArkMod.MOD_ID);
+        public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES,
+                        LostArkMod.MOD_ID);
 
-    public static final RegistryObject<MenuType<StoneCarvingTableMenu>> STONE_CARVING_MENU = registerMenuType(
-            "stone_carving_menu", StoneCarvingTableMenu::new);
+        public static final RegistryObject<MenuType<StoneCarvingTableMenu>> STONE_CARVING_MENU = registerMenuType(
+                        "stone_carving_menu", StoneCarvingTableMenu::new);
 
-            public static final RegistryObject<MenuType<CustomInventoryMenu>> CUSTOM_INVENTORY_MENU = registerMenuType(
-                "custom_inventory_menu", CustomInventoryMenu::new);
+                        
+        // 메뉴 타입을 등록하는 공통 메서드
+        private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name,
+                        IContainerFactory<T> factory) {
+                return MENUS.register(name, () -> IForgeMenuType.create(factory));
+        }
 
-    private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name,
-            IContainerFactory<T> factory) {
-        return MENUS.register(name, () -> IForgeMenuType.create(factory));
-    }
-
-    public static void register(IEventBus eventBus) {
-        MENUS.register(eventBus);
-    }
+        public static void register(IEventBus eventBus) {
+                MENUS.register(eventBus);
+        }
 }

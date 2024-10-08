@@ -3,7 +3,7 @@ package net.Locke.lostarkmod.datagen.loot;
 import java.util.Set;
 
 import net.Locke.lostarkmod.block.ModBlocks;
-import net.Locke.lostarkmod.item.Moditems;
+import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
@@ -32,13 +32,13 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.dropSelf(ModBlocks.STONE_CARVING_TABLE.get());
 
         this.add(ModBlocks.DESTRUCTION_ORE.get(),
-                block -> createCopperLikeOreDrops(ModBlocks.DESTRUCTION_ORE.get(), Moditems.DESTRUCTION_STONE.get()));
+                block -> createCopperLikeOreDrops(ModBlocks.DESTRUCTION_ORE.get(), ModItems.DESTRUCTION_STONE.get()));
         this.add(ModBlocks.GUARDIAN_ORE.get(),
-                block -> createCopperLikeOreDrops(ModBlocks.GUARDIAN_ORE.get(), Moditems.GUARDIAN_STONE.get()));
+                block -> createCopperLikeOreDrops(ModBlocks.GUARDIAN_ORE.get(), ModItems.GUARDIAN_STONE.get()));
         this.add(ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get(),
-                block -> createCopperLikeOreDrops(ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get(), Moditems.DESTRUCTION_STONE.get()));
+                block -> createCopperLikeOreDrops(ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get(), ModItems.DESTRUCTION_STONE.get()));
         this.add(ModBlocks.GUARDIAN_DEEPSLATE_ORE.get(),
-                block -> createCopperLikeOreDrops(ModBlocks.GUARDIAN_DEEPSLATE_ORE.get(), Moditems.GUARDIAN_STONE.get()));
+                block -> createCopperLikeOreDrops(ModBlocks.GUARDIAN_DEEPSLATE_ORE.get(), ModItems.GUARDIAN_STONE.get()));
 
     }
 

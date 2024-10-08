@@ -1,0 +1,13 @@
+{
+  "entities": [
+    "minecraft:player"
+  ],
+  "slots": [
+    "rings_lostark",
+    "necklace_lostark",
+    "ability_stone",
+    "earings_lostark",
+    "bracelet_lostark",
+    "sholder_lostark"
+  ]
+}
