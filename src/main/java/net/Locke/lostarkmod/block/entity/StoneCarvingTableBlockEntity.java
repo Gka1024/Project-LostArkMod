@@ -2,11 +2,14 @@ package net.Locke.lostarkmod.block.entity;
 
 import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.screen.StoneCarvingTableMenu;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -39,11 +42,15 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
-    private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY); 
+    private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
 
     protected final ContainerData data;
-    private int progress = 0;
-    private int maxProgress = 78;
+
+    private int currentProbability;
+    private int opt1Cur, opt2Cur, opt3Cur; // 현재 얼마나 성공했는가
+    private int opt1Prg, opt2Prg, opt3Prg; // 현재 얼마나 진행했는가
+    private byte[] opt1Arr = new byte[10], opt2Arr = new byte[10], opt3Arr = new byte[10];
+    private int opt1Index, opt2Index, opt3Index; // 어떤 옵션인가
 
     public StoneCarvingTableBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.STONE_CARVING_BE.get(), pPos, pBlockState);
@@ -51,8 +58,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
             @Override
             public int get(int pIndex) {
                 return switch (pIndex) {
-                    case 0 -> StoneCarvingTableBlockEntity.this.progress;
-                    case 1 -> StoneCarvingTableBlockEntity.this.maxProgress;
+                    case 0 -> StoneCarvingTableBlockEntity.this.currentProbability;
+                    case 1 -> 30; // maximum progress
                     default -> 0;
                 };
             }
@@ -60,20 +67,27 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
             @Override
             public void set(int pIndex, int pValue) {
                 switch (pIndex) {
-                    case 0 -> StoneCarvingTableBlockEntity.this.progress = pValue;
-                    case 1 -> StoneCarvingTableBlockEntity.this.maxProgress = pValue;
+                    case 0 -> StoneCarvingTableBlockEntity.this.opt1Cur = pValue;
+                    case 1 -> StoneCarvingTableBlockEntity.this.opt2Cur = pValue;
+                    case 2 -> StoneCarvingTableBlockEntity.this.opt3Cur = pValue;
                 }
             }
 
             @Override
             public int getCount() {
-                return 2;
+                return 7;
             }
         };
     }
+
     public boolean hasEnoughItems(int slot, int count) {
         ItemStack stack = itemHandler.getStackInSlot(slot); // 지정한 슬롯에서 아이템 가져오기
         return !stack.isEmpty() && stack.getCount() >= count; // 아이템이 있고, 수량이 충분한지 여부 반환
+    }
+
+    public boolean isStoneExist() {
+        ItemStack stack = itemHandler.getStackInSlot(0);
+        return !stack.isEmpty();
     }
 
     public void removeItemFromSlot(int slot, int count) {
@@ -86,7 +100,122 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
             setChanged(); // 블록 엔티티가 변경되었음을 알림 (클라이언트와 동기화)
         }
     }
-    
+
+    public void stoneCarve(int option) {
+
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+
+        if (!abilityStone.hasTag()) {
+            arrayClear(0);
+            currentProbability = 75;
+        }
+
+        int ranInt = (int) (Math.random() * 100) + 1; // 난수 생성
+        boolean isSuccess = currentProbability > ranInt;
+        int curIncrease = isSuccess ? 1 : 0;
+
+        CompoundTag tag = abilityStone.getOrCreateTag();
+
+        if (!abilityStone.isEmpty() && abilityStone.getItem() == ModItems.ABILITY_STONE.get()) {
+
+            String key = "opt" + Integer.toString(option);
+
+            int cur = tag.getInt(key + ".current"); // 얼마나 성공했는가?
+            int prg = tag.getInt(key + ".progress"); // 얼마나 진행했는가?
+            byte[] arr = tag.getByteArray(key + ".array"); // 어떻게 진행했는가?
+
+            if (arr.length == 0) {
+                arr = new byte[10];
+            }
+
+            tag.putInt(key + ".current", cur + curIncrease);
+
+            tag.putInt(key + ".progress", prg + 1);
+
+            arr[prg] = isSuccess ? (byte) 1 : 2;
+            tag.putByteArray(key + ".array", arr);
+
+            if (isSuccess && currentProbability > 25)
+                currentProbability -= 10;
+            else if (!isSuccess && currentProbability < 75)
+                currentProbability += 10;
+
+            System.out.println("entity");
+            tag.putInt("probability", currentProbability);
+
+            playSoundBasedOnSuccess(this.worldPosition, option == 3, isSuccess);
+            setChanged(); // 블록 엔티티 변경 알림
+        }
+    }
+
+    public void playSoundBasedOnSuccess(BlockPos pos, boolean is3rd, boolean isSuccess) {
+
+        SoundEvent soundEvent = isSuccess ? is3rd ? SoundEvents.DEEPSLATE_BREAK : SoundEvents.AMETHYST_BLOCK_BREAK
+                : SoundEvents.GLASS_BREAK;
+
+        // 사운드 재생
+        Minecraft.getInstance().level.playSound(
+                Minecraft.getInstance().player, // 사운드를 듣는 대상 플레이어
+                pos, // 사운드가 발생하는 위치
+                soundEvent, // 재생할 사운드
+                net.minecraft.sounds.SoundSource.BLOCKS // 사운드의 소스(블록 관련 사운드)
+        );
+
+    }
+
+    public int getCurrentProbability() {
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        if (abilityStone.hasTag()) {
+            return abilityStone.getTag().getInt("probability");
+        }
+
+        return 75;
+    }
+
+    public boolean isCarvable(int index) {
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        CompoundTag tag = abilityStone.getOrCreateTag();
+
+        return tag.getInt("opt" + Integer.toString(index) + ".progress") < 10;
+    }
+
+    public byte[] getByteArray(int index) {
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        
+        if(abilityStone.hasTag())
+        {
+            CompoundTag tag = abilityStone.getTag();
+            return tag.getByteArray("opt"+ Integer.toString(index) + ".array");
+        }
+
+        return null;
+    }
+
+    public int getCurrent(int index)
+    {
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        if(abilityStone.hasTag())
+        {
+            CompoundTag tag = abilityStone.getTag();
+            return tag.getInt("opt"+ Integer.toString(index) + ".current");
+        }
+        return 0;
+    }
+
+    public void arrayClear(int index) {
+        switch (index) {
+            case 1:
+                opt1Arr = new byte[10];
+            case 2:
+                opt2Arr = new byte[10];
+            case 3:
+                opt3Arr = new byte[10];
+            default:
+                opt1Arr = new byte[10];
+                opt2Arr = new byte[10];
+                opt3Arr = new byte[10];
+        }
+    }
 
     @Override
     public @NotNull <T> LazyOptional getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
@@ -129,7 +258,24 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-        pTag.putInt("stone_carving_table.progress", progress);
+
+        CompoundTag optsTag = new CompoundTag();
+
+        pTag.putInt("probability", currentProbability);
+
+        pTag.putInt("opt1.current", opt1Cur);
+        pTag.putInt("opt2.current", opt2Cur);
+        pTag.putInt("opt3.current", opt3Cur);
+
+        pTag.putInt("opt1.progress", opt1Prg);
+        pTag.putInt("opt2.progress", opt2Prg);
+        pTag.putInt("opt3.progress", opt3Prg);
+
+        pTag.putByteArray("opt1.array", opt1Arr);
+        pTag.putByteArray("opt2.array", opt2Arr);
+        pTag.putByteArray("opt3.array", opt3Arr);
+
+        pTag.put("options", optsTag);
 
         super.saveAdditional(pTag);
     }
@@ -139,8 +285,23 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
         super.load(pTag);
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        progress = pTag.getInt("stone_carving_table.progress");
-    }
 
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        CompoundTag tag = abilityStone.getOrCreateTag();
+
+        currentProbability = tag.getInt("probability");
+
+        opt1Prg = tag.getInt("opt1.progress");
+        opt2Prg = tag.getInt("opt2.progress");
+        opt3Prg = tag.getInt("opt3.progress");
+
+        opt1Cur = tag.getInt("opt1.current");
+        opt2Cur = tag.getInt("opt2.current");
+        opt3Cur = tag.getInt("opt3.current");
+
+        opt1Arr = tag.getByteArray("opt1.array");
+        opt2Arr = tag.getByteArray("opt2.array");
+        opt3Arr = tag.getByteArray("opt3.array");
+    }
 
 }

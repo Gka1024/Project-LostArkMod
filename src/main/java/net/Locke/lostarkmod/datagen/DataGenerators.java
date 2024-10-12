@@ -14,29 +14,29 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = LostArkMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        @SubscribeEvent
+        public static void gatherData(GatherDataEvent event) {
+                DataGenerator generator = event.getGenerator();
+                PackOutput packOutput = generator.getPackOutput();
+                ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+                CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
-        generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput));
+                generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput));
+                generator.addProvider(event.includeServer(), ModLootTableProvider.create(packOutput));
 
-        generator.addProvider(event.includeServer(), new ModBlockStateProvider(packOutput, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModItemModelProvider(packOutput, existingFileHelper));
+                generator.addProvider(event.includeServer(), new ModBlockStateProvider(packOutput, existingFileHelper));
+                generator.addProvider(event.includeServer(), new ModItemModelProvider(packOutput, existingFileHelper));
 
-        ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
-                new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider,
-                blockTagGenerator.contentsGetter(), existingFileHelper));
+                ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
+                                new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
+                generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider,
+                                blockTagGenerator.contentsGetter(), existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new ModCuriosDataProvider(
-                LostArkMod.MOD_ID,
-                packOutput,
-                existingFileHelper,
-                lookupProvider));
-    }
+                generator.addProvider(event.includeServer(), new ModCuriosDataProvider(
+                                LostArkMod.MOD_ID,
+                                packOutput,
+                                existingFileHelper,
+                                lookupProvider));
+        }
 
 }

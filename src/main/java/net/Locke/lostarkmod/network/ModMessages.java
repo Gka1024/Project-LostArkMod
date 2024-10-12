@@ -12,8 +12,7 @@ public class ModMessages {
             new ResourceLocation("lostarkmod", "main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
-            PROTOCOL_VERSION::equals
-    );
+            PROTOCOL_VERSION::equals);
 
     public static void register() {
         int id = 0;
@@ -22,6 +21,12 @@ public class ModMessages {
                 .encoder(RemoveItemPacket::encode)
                 .decoder(RemoveItemPacket::decode)
                 .consumerMainThread(RemoveItemPacket::handle)
+                .add();
+
+        INSTANCE.messageBuilder(StoneCarvePacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(StoneCarvePacket::encode)
+                .decoder(StoneCarvePacket::decode)
+                .consumerMainThread(StoneCarvePacket::handle)
                 .add();
     }
 }

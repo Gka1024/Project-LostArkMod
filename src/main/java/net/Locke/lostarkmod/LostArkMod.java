@@ -4,9 +4,11 @@ import com.mojang.logging.LogUtils;
 
 import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
+import net.Locke.lostarkmod.effect.ModEffects;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.network.ModMessages;
+import net.Locke.lostarkmod.particle.ModParticles;
 import net.Locke.lostarkmod.screen.ModMenuTypes;
 import net.Locke.lostarkmod.screen.StoneCarvingTableScreen;
 import net.minecraft.client.Minecraft;
@@ -56,6 +58,9 @@ public class LostArkMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModEffects.register(modEventBus);
+        ModParticles.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
         ModMenuTypes.register(modEventBus);

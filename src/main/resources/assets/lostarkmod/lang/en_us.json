@@ -50,6 +50,11 @@
     "block.lostarkmod.guardian_deepslate_ore" : "Guardian Deepslate Ore",
     "block.lostarkmod.stone_carving_table" : "Stone Carving Table",
 
+    "effect.lostarkmod.melee_damage" : "Melee Damage",
+    "effect.lostarkmod.add_heart" : "Add Heart",
+    "effect.lostarkmod.slow_atkspeed" : "Slow Attack",
+
+
     "curios.identifier.ability_stone": "Ability Stone Slot",
 
     
