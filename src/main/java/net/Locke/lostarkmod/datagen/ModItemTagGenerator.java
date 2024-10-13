@@ -27,7 +27,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     @Override
     protected void addTags(Provider pProvider) {
         TagKey<Item> abilityStoneTag = ItemTags.create(new ResourceLocation("curios", "ability_stone"));
-        this.tag(abilityStoneTag).add(ModItems.ABILITY_STONE.get());
+        this.tag(abilityStoneTag).add(ModItems.ABILITY_STONE_CARVED.get());
     }
 
 }

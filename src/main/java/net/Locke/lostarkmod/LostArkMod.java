@@ -109,7 +109,7 @@ public class LostArkMod {
             event.accept(ModItems.SOLAR_BLESSING);
             event.accept(ModItems.SOLAR_GRACE);
             event.accept(ModItems.NECKLACE);
-            event.accept(ModItems.ABILITY_STONE);
+            event.accept(ModItems.ABILITY_STONE_UNCARVED);
             event.accept(ModItems.ABILITY_STONE_CARVED);
 
             event.accept(ModItems.SALVATION_HELMET);

@@ -51,7 +51,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SOLAR_BLESSING);
         simpleItem(ModItems.SOLAR_GRACE);
         simpleItem(ModItems.SOLAR_PROTECTION);
-        simpleItem(ModItems.ABILITY_STONE);
+        simpleItem(ModItems.ABILITY_STONE_UNCARVED);
         simpleItem(ModItems.ABILITY_STONE_CARVED);
         simpleItem(ModItems.SALVATION_HELMET);
         simpleItem(ModItems.SALVATION_CHESTPLATE);

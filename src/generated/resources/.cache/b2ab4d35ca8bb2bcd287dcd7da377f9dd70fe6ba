@@ -1,6 +1,6 @@
-// 1.20.1	2024-10-08T02:23:19.7839191	Item Models: lostarkmod
-4cfae2a244108b9026242eab54fa965d816ca938 assets/lostarkmod/models/item/ability_stone.json
+// 1.20.1	2024-10-13T01:22:10.0959762	Item Models: lostarkmod
 2f3d99a2de32ea2e887e0cb751f93abdcc5f5e19 assets/lostarkmod/models/item/ability_stone_carved.json
+8da37f21263a437062c31fc720b4fab74d81f75b assets/lostarkmod/models/item/ability_stone_uncarved.json
 927788008580953b48e437987f9083041e9c1f0d assets/lostarkmod/models/item/destruction_stone.json
 21a849dd8780cfeb0dcd24801147dea5df0f3e93 assets/lostarkmod/models/item/destruction_stone_great_honor.json
 b990c7be44f373967cef7af12f722ad16092f9cc assets/lostarkmod/models/item/destruction_stone_honor.json

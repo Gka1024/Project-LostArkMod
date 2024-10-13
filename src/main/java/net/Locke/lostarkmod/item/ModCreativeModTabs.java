@@ -53,7 +53,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.SOLAR_BLESSING.get());
                         pOutput.accept(ModItems.SOLAR_GRACE.get());
                         pOutput.accept(ModItems.NECKLACE.get());
-                        pOutput.accept(ModItems.ABILITY_STONE.get());
+                        pOutput.accept(ModItems.ABILITY_STONE_UNCARVED.get());
                         pOutput.accept(ModItems.ABILITY_STONE_CARVED.get());
 
                         pOutput.accept(ModItems.SALVATION_HELMET.get());

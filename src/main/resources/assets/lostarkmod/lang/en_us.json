@@ -31,8 +31,8 @@
     "item.lostarkmod.solar_grace" : "Solar Grace",
     "item.lostarkmod.solar_protection" : "Solar Protection",
     "item.lostarkmod.necklace" : "necklace temp",
-    "item.lostarkmod.ability_stone" : "Uncarved Ability Stone",
-    "item.lostarkmod.ability_stone_carved" : "Carved Ability Stone",
+    "item.lostarkmod.ability_stone_uncarved" : "Uncarved Ability Stone",
+    "item.lostarkmod.ability_stone_carved" : "Ability Stone",
 
 
     

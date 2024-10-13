@@ -92,7 +92,7 @@ public class ModItems {
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> SOLAR_PROTECTION = ITEMS.register("solar_protection",
                         () -> new Item(new Item.Properties()));
-        public static final RegistryObject<Item> ABILITY_STONE = ITEMS.register("ability_stone",
+        public static final RegistryObject<Item> ABILITY_STONE_UNCARVED = ITEMS.register("ability_stone_uncarved",
                         () -> new AbilityStoneItem(new Item.Properties()));
         public static final RegistryObject<Item> ABILITY_STONE_CARVED = ITEMS.register("ability_stone_carved",
                         () -> new AbilityStoneItem(new Item.Properties()));
