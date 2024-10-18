@@ -57,6 +57,12 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
                 return switch (pIndex) {
                     case 0 -> StoneCarvingTableBlockEntity.this.currentProbability;
                     case 1 -> 30; // maximum progress
+                    case 2 -> StoneCarvingTableBlockEntity.this.opt1Cur; // opt1 current
+                    case 3 -> StoneCarvingTableBlockEntity.this.opt2Cur; // opt2 current
+                    case 4 -> StoneCarvingTableBlockEntity.this.opt3Cur; // opt3 current
+                    case 5 -> StoneCarvingTableBlockEntity.this.opt1Prg; // opt1 progress
+                    case 6 -> StoneCarvingTableBlockEntity.this.opt2Prg; // opt2 progress
+                    case 7 -> StoneCarvingTableBlockEntity.this.opt3Prg;
                     default -> 0;
                 };
             }
@@ -67,12 +73,15 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
                     case 0 -> StoneCarvingTableBlockEntity.this.opt1Cur = pValue;
                     case 1 -> StoneCarvingTableBlockEntity.this.opt2Cur = pValue;
                     case 2 -> StoneCarvingTableBlockEntity.this.opt3Cur = pValue;
+                    case 3 -> StoneCarvingTableBlockEntity.this.opt1Prg = pValue; // opt1 progress
+                    case 4 -> StoneCarvingTableBlockEntity.this.opt2Prg = pValue; // opt2 progress
+                    case 5 -> StoneCarvingTableBlockEntity.this.opt3Prg = pValue; // opt3 progress
                 }
             }
 
             @Override
             public int getCount() {
-                return 7;
+                return 7; // total number of data elements
             }
         };
     }
@@ -103,13 +112,15 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
 
         if (isNew(abilityStone)) {
-            //arrayClear(0);
+            arrayClear(0);
             currentProbability = 75;
         }
 
         int ranInt = (int) (Math.random() * 100) + 1; // 난수 생성
         boolean isSuccess = currentProbability > ranInt;
         int curIncrease = isSuccess ? 1 : 0;
+
+        System.out.println(ranInt + " / " + currentProbability + " : " + isSuccess);
 
         CompoundTag tag = abilityStone.getOrCreateTag();
 
@@ -141,9 +152,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
             playSoundBasedOnSuccess(this.worldPosition, option == 3, isSuccess);
 
-            
-            if(isCarveComplete())
-            {
+            if (isCarveComplete()) {
                 MakeStone();
             }
 
@@ -151,11 +160,9 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         }
     }
 
-    private boolean isNew(ItemStack abilityStone)
-    {
+    private boolean isNew(ItemStack abilityStone) {
         CompoundTag tag = abilityStone.getOrCreateTag();
-        if(tag.getInt("opt1.progress") != 0 || tag.getInt("opt1.progress") != 0|| tag.getInt("opt1.progress") != 0 )
-        {
+        if (tag.getInt("opt1.progress") != 0 || tag.getInt("opt1.progress") != 0 || tag.getInt("opt1.progress") != 0) {
             return false;
         }
         return true;
@@ -179,7 +186,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     public int getCurrentProbability() {
         ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
         if (abilityStone.hasTag()) {
-            return abilityStone.getTag().getInt("probability");
+            CompoundTag tag = abilityStone.getTag();
+            return tag.contains("probability") ? tag.getInt("probability") : 75;
         }
 
         return 75;
@@ -189,7 +197,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
         CompoundTag tag = abilityStone.getOrCreateTag();
 
-        return tag.getInt("opt" + Integer.toString(index) + ".progress") < 10;
+        return tag.getInt("opt" + Integer.toString(index) + ".progress") < 10
+                && tag.contains("opt" + Integer.toString(index) + ".index");
     }
 
     public byte[] getByteArray(int index) {
@@ -211,7 +220,25 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         }
         return 0;
     }
-/* 
+
+    public int getOptionIndex(int index) {
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        if (abilityStone.hasTag()) {
+            CompoundTag tag = abilityStone.getTag();
+            return tag.getInt("opt" + Integer.toString(index) + ".index");
+        }
+        return 0;
+    }
+
+    public boolean isStoneHasNBT() {
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+
+        if (isStoneExist()) {
+            return abilityStone.hasTag();
+        }
+        return true;
+    }
+
     private void arrayClear(int index) {
         switch (index) {
             case 1:
@@ -226,7 +253,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
                 opt3Arr = new byte[10];
         }
     }
-*/
+
     public boolean isCarveComplete() {
         ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
         CompoundTag tag = abilityStone.getTag();
@@ -239,8 +266,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         return false;
     }
 
-    private void MakeStone()
-    {
+    private void MakeStone() {
         ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
         CompoundTag tag = abilityStone.getTag();
 
@@ -251,14 +277,35 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         int opt1Level = ((tag.getInt("opt1.current") + 1) / 2) - 2;
         int opt2Level = ((tag.getInt("opt2.current") + 1) / 2) - 2;
         int opt3Level = ((tag.getInt("opt3.current") + 1) / 2) - 2;
-        
+
         nbt.putInt("opt1.level", opt1Level > 0 ? opt1Level : 0);
         nbt.putInt("opt2.level", opt2Level > 0 ? opt2Level : 0);
         nbt.putInt("opt3.level", opt3Level > 0 ? opt3Level : 0);
 
+        nbt.putInt("opt1.index", tag.getInt("opt1.index"));
+        nbt.putInt("opt2.index", tag.getInt("opt2.index"));
+        nbt.putInt("opt3.index", tag.getInt("opt3.index"));
+
         newStone.setTag(nbt);
 
         itemHandler.setStackInSlot(STONE_SLOT, newStone);
+
+        resetCarvingState();
+
+        setChanged();
+    }
+
+    private void resetCarvingState() {
+        currentProbability = 75;
+        opt1Cur = 0;
+        opt2Cur = 0;
+        opt3Cur = 0;
+        opt1Prg = 0;
+        opt2Prg = 0;
+        opt3Prg = 0;
+        opt1Arr = new byte[10];
+        opt2Arr = new byte[10];
+        opt3Arr = new byte[10];
     }
 
     @Override
@@ -303,7 +350,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
 
-        CompoundTag optsTag = new CompoundTag();
+        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        CompoundTag tag = abilityStone.getTag();
 
         pTag.putInt("probability", currentProbability);
 
@@ -319,34 +367,28 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         pTag.putByteArray("opt2.array", opt2Arr);
         pTag.putByteArray("opt3.array", opt3Arr);
 
-        pTag.put("options", optsTag);
-
         super.saveAdditional(pTag);
     }
 
     @Override
     public void load(CompoundTag pTag) {
-
         super.load(pTag);
-        
         itemHandler.deserializeNBT(pTag.getCompound("inventory"));
-        
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
-        CompoundTag tag = abilityStone.getOrCreateTag();
 
-        currentProbability = tag.getInt("probability");
+        currentProbability = pTag.getInt("probability");
 
-        opt1Prg = tag.getInt("opt1.progress");
-        opt2Prg = tag.getInt("opt2.progress");
-        opt3Prg = tag.getInt("opt3.progress");
+        opt1Prg = pTag.getInt("opt1.progress");
+        opt2Prg = pTag.getInt("opt2.progress");
+        opt3Prg = pTag.getInt("opt3.progress");
 
-        opt1Cur = tag.getInt("opt1.current");
-        opt2Cur = tag.getInt("opt2.current");
-        opt3Cur = tag.getInt("opt3.current");
+        opt1Cur = pTag.getInt("opt1.current");
+        opt2Cur = pTag.getInt("opt2.current");
+        opt3Cur = pTag.getInt("opt3.current");
 
-        opt1Arr = tag.getByteArray("opt1.array");
-        opt2Arr = tag.getByteArray("opt2.array");
-        opt3Arr = tag.getByteArray("opt3.array"); 
+        opt1Arr = pTag.getByteArray("opt1.array");
+        opt2Arr = pTag.getByteArray("opt2.array");
+        opt3Arr = pTag.getByteArray("opt3.array");
+
     }
 
 }

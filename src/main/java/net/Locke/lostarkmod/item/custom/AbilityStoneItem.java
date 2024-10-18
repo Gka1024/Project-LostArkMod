@@ -1,7 +1,10 @@
 package net.Locke.lostarkmod.item.custom;
 
 import net.Locke.lostarkmod.effect.ModEffects;
+import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -27,32 +30,75 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         super(pProperties);
     }
 
-    public int opt1, opt2, opt3;
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        // 서버에서만 동작
+        if (!level.isClientSide()) {
+            ItemStack itemInHand = player.getItemInHand(hand);
+            ItemStack newStone = new ItemStack(ModItems.ABILITY_STONE_UNCARVED.get());
+            CompoundTag tag = itemInHand.getTag();
 
-    public enum abilityType {
-        MELEE_DAMAGE, // 1
+            if (tag == null) {
+                tag = newStone.getOrCreateTag();
+                int opt1Index = (int) (Math.random() * 15) + 1;
+                int opt2Index = (int) (Math.random() * 15) + 1;
+                int opt3Index = (int) (Math.random() * 5) + 1;
+
+                if (opt1Index == opt2Index) {
+                    opt2Index += (int) (Math.random() * 14) + 1;
+                    opt2Index %= 15;
+                }
+
+                tag.putInt("opt1.index", opt1Index);
+                tag.putInt("opt2.index", opt2Index);
+                tag.putInt("opt3.index", opt3Index);
+                tag.putDouble("random", Math.random());
+            }
+
+            boolean addedSuccessfully = player.getInventory().add(newStone);
+
+            if (addedSuccessfully) 
+            {
+                itemInHand.shrink(1); // SillingBoxItem 하나만 사라지도록 감소
+            } 
+            else 
+            {
+                player.sendSystemMessage(Component.literal("INVENTORY FULL!"));
+                return InteractionResultHolder.fail(itemInHand);
+            }
+
+        }
+        return InteractionResultHolder.success(player.getItemInHand(hand));
+    }
+
+    public enum abilityType { // ~15
+        MELEE_DAMAGE,
         MAGIC_DAMAGE,
         ATTACK_SPEED,
-        DEFFENCE, // 2
+        DEFFENCE, 
         SPEED,
         ADD_HEART,
         ADD_MANA,
         BUFF_ATTACK,
         BUFF_SHIELD,
+        MINING_SPEED,
+        RANGED_DAMAGE,
         MANA_REGEN,
         MORE_HEALING,
-        MINING_SPEED,
         LESS_COOLDOWN,
         LUCKY
     }
 
-    public enum disableType {
+    public enum disableType { // ~5
         LESS_DAMAGE,
-        SLOW_ATKSPEED, // 3
+        SLOW_ATKSPEED, 
         DAMAGE_INCOME,
         SLOW_MOVESPEED,
         REMOVE_HEART
     }
+
+    abilityType[] abilities = abilityType.values();
+    disableType[] disables = disableType.values();
 
     @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag unused) {
@@ -101,8 +147,14 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         super.appendHoverText(stack, world, tooltip, flag);
 
         if (stack.hasTag()) {
-            CompoundTag nbt = stack.getTag();
-            tooltip.add(Component.literal("NBT Data: " + nbt.toString()));
+            CompoundTag tag = stack.getTag();
+            tooltip.add(Component.literal(
+                    "Ability 1: " + abilities[tag.getInt("opt1.index") - 1] + " Lv" + tag.getInt("opt1.level")));
+            tooltip.add(Component.literal(
+                    "Ability 2: " + abilities[tag.getInt("opt2.index") - 1] + " Lv" + tag.getInt("opt2.level")));
+            tooltip.add(Component
+                    .literal("Disable : " + disables[tag.getInt("opt3.index") - 1] + " Lv" + tag.getInt("opt3.level")));
+
         } else {
             tooltip.add(Component.literal("No NBT data."));
         }

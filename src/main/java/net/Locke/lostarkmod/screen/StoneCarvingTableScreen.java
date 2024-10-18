@@ -1,6 +1,5 @@
 package net.Locke.lostarkmod.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.network.chat.Component;
 import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.block.entity.StoneCarvingTableBlockEntity;
@@ -9,17 +8,10 @@ import net.Locke.lostarkmod.network.ModMessages;
 import net.Locke.lostarkmod.network.RemoveItemPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.multiplayer.chat.LoggedChatMessage.System;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvingTableMenu> {
 
@@ -63,6 +55,7 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
 
         renderButton(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         renderStoneSuccess(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
+        renderImage(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
 
     }
 
@@ -126,8 +119,30 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
                 }
             }
         }
+    }
+
+    private void renderImage(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
+        int imageX = x + 17;
+        int imageY = y + 45;
+
+        int opt1Index = getOptionIndex(1) - 1;
+        int opt2Index = getOptionIndex(2) - 1;
+        int opt3Index = getOptionIndex(3) - 1;
+        int offset = 22;
+
+        if(opt1Index != -1)
+            guiGraphics.blit(ICON_TEXTURE, imageX, imageY, opt1Index % 10 * offset, opt1Index / 10 * offset, 18, 18); // 버프 1
+
+        if(opt2Index != -1)
+            guiGraphics.blit(ICON_TEXTURE, imageX, imageY + 22, opt2Index % 10 * offset, opt2Index / 10 * offset, 18, 18); // 버프 2
+
+        if(opt3Index != -1)
+            guiGraphics.blit(ICON_TEXTURE, imageX, imageY + 53, (opt3Index % 10 + 5) * offset, offset, 18, 18); // 디버프
 
     }
+
+
+
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
@@ -169,15 +184,24 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
         // this.menu.getBlockEntity();
 
         // 슬롯 1번에 아이템이 5개 이상 있는지 확인
-        if (!blockEntity.hasEnoughItems(1, 2) && !blockEntity.isStoneExist()) {
+        if (!blockEntity.hasEnoughItems(1, 2)) {
             // 아이템이 충분하지 않으면 알림을 출력하고 함수 종료
             Minecraft.getInstance().player.displayClientMessage(
-                    Component.literal("Not enough items to proceed."), true);
+                    Component.literal("Not enough Silling"), true);
             return;
         }
 
-        if (!blockEntity.isCarvable(buttonId))
+        if (!blockEntity.isStoneExist()) {
+            Minecraft.getInstance().player.displayClientMessage(
+                    Component.literal("No Stones"), true);
             return;
+        }
+
+        if (!blockEntity.isCarvable(buttonId)) {
+            Minecraft.getInstance().player.displayClientMessage(
+                    Component.literal("No Proceeds"), true);
+            return;
+        }
 
         sendRemoveItemPacket(1, 2);
         sendStoneCarvePacket(buttonId);
@@ -204,9 +228,18 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
         return blockEntity.getCurrentProbability();
     }
 
-    private int getCurrent(int index)
-    {
+    private int getCurrentSuccess(int index) {
         return blockEntity.getCurrent(index);
+    }
+
+    private int getOptionIndex(int index)
+    {
+        return blockEntity.getOptionIndex(index);
+    }
+
+    private boolean isStoneHasNBT()
+    {
+        return blockEntity.isStoneHasNBT();
     }
 
     private byte[] getByteArray(int index) {
@@ -220,10 +253,13 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
                 16777215); // 확률 표시
         guiGraphics.drawString(this.font, Component.literal("2 Silling"), 10, -13, 16777215); // 실링 표시
 
+        if(!isStoneHasNBT())
+            guiGraphics.drawString(this.font, Component.literal("Right Click to Proceed"), 10, 0, 16777215); // 안내문 표시
+
         // 진행률 표시
-        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(getCurrent(1))), 142, 13, 41961);
-        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(getCurrent(2))), 142, 35, 41961);
-        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(getCurrent(3))), 142, 65, 15602975);
+        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(getCurrentSuccess(1))), 142, 13, 41961);
+        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(getCurrentSuccess(2))), 142, 35, 41961);
+        guiGraphics.drawString(this.font, Component.literal("+" + Integer.toString(getCurrentSuccess(3))), 142, 65, 15602975);
 
     }
 

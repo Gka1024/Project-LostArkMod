@@ -95,7 +95,7 @@ public class ModItems {
         public static final RegistryObject<Item> ABILITY_STONE_UNCARVED = ITEMS.register("ability_stone_uncarved",
                         () -> new AbilityStoneItem(new Item.Properties()));
         public static final RegistryObject<Item> ABILITY_STONE_CARVED = ITEMS.register("ability_stone_carved",
-                        () -> new AbilityStoneItem(new Item.Properties()));
+                        () -> new AbilityStoneItem(new Item.Properties().stacksTo(1)));
 
         public static final RegistryObject<Item> SALVATION_HELMET = ITEMS.register("salvation_helmet",
                         () -> new ModArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.HELMET,

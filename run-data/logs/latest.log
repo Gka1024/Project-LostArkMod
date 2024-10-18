@@ -1,33 +1,33 @@
-[1310월2024 01:27:32.583] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\123\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.3.7, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, lostarkmod, --all, --output, D:\LOAMOD\src\generated\resources, --existing, D:\LOAMOD\src\main\resources]
-[1310월2024 01:27:32.587] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Eclipse Adoptium; OS Windows 10 arch amd64 version 10.0
-[1310월2024 01:27:32.674] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
-[1310월2024 01:27:32.704] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/123/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
-[1310월2024 01:27:32.887] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.7\5d72a04334eea2494912f0d91216648462bb32c3\javafmllanguage-1.20.1-47.3.7.jar is missing mods.toml file
-[1310월2024 01:27:32.888] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.7\74fd0ee16e74766d45d2efe7c74b6d0e121677df\lowcodelanguage-1.20.1-47.3.7.jar is missing mods.toml file
-[1310월2024 01:27:32.889] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.7\cf753f5bc19311c127ea07e1ee43d5f9477df22b\mclanguage-1.20.1-47.3.7.jar is missing mods.toml file
-[1310월2024 01:27:32.891] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.7\b6a4840dfdc56e2ae2eccdd1bf233959493d11ea\fmlcore-1.20.1-47.3.7.jar is missing mods.toml file
-[1310월2024 01:27:32.936] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
-[1310월2024 01:27:33.647] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
-[1310월2024 01:27:33.649] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\123\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, lostarkmod, --all, --output, D:\LOAMOD\src\generated\resources, --existing, D:\LOAMOD\src\main\resources]
-[1310월2024 01:27:33.805] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using D:\LOAMOD\build/createSrgToMcp/output.srg
-[1310월2024 01:27:34.086] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [lostarkmod]
-[1310월2024 01:27:36.230] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.7, for MC 1.20.1 with MCP 20230612.114412
-[1310월2024 01:27:36.233] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.3.7 Initialized
-[1310월2024 01:27:36.447] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/123/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
-[1310월2024 01:27:36.447] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/123/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
-[1310월2024 01:27:36.556] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
-[1310월2024 01:27:36.598] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 42 ms
-[1310월2024 01:27:36.598] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
-[1310월2024 01:27:36.621] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 23 ms
-[1310월2024 01:27:36.621] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: lostarkmod
-[1310월2024 01:27:36.684] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: lostarkmod finished after 61 ms
-[1310월2024 01:27:36.684] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: lostarkmod
-[1310월2024 01:27:36.693] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: lostarkmod finished after 9 ms
-[1310월2024 01:27:36.693] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id lostarkmod
-[1310월2024 01:27:36.709] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id lostarkmod finished after 14 ms
-[1310월2024 01:27:36.709] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id lostarkmod
-[1310월2024 01:27:36.710] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id lostarkmod finished after 0 ms
-[1310월2024 01:27:36.710] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Curios for lostarkmod
-[1310월2024 01:27:36.712] [main/INFO] [net.minecraft.data.DataGenerator/]: Curios for lostarkmod finished after 2 ms
-[1310월2024 01:27:36.712] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 156 ms
-[1310월2024 01:27:36.715] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 125, old count: 125, new count: 126, removed stale: 0, written: 1
+[1510월2024 19:56:47.291] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\123\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.3.7, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, lostarkmod, --all, --output, D:\LOAMOD\src\generated\resources, --existing, D:\LOAMOD\src\main\resources]
+[1510월2024 19:56:47.295] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.12 by Eclipse Adoptium; OS Windows 10 arch amd64 version 10.0
+[1510월2024 19:56:47.371] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[1510월2024 19:56:47.396] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/123/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[1510월2024 19:56:47.565] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.7\5d72a04334eea2494912f0d91216648462bb32c3\javafmllanguage-1.20.1-47.3.7.jar is missing mods.toml file
+[1510월2024 19:56:47.567] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.7\74fd0ee16e74766d45d2efe7c74b6d0e121677df\lowcodelanguage-1.20.1-47.3.7.jar is missing mods.toml file
+[1510월2024 19:56:47.568] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.7\cf753f5bc19311c127ea07e1ee43d5f9477df22b\mclanguage-1.20.1-47.3.7.jar is missing mods.toml file
+[1510월2024 19:56:47.570] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\123\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.7\b6a4840dfdc56e2ae2eccdd1bf233959493d11ea\fmlcore-1.20.1-47.3.7.jar is missing mods.toml file
+[1510월2024 19:56:47.614] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[1510월2024 19:56:48.314] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[1510월2024 19:56:48.315] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\123\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, lostarkmod, --all, --output, D:\LOAMOD\src\generated\resources, --existing, D:\LOAMOD\src\main\resources]
+[1510월2024 19:56:48.460] [main/INFO] [mixin/]: Remapping refMap curios.refmap.json using D:\LOAMOD\build/createSrgToMcp/output.srg
+[1510월2024 19:56:48.736] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [lostarkmod]
+[1510월2024 19:56:50.851] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.7, for MC 1.20.1 with MCP 20230612.114412
+[1510월2024 19:56:50.853] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.3.7 Initialized
+[1510월2024 19:56:51.063] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/123/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[1510월2024 19:56:51.063] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/123/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1/forge-1.20.1-47.3.7_mapped_parchment_2023.06.26-1.20.1-recomp.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[1510월2024 19:56:51.162] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[1510월2024 19:56:51.196] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 33 ms
+[1510월2024 19:56:51.196] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[1510월2024 19:56:51.219] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 23 ms
+[1510월2024 19:56:51.219] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: lostarkmod
+[1510월2024 19:56:51.296] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: lostarkmod finished after 76 ms
+[1510월2024 19:56:51.296] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: lostarkmod
+[1510월2024 19:56:51.305] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: lostarkmod finished after 8 ms
+[1510월2024 19:56:51.305] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id lostarkmod
+[1510월2024 19:56:51.310] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id lostarkmod finished after 5 ms
+[1510월2024 19:56:51.310] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id lostarkmod
+[1510월2024 19:56:51.311] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id lostarkmod finished after 0 ms
+[1510월2024 19:56:51.311] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Curios for lostarkmod
+[1510월2024 19:56:51.313] [main/INFO] [net.minecraft.data.DataGenerator/]: Curios for lostarkmod finished after 1 ms
+[1510월2024 19:56:51.313] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 151 ms
+[1510월2024 19:56:51.316] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 125, old count: 125, new count: 126, removed stale: 0, written: 0

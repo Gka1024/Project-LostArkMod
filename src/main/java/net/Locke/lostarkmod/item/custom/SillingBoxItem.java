@@ -30,7 +30,6 @@ public class SillingBoxItem extends Item {
 
             // 특정 아이템 생성
             ItemStack itemToGive = new ItemStack(ModItems.SILLING.get(), randomAmount); // 원하는 아이템으로 변경
-            ItemStack leftoverItem = itemToGive.copy(); // 남은 아이템을 저장
 
             // 아이템 지급 시도
             boolean addedSuccessfully = player.getInventory().add(itemToGive);
@@ -42,8 +41,6 @@ public class SillingBoxItem extends Item {
             } 
             else 
             {
-                // 지급 실패 시, 남은 아이템을 플레이어에게 반환
-                player.getInventory().add(leftoverItem);
                 player.sendSystemMessage(Component.literal("INVENTORY FULL!"));
                 return InteractionResultHolder.fail(itemInHand);
             }
