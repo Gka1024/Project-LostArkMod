@@ -56,10 +56,35 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.ABILITY_STONE_UNCARVED.get());
                         pOutput.accept(ModItems.ABILITY_STONE_CARVED.get());
 
-                        pOutput.accept(ModItems.SALVATION_HELMET.get());
+                        pOutput.accept(ModItems.SALVATION_HAT.get());
                         pOutput.accept(ModItems.SALVATION_CHESTPLATE.get());
                         pOutput.accept(ModItems.SALVATION_LEGGINGS.get());
                         pOutput.accept(ModItems.SALVATION_BOOTS.get());
+                        pOutput.accept(ModItems.SALVATION_SHOULDER.get());
+
+                        pOutput.accept(ModItems.ENTROPY_MASK.get());
+                        pOutput.accept(ModItems.ENTROPY_CHESTPIECE.get());
+                        pOutput.accept(ModItems.ENTROPY_LEGGINGS.get());
+                        pOutput.accept(ModItems.ENTROPY_BOOTS.get());
+                        pOutput.accept(ModItems.ENTROPY_SHOULDER.get());
+
+                        pOutput.accept(ModItems.HALLUCINATION_HELM.get());
+                        pOutput.accept(ModItems.HALLUCINATION_CHESTPIECE.get());
+                        pOutput.accept(ModItems.HALLUCINATION_PANTS.get());
+                        pOutput.accept(ModItems.HALLUCINATION_BOOTS.get());
+                        pOutput.accept(ModItems.HALLUCINATION_SHOULDER.get());
+
+                        pOutput.accept(ModItems.NIGHTMARE_HAT.get());
+                        pOutput.accept(ModItems.NIGHTMARE_CHESTPIECE.get());
+                        pOutput.accept(ModItems.NIGHTMARE_PANTS.get());
+                        pOutput.accept(ModItems.NIGHTMARE_BOOTS.get());
+                        pOutput.accept(ModItems.NIGHTMARE_SHOULDER.get());
+
+                        pOutput.accept(ModItems.YEARNING_HAT.get());
+                        pOutput.accept(ModItems.YEARNING_CHESTPIECE.get());
+                        pOutput.accept(ModItems.YEARNING_PANTS.get());
+                        pOutput.accept(ModItems.YEARNING_BOOTS.get());
+                        pOutput.accept(ModItems.YEARNING_SHOULDER.get());
 
                         pOutput.accept(ModBlocks.SILLING_BLOCK.get());
                         pOutput.accept(ModBlocks.GOLD_BLOCK.get());

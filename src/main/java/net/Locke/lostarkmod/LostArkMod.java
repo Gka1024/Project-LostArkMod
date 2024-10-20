@@ -112,10 +112,35 @@ public class LostArkMod {
             event.accept(ModItems.ABILITY_STONE_UNCARVED);
             event.accept(ModItems.ABILITY_STONE_CARVED);
 
-            event.accept(ModItems.SALVATION_HELMET);
+            event.accept(ModItems.SALVATION_HAT);
             event.accept(ModItems.SALVATION_CHESTPLATE);
             event.accept(ModItems.SALVATION_LEGGINGS);
             event.accept(ModItems.SALVATION_BOOTS);
+            event.accept(ModItems.SALVATION_SHOULDER);
+
+            event.accept(ModItems.ENTROPY_MASK);
+            event.accept(ModItems.ENTROPY_CHESTPIECE);
+            event.accept(ModItems.ENTROPY_LEGGINGS);
+            event.accept(ModItems.ENTROPY_BOOTS);
+            event.accept(ModItems.ENTROPY_SHOULDER);
+            
+            event.accept(ModItems.HALLUCINATION_HELM);
+            event.accept(ModItems.HALLUCINATION_CHESTPIECE);
+            event.accept(ModItems.HALLUCINATION_PANTS);
+            event.accept(ModItems.HALLUCINATION_BOOTS);
+            event.accept(ModItems.HALLUCINATION_SHOULDER);
+
+            event.accept(ModItems.NIGHTMARE_HAT);
+            event.accept(ModItems.NIGHTMARE_CHESTPIECE);
+            event.accept(ModItems.NIGHTMARE_PANTS);
+            event.accept(ModItems.NIGHTMARE_BOOTS);
+            event.accept(ModItems.NIGHTMARE_SHOULDER);
+
+            event.accept(ModItems.YEARNING_HAT);
+            event.accept(ModItems.YEARNING_CHESTPIECE);
+            event.accept(ModItems.YEARNING_PANTS);
+            event.accept(ModItems.YEARNING_BOOTS);
+            event.accept(ModItems.YEARNING_SHOULDER);
 
         }
     }

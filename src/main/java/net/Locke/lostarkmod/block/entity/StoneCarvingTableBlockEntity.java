@@ -35,7 +35,28 @@ import org.jetbrains.annotations.Nullable;
 
 public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuProvider {
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2);
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2){
+        @Override
+        protected void  onContentsChanged(int slot)
+        {
+            setChanged();
+        }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack)
+        {
+            if(slot == 0)
+            {
+                return stack.getItem() == ModItems.ABILITY_STONE_UNCARVED.get();
+            }
+
+            if(slot == 1)
+            {
+                return stack.getItem() == ModItems.SILLING.get();
+            }
+            return false;
+        }
+    };
 
     private static final int STONE_SLOT = 0;
     private static final int SILLING_SLOT = 1;
@@ -307,6 +328,9 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         opt2Arr = new byte[10];
         opt3Arr = new byte[10];
     }
+
+   
+
 
     @Override
     public @NotNull <T> LazyOptional getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {

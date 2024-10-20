@@ -53,10 +53,37 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SOLAR_PROTECTION);
         simpleItem(ModItems.ABILITY_STONE_UNCARVED);
         simpleItem(ModItems.ABILITY_STONE_CARVED);
-        simpleItem(ModItems.SALVATION_HELMET);
+
+        simpleItem(ModItems.SALVATION_HAT);
         simpleItem(ModItems.SALVATION_CHESTPLATE);
         simpleItem(ModItems.SALVATION_LEGGINGS);
         simpleItem(ModItems.SALVATION_BOOTS);
+        simpleItem(ModItems.SALVATION_SHOULDER);
+
+        simpleItem(ModItems.ENTROPY_MASK);
+        simpleItem(ModItems.ENTROPY_CHESTPIECE);
+        simpleItem(ModItems.ENTROPY_LEGGINGS);
+        simpleItem(ModItems.ENTROPY_BOOTS);
+        simpleItem(ModItems.ENTROPY_SHOULDER);
+
+        simpleItem(ModItems.HALLUCINATION_HELM);
+        simpleItem(ModItems.HALLUCINATION_CHESTPIECE);
+        simpleItem(ModItems.HALLUCINATION_PANTS);
+        simpleItem(ModItems.HALLUCINATION_BOOTS);
+        simpleItem(ModItems.HALLUCINATION_SHOULDER);
+
+        simpleItem(ModItems.NIGHTMARE_HAT);
+        simpleItem(ModItems.NIGHTMARE_CHESTPIECE);
+        simpleItem(ModItems.NIGHTMARE_PANTS);
+        simpleItem(ModItems.NIGHTMARE_BOOTS);
+        simpleItem(ModItems.NIGHTMARE_SHOULDER);
+
+        simpleItem(ModItems.YEARNING_HAT);
+        simpleItem(ModItems.YEARNING_CHESTPIECE);
+        simpleItem(ModItems.YEARNING_PANTS);
+        simpleItem(ModItems.YEARNING_BOOTS);
+        simpleItem(ModItems.YEARNING_SHOULDER);
+        
 
     }
 

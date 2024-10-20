@@ -2,6 +2,7 @@ package net.Locke.lostarkmod.screen;
 
 import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.StoneCarvingTableBlockEntity;
+import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -18,20 +19,18 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class StoneCarvingTableMenu extends AbstractContainerMenu{
+public class StoneCarvingTableMenu extends AbstractContainerMenu {
 
     public final StoneCarvingTableBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
-    
 
     public StoneCarvingTableMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()),
+                new SimpleContainerData(2));
     }
 
-
-    public StoneCarvingTableMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data)
-    {
+    public StoneCarvingTableMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.STONE_CARVING_MENU.get(), pContainerId);
         checkContainerSize(inv, 2);
         blockEntity = ((StoneCarvingTableBlockEntity) entity);
@@ -41,40 +40,34 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
         addPlayerHotbar(inv);
         addPlayerInventory(inv);
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler ->{
+        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new SlotItemHandler(iItemHandler, 0, 81, -18)); // Stone
-            this.addSlot(new SlotItemHandler(iItemHandler, 1, -11, -18)); // Silling
+            this.addSlot(new CustomSlotItemHandler(iItemHandler, 1, -11, -18, 256)); // Silling
         });
-        
+
     }
 
-    private void addPlayerInventory(Inventory inv)
-    {
-        for(int i = 0; i < 3; ++i)
-        {
-            for(int j = 0; j < 9; ++j)
-            {
+    private void addPlayerInventory(Inventory inv) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 9; ++j) {
                 this.addSlot(new Slot(inv, j + i * 9 + 9, (j * 18) + 9, 116 + i * 18));
             }
         }
     }
 
-    private void addPlayerHotbar(Inventory inv)
-    {
-        for(int i = 0; i < 9; i++)
-        {
+    private void addPlayerHotbar(Inventory inv) {
+        for (int i = 0; i < 9; i++) {
             this.addSlot(new Slot(inv, i, (i * 18) + 9, 174));
         }
     }
 
-    public boolean isCrafting()
-    {
+    public boolean isCrafting() {
         return data.get(0) > 0;
     }
-    
+
     public int getScaledProgress() {
         int progress = this.data.get(0);
-        int maxProgress = this.data.get(1);  // Max Progress
+        int maxProgress = this.data.get(1); // Max Progress
         int progressArrowSize = 26; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
@@ -82,16 +75,22 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
 
     @Override
     public boolean stillValid(Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer, ModBlocks.STONE_CARVING_TABLE.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer,
+                ModBlocks.STONE_CARVING_TABLE.get());
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
-    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
-    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
-    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
-    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
-    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
+    // For this container, we can see both the tile inventory's slots as well as the
+    // player inventory slots and the hotbar.
+    // Each time we add a Slot to the container, it automatically increases the
+    // slotIndex, which means
+    // 0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 -
+    // 8)
+    // 9 - 35 = player inventory slots (which map to the InventoryPlayer slot
+    // numbers 9 - 35)
+    // 36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 -
+    // 8)
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -101,11 +100,13 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 2; // must be the number of slots you have!
+
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        if (sourceSlot == null || !sourceSlot.hasItem())
+            return ItemStack.EMPTY; // EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
@@ -114,11 +115,12 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
                     + TE_INVENTORY_SLOT_COUNT, false)) {
-                return ItemStack.EMPTY;  // EMPTY_ITEM
+                return ItemStack.EMPTY; // EMPTY_ITEM
             }
         } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
             // This is a TE slot so merge the stack into the players inventory
-            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
+            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT,
+                    false)) {
                 return ItemStack.EMPTY;
             }
         } else {
@@ -134,7 +136,6 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu{
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }
-
 
     public BlockEntity getBlockEntity() {
         return this.blockEntity;

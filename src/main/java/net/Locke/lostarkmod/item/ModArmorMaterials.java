@@ -11,7 +11,15 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 public enum ModArmorMaterials implements ArmorMaterial {
     SALVATION("salvation", 26, new int[] { 5, 7, 5, 4 },
-            25, SoundEvents.ARMOR_EQUIP_GOLD, 1f, 0f, () -> Ingredient.of(ModItems.SILLING.get()));
+            25, SoundEvents.ARMOR_EQUIP_IRON, 1f, 0f, () -> Ingredient.of(ModItems.SILLING.get())),
+    ENTROPY("entropy", 26, new int[] { 5, 7, 5, 4 },
+            25, SoundEvents.ARMOR_EQUIP_IRON, 1f, 0f, () -> Ingredient.of(ModItems.SILLING.get())),
+    HALLUCINATION("hallucination", 26, new int[] { 5, 7, 5, 4 },
+            25, SoundEvents.ARMOR_EQUIP_NETHERITE, 1f, 0f, () -> Ingredient.of(ModItems.SILLING.get())),
+    NIGHTMARE("nightmare", 26, new int[] { 5, 7, 5, 4 },
+            25, SoundEvents.ARMOR_EQUIP_LEATHER, 1f, 0f, () -> Ingredient.of(ModItems.SILLING.get())),
+    YEARNING("yearning", 26, new int[] { 5, 7, 5, 4 },
+            25, SoundEvents.ARMOR_EQUIP_TURTLE, 1f, 0f, () -> Ingredient.of(ModItems.SILLING.get()));
 
     private final String name;
     private final int durabilityMultiplier;
@@ -77,5 +85,3 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }
 
 }
-
-
