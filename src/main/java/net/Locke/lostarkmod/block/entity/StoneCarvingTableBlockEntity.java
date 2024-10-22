@@ -60,6 +60,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
     private static final int STONE_SLOT = 0;
     private static final int SILLING_SLOT = 1;
+    private static final int MAX_PROBABILITY = 75;
+    private static final int MIN_PROBABILITY = 25;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
@@ -164,9 +166,9 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
             arr[prg] = isSuccess ? (byte) 1 : 2;
             tag.putByteArray(key + ".array", arr);
 
-            if (isSuccess && currentProbability > 25)
+            if (isSuccess && currentProbability > MIN_PROBABILITY)
                 currentProbability -= 10;
-            else if (!isSuccess && currentProbability < 75)
+            else if (!isSuccess && currentProbability < MAX_PROBABILITY)
                 currentProbability += 10;
 
             tag.putInt("probability", currentProbability);

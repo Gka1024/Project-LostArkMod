@@ -32,7 +32,7 @@ public class AbilityStoneItem extends Item implements ICurioItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        // 서버에서만 동작
+        // 서버에서만 동작 - 랜덤한 버프를 부여하는 과정
         if (!level.isClientSide()) {
             ItemStack itemInHand = player.getItemInHand(hand);
             ItemStack newStone = new ItemStack(ModItems.ABILITY_STONE_UNCARVED.get());
@@ -118,27 +118,16 @@ public class AbilityStoneItem extends Item implements ICurioItem {
 
     private void ApplyBuffs(Player player, ItemStack stack, int index) {
         CompoundTag tag = stack.getOrCreateTag();
-        int progress = tag.getInt("opt" + Integer.toString(index) + ".progress");
+        int opt1 = tag.getInt("opt1.index");
+        int opt2 = tag.getInt("opt2.index");
+        int opt3 = tag.getInt("opt3.index");
 
-        switch (progress) {
-            case 5:
-            case 6:
+        int opt1Level = tag.getInt("opt1.level");
+        int opt2Level = tag.getInt("opt2.level");
+        int opt3Level = tag.getInt("opt3.level");
 
-                break;
+        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 1));
 
-            case 7:
-            case 8:
-
-                break;
-
-            case 9:
-            case 10:
-
-                break;
-
-            default:
-                break;
-        }
 
     }
 

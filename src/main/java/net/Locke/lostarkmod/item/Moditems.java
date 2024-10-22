@@ -19,7 +19,7 @@ public class ModItems {
                         () -> new Item(new Item.Properties()));
 
         public static final RegistryObject<Item> SILLING = ITEMS.register("silling",
-                        () -> new Item(new Item.Properties().stacksTo(128)));
+                        () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> SILLING_BOX = ITEMS.register("silling_box",
                         () -> new SillingBoxItem(new Item.Properties()));
         public static final RegistryObject<Item> GOLD_LOSTARK = ITEMS.register("gold_lostark",
