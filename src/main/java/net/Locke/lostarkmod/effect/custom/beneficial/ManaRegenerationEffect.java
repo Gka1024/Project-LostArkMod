@@ -1,11 +1,11 @@
-package net.Locke.lostarkmod.effect.custom;
+package net.Locke.lostarkmod.effect.custom.beneficial;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class AddHeartEffect extends MobEffect {
-    public AddHeartEffect() {
+public class ManaRegenerationEffect extends MobEffect {
+    public ManaRegenerationEffect() {
         super(MobEffectCategory.BENEFICIAL, 0); // 효과의 종류와 색상 설정
     }
 

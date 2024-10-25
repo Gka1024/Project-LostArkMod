@@ -1,12 +1,13 @@
 package net.Locke.lostarkmod.capability;
 
-public class Mana implements IMana{
+public class Mana implements IMana {
 
     private int mana;
+    private int regenMana = 5;
+    private int maxMana = 100;
 
-    public Mana()
-    {
-        this.mana = 100;
+    public Mana() {
+        this.mana = maxMana;
     }
 
     @Override
@@ -20,6 +21,11 @@ public class Mana implements IMana{
     }
 
     @Override
+    public void setMaxMana(int mana) {
+        this.maxMana = mana;
+    }
+
+    @Override
     public void addMana(int amount) {
         this.mana += amount;
     }
@@ -27,6 +33,20 @@ public class Mana implements IMana{
     @Override
     public void useMana(int amount) {
         this.mana -= amount;
+    }
+
+    @Override
+    public int getMaxMana() {
+        return this.maxMana;
+    }
+
+    @Override
+    public void manaRegen() {
+
+        if (this.mana < this.maxMana) {
+            this.mana += regenMana;
+        }
+        System.out.println("mana : "+this.mana);
     }
 
 }

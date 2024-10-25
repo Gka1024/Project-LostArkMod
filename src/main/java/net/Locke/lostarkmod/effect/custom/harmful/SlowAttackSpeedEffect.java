@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.effect.custom;
+package net.Locke.lostarkmod.effect.custom.harmful;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -6,7 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 
 public class SlowAttackSpeedEffect extends MobEffect {
     public SlowAttackSpeedEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0); // 효과의 종류와 색상 설정
+        super(MobEffectCategory.HARMFUL, 0); // 효과의 종류와 색상 설정
     }
 
     @Override

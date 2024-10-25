@@ -220,6 +220,11 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
         CompoundTag tag = abilityStone.getOrCreateTag();
 
+        if(tag.getBoolean("isCarved"))
+        {
+            return false;
+        }
+
         return tag.getInt("opt" + Integer.toString(index) + ".progress") < 10
                 && tag.contains("opt" + Integer.toString(index) + ".index");
     }
@@ -297,6 +302,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
         CompoundTag nbt = new CompoundTag();
 
+        boolean isCarved = true;
+
         int opt1Level = ((tag.getInt("opt1.current") + 1) / 2) - 2;
         int opt2Level = ((tag.getInt("opt2.current") + 1) / 2) - 2;
         int opt3Level = ((tag.getInt("opt3.current") + 1) / 2) - 2;
@@ -308,6 +315,8 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         nbt.putInt("opt1.index", tag.getInt("opt1.index"));
         nbt.putInt("opt2.index", tag.getInt("opt2.index"));
         nbt.putInt("opt3.index", tag.getInt("opt3.index"));
+
+        nbt.putBoolean("isCarved", isCarved);
 
         newStone.setTag(nbt);
 

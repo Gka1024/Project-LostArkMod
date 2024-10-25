@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 
 import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
+import net.Locke.lostarkmod.client.ManaHUDRenderer;
 import net.Locke.lostarkmod.effect.ModEffects;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.ModItems;
@@ -159,6 +160,7 @@ public class LostArkMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STONE_CARVING_MENU.get(), StoneCarvingTableScreen::new);
+            ManaHUDRenderer.register();
         }
     }
 }

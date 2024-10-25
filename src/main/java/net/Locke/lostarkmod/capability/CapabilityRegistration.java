@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,7 +15,9 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber
 public class CapabilityRegistration {
 
-    public static Capability<IMana> MANA_CAPABILITY = null;
+    public static Capability<IMana> MANA_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {
+
+    });
 
     @SubscribeEvent
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
@@ -24,7 +27,10 @@ public class CapabilityRegistration {
     @SubscribeEvent
     public static void onAttachCapabilities(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof Player) { // Player 엔티티에만 붙이기
-            event.addCapability(new ResourceLocation(LostArkMod.MOD_ID, "mana"), new ManaProvider());
+            if (!event.getObject().getCapability(MANA_CAPABILITY).isPresent()) {
+                event.addCapability(new ResourceLocation(LostArkMod.MOD_ID, "mana"), new ManaProvider());
+                System.out.println("Mana attach");
+            }
         }
     }
 }

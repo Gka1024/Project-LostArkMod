@@ -1,9 +1,7 @@
 package net.Locke.lostarkmod.item;
 
 import net.Locke.lostarkmod.LostArkMod;
-import net.Locke.lostarkmod.item.custom.AbilityStoneItem;
-import net.Locke.lostarkmod.item.custom.ModArmorItem;
-import net.Locke.lostarkmod.item.custom.SillingBoxItem;
+import net.Locke.lostarkmod.item.custom.*;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -57,7 +55,7 @@ public class ModItems {
         public static final RegistryObject<Item> HONOR_LEAPSTONE_MARVELOUS = ITEMS.register("honor_leapstone_marvelous",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> HONOR_LEAPSTONE_SPLENDID = ITEMS.register("honor_leapstone_splendid",
-                        () -> new Item(new Item.Properties()));
+                        () -> new LeapStone(new Item.Properties()));
 
         public static final RegistryObject<Item> GOLD_BOX_LARGE = ITEMS.register("gold_box_large",
                         () -> new Item(new Item.Properties()));
@@ -66,7 +64,7 @@ public class ModItems {
         public static final RegistryObject<Item> GOLD_PILE = ITEMS.register("gold_pile",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> GOLD_POCKET = ITEMS.register("gold_pocket",
-                        () -> new Item(new Item.Properties()));
+                        () -> new GoldPocketItem(new Item.Properties()));
         public static final RegistryObject<Item> GOLDBAR_HUGE = ITEMS.register("goldbar_huge",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> GOLDBAR_THICK = ITEMS.register("goldbar_thick",

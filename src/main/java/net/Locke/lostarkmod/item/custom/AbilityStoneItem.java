@@ -35,38 +35,33 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         // 서버에서만 동작 - 랜덤한 버프를 부여하는 과정
         if (!level.isClientSide()) {
             ItemStack itemInHand = player.getItemInHand(hand);
-            ItemStack newStone = new ItemStack(ModItems.ABILITY_STONE_UNCARVED.get());
             CompoundTag tag = itemInHand.getTag();
+            ItemStack newStone = new ItemStack(ModItems.ABILITY_STONE_UNCARVED.get());
 
             if (tag == null) {
                 tag = newStone.getOrCreateTag();
                 int opt1Index = (int) (Math.random() * 15) + 1;
-                int opt2Index = (int) (Math.random() * 15) + 1;
+                int opt2Index = (int) (Math.random() * 14) + 1;
                 int opt3Index = (int) (Math.random() * 5) + 1;
 
-                if (opt1Index == opt2Index) {
-                    opt2Index += (int) (Math.random() * 14) + 1;
-                    opt2Index %= 15;
+                if (opt1Index <= opt2Index) {
+                    opt2Index++;
                 }
 
                 tag.putInt("opt1.index", opt1Index);
                 tag.putInt("opt2.index", opt2Index);
                 tag.putInt("opt3.index", opt3Index);
                 tag.putDouble("random", Math.random());
+
+                boolean addedSuccessfully = player.getInventory().add(newStone);
+
+                if (addedSuccessfully) {
+                    itemInHand.shrink(1); // SillingBoxItem 하나만 사라지도록 감소
+                } else {
+                    player.sendSystemMessage(Component.literal("INVENTORY FULL!"));
+                    return InteractionResultHolder.fail(itemInHand);
+                }
             }
-
-            boolean addedSuccessfully = player.getInventory().add(newStone);
-
-            if (addedSuccessfully) 
-            {
-                itemInHand.shrink(1); // SillingBoxItem 하나만 사라지도록 감소
-            } 
-            else 
-            {
-                player.sendSystemMessage(Component.literal("INVENTORY FULL!"));
-                return InteractionResultHolder.fail(itemInHand);
-            }
-
         }
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }
@@ -75,7 +70,7 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         MELEE_DAMAGE,
         MAGIC_DAMAGE,
         ATTACK_SPEED,
-        DEFFENCE, 
+        DEFFENCE,
         SPEED,
         ADD_HEART,
         ADD_MANA,
@@ -84,14 +79,14 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         MINING_SPEED,
         RANGED_DAMAGE,
         MANA_REGEN,
-        MORE_HEALING,
+        HEALTH_REGEN,
         LESS_COOLDOWN,
         LUCKY
     }
 
     public enum disableType { // ~5
         LESS_DAMAGE,
-        SLOW_ATKSPEED, 
+        SLOW_ATKSPEED,
         DAMAGE_INCOME,
         SLOW_MOVESPEED,
         REMOVE_HEART
@@ -127,7 +122,6 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         int opt3Level = tag.getInt("opt3.level");
 
         player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 1));
-
 
     }
 
