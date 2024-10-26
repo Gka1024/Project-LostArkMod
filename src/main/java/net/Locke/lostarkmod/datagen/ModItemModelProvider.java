@@ -23,6 +23,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ModItems.SILLING);
         simpleItem(ModItems.SILLING_BOX);
         simpleItem(ModItems.GOLD_LOSTARK);
+        simpleItem(ModItems.GUIDE_BOOK);
         simpleItem(ModItems.DESTRUCTION_STONE);
         simpleItem(ModItems.DESTRUCTION_STONE_HONOR);
         simpleItem(ModItems.DESTRUCTION_STONE_GREAT_HONOR);

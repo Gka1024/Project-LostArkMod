@@ -23,6 +23,9 @@ public class ModItems {
         public static final RegistryObject<Item> GOLD_LOSTARK = ITEMS.register("gold_lostark",
                         () -> new Item(new Item.Properties()));
 
+        public static final RegistryObject<Item> GUIDE_BOOK = ITEMS.register("guide_book",
+                        () -> new Item(new Item.Properties()));
+
         public static final RegistryObject<Item> DESTRUCTION_STONE = ITEMS.register("destruction_stone",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> DESTRUCTION_STONE_HONOR = ITEMS.register("destruction_stone_honor",

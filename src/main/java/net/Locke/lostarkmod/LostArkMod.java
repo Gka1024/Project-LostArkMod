@@ -84,6 +84,7 @@ public class LostArkMod {
             event.accept(ModItems.SILLING);
             event.accept(ModItems.SILLING_BOX);
             event.accept(ModItems.GOLD_LOSTARK);
+            event.accept(ModItems.GUIDE_BOOK);
             event.accept(ModItems.DESTRUCTION_STONE);
             event.accept(ModItems.DESTRUCTION_STONE_HONOR);
             event.accept(ModItems.DESTRUCTION_STONE_GREAT_HONOR);

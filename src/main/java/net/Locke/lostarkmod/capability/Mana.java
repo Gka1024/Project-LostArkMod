@@ -46,7 +46,6 @@ public class Mana implements IMana {
         if (this.mana < this.maxMana) {
             this.mana += regenMana;
         }
-        System.out.println("mana : "+this.mana);
     }
 
 }
