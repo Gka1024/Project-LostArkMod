@@ -25,6 +25,10 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModItems.SILLING.get());
                         pOutput.accept(ModItems.SILLING_BOX.get());
                         pOutput.accept(ModItems.GUIDE_BOOK.get());
+
+                        pOutput.accept(ModItems.MANA_CHECK.get());
+                        pOutput.accept(ModItems.MANA_USE.get());
+
                         pOutput.accept(ModItems.GOLD_LOSTARK.get());
                         pOutput.accept(ModItems.GOLD_PILE.get());
                         pOutput.accept(ModItems.GOLD_POCKET.get());

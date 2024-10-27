@@ -26,6 +26,11 @@ public class ModItems {
         public static final RegistryObject<Item> GUIDE_BOOK = ITEMS.register("guide_book",
                         () -> new Item(new Item.Properties()));
 
+        public static final RegistryObject<Item> MANA_USE = ITEMS.register("mana_use",
+                        () -> new ManaUseItem(new Item.Properties()));
+        public static final RegistryObject<Item> MANA_CHECK = ITEMS.register("mana_check",
+                        () -> new ManaCheckItem(new Item.Properties()));
+
         public static final RegistryObject<Item> DESTRUCTION_STONE = ITEMS.register("destruction_stone",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> DESTRUCTION_STONE_HONOR = ITEMS.register("destruction_stone_honor",
@@ -58,7 +63,7 @@ public class ModItems {
         public static final RegistryObject<Item> HONOR_LEAPSTONE_MARVELOUS = ITEMS.register("honor_leapstone_marvelous",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> HONOR_LEAPSTONE_SPLENDID = ITEMS.register("honor_leapstone_splendid",
-                        () -> new LeapStone(new Item.Properties()));
+                        () -> new Item(new Item.Properties()));
 
         public static final RegistryObject<Item> GOLD_BOX_LARGE = ITEMS.register("gold_box_large",
                         () -> new Item(new Item.Properties()));
@@ -67,7 +72,7 @@ public class ModItems {
         public static final RegistryObject<Item> GOLD_PILE = ITEMS.register("gold_pile",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> GOLD_POCKET = ITEMS.register("gold_pocket",
-                        () -> new GoldPocketItem(new Item.Properties()));
+                        () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> GOLDBAR_HUGE = ITEMS.register("goldbar_huge",
                         () -> new Item(new Item.Properties()));
         public static final RegistryObject<Item> GOLDBAR_THICK = ITEMS.register("goldbar_thick",

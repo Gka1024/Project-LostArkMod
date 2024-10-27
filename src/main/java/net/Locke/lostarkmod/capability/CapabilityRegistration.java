@@ -29,7 +29,6 @@ public class CapabilityRegistration {
         if (event.getObject() instanceof Player) { // Player 엔티티에만 붙이기
             if (!event.getObject().getCapability(MANA_CAPABILITY).isPresent()) {
                 event.addCapability(new ResourceLocation(LostArkMod.MOD_ID, "mana"), new ManaProvider());
-                System.out.println("Mana attach");
             }
         }
     }

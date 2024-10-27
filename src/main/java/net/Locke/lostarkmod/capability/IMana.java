@@ -6,6 +6,6 @@ public interface IMana {
     void setMaxMana(int mana);
     void setMana(int mana);
     void addMana(int amount);
-    void useMana(int amount);
+    boolean useMana(int amount);
     void manaRegen();
 }

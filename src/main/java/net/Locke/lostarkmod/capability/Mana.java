@@ -23,6 +23,10 @@ public class Mana implements IMana {
     @Override
     public void setMaxMana(int mana) {
         this.maxMana = mana;
+        if(this.mana > this.maxMana)
+        {
+            this.mana = this.maxMana;
+        }
     }
 
     @Override
@@ -31,8 +35,13 @@ public class Mana implements IMana {
     }
 
     @Override
-    public void useMana(int amount) {
-        this.mana -= amount;
+    public boolean useMana(int amount) {
+        if(this.mana > amount)
+        {
+            this.mana -= amount;
+            return true;
+        }
+        return false;
     }
 
     @Override
