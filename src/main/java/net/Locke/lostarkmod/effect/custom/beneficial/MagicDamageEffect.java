@@ -4,7 +4,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class MagicDamageEffect extends MobEffect {
+public class MagicDamageEffect extends MobEffect { // 마법 및 스킬 개발 후에 작업 예정
     public MagicDamageEffect() {
         super(MobEffectCategory.BENEFICIAL, 0); // 효과의 종류와 색상 설정
     }

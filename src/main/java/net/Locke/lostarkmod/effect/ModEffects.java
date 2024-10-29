@@ -17,7 +17,7 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> ATTACK_SPEED = EFFECTS.register("attack_speed", () -> new AttackSpeedEffect());
     public static final RegistryObject<MobEffect> BUFF_ATTACK = EFFECTS.register("buff_attack", () -> new BuffAttackEffect());
     public static final RegistryObject<MobEffect> BUFF_SHIELD = EFFECTS.register("buff_shield", () -> new BuffShieldEffect());
-    public static final RegistryObject<MobEffect> DEFFENCE = EFFECTS.register("deffence", () -> new DeffenceEffect());
+    public static final RegistryObject<MobEffect> DEFENCE = EFFECTS.register("defence", () -> new DefenceEffect());
     public static final RegistryObject<MobEffect> HEALTH_REGEN = EFFECTS.register("health_regeneration", () -> new HealthRegenerationEffect());
     public static final RegistryObject<MobEffect> LESS_COOLDOWN = EFFECTS.register("less_cooldown", () -> new LessCooldownEffect());
     public static final RegistryObject<MobEffect> LUCKY = EFFECTS.register("lucky", () -> new LuckyEffect());

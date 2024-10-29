@@ -3,6 +3,7 @@ package net.Locke.lostarkmod.effect.custom.beneficial;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 public class HealthRegenerationEffect extends MobEffect {
     public HealthRegenerationEffect() {
@@ -11,8 +12,10 @@ public class HealthRegenerationEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        // 이펙트가 적용될 때마다 실행되는 로직
-        // 예를 들어, 체력을 회복시키거나, 속도를 증가시키는 등의 작업
+        if(entity instanceof Player player)
+        {
+            player.heal(1.0f);
+        }
     }
 
     @Override

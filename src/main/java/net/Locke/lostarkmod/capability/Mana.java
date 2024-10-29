@@ -57,4 +57,12 @@ public class Mana implements IMana {
         }
     }
 
+    @Override
+    public void manaRegen(int regenMana) {
+
+        if (this.mana < this.maxMana) {
+            this.mana += regenMana;
+        }
+    }
+
 }

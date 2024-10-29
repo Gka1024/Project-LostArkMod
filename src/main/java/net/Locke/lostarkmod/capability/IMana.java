@@ -8,4 +8,5 @@ public interface IMana {
     void addMana(int amount);
     boolean useMana(int amount);
     void manaRegen();
+    void manaRegen(int amount);
 }

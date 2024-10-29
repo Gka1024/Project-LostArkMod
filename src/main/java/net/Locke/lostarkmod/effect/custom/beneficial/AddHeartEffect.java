@@ -11,7 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import java.util.UUID;
 
 public class AddHeartEffect extends MobEffect {
-    private static final UUID MODIFIER_UUID = UUID.fromString("d0a4b5e6-8c4f-4b8c-9b8f-2d6a5f9e9b5e");
+    private static final UUID MODIFIER_UUID = UUID.randomUUID();
 
     public AddHeartEffect() {
         super(MobEffectCategory.BENEFICIAL, 0); // 효과의 종류와 색상 설정
@@ -42,9 +42,9 @@ public class AddHeartEffect extends MobEffect {
         if (entity instanceof Player player) {
             // 이펙트가 끝날 때 수정자를 제거합니다.
             player.getAttribute(Attributes.MAX_HEALTH).removeModifier(MODIFIER_UUID);
-            if(player.getHealth() > Player.MAX_HEALTH)
+            if(player.getHealth() > player.getMaxHealth())
             {
-                player.setHealth(Player.MAX_HEALTH);
+                player.setHealth(player.getMaxHealth());
             }
         }
         super.removeAttributeModifiers(entity, attributeMap, amplifier);

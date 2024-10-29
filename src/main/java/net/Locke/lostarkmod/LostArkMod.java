@@ -6,6 +6,7 @@ import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.client.ManaHUDRenderer;
 import net.Locke.lostarkmod.effect.ModEffects;
+import net.Locke.lostarkmod.event.DamageReduction;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.network.ModMessages;
@@ -75,6 +76,7 @@ public class LostArkMod {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModMessages.register();
+        new DamageReduction();
     }
 
     // Add the example block item to the building blocks tab

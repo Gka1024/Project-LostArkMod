@@ -4,7 +4,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class LessCooldownEffect extends MobEffect {
+public class LessCooldownEffect extends MobEffect {// 스킬 개발 후에 작업 예정
     public LessCooldownEffect() {
         super(MobEffectCategory.BENEFICIAL, 0); // 효과의 종류와 색상 설정
     }
