@@ -1,7 +1,6 @@
 package net.Locke.lostarkmod.event;
 
 import net.Locke.lostarkmod.capability.IMana;
-import net.Locke.lostarkmod.capability.Mana;
 import net.Locke.lostarkmod.capability.ManaProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
@@ -10,7 +9,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(Dist.CLIENT)
-public class ManaRegenOnTick {
+public class ManaRegenHandler {
 
     private static int flag = 0;
     Minecraft mc = Minecraft.getInstance();

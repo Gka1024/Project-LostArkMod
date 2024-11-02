@@ -10,17 +10,17 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 
-public class MoveSpeed extends MobEffect {
+public class MoveSpeedEffect extends MobEffect {
     private static final UUID MODIFIER_UUID = UUID.randomUUID();
 
-    public MoveSpeed() {
+    public MoveSpeedEffect() {
         super(MobEffectCategory.BENEFICIAL, 0); // 효과의 종류와 색상 설정
     }
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (entity instanceof Player player) {
-            double increaseSpeed = 0.02 * (amplifier + 1);
+            double increaseSpeed = 0.005 * (amplifier + 2);
             PlayerSpeedAdjust(increaseSpeed, player);
         }
     }

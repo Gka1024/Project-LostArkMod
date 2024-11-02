@@ -1,24 +1,51 @@
 package net.Locke.lostarkmod.effect.custom.harmful;
 
+import java.util.UUID;
+
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 
 public class SlowAttackSpeedEffect extends MobEffect {
+    private static final UUID MODIFIER_UUID = UUID.randomUUID();
+
     public SlowAttackSpeedEffect() {
         super(MobEffectCategory.HARMFUL, 0); // 효과의 종류와 색상 설정
     }
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        // 이펙트가 적용될 때마다 실행되는 로직
-        // 예를 들어, 체력을 회복시키거나, 속도를 증가시키는 등의 작업
+        if (entity instanceof Player player) {
+            double attackSpeedIncrease = -0.1 * (amplifier + 1); // 증폭 수준에 따라 증가
+            
+            playerAttackSpeedAdjust(attackSpeedIncrease, player);
+        }
+    }
+
+    public void playerAttackSpeedAdjust(double value, Player player) {
+        AttributeModifier modifier = new AttributeModifier(MODIFIER_UUID, "attackslow", value, AttributeModifier.Operation.ADDITION);
+        if(!player.getAttribute(Attributes.ATTACK_SPEED).hasModifier(modifier))
+        {
+            player.getAttribute(Attributes.ATTACK_SPEED).addTransientModifier(modifier);
+        }
+    }
+
+    @Override
+    public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
+        if (pLivingEntity instanceof Player player) {
+            // 이펙트가 끝날 때 수정자를 제거합니다.
+            player.getAttribute(Attributes.ATTACK_SPEED).removeModifier(MODIFIER_UUID);
+        }
+        super.removeAttributeModifiers(pLivingEntity, pAttributeMap, pAmplifier);
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        // 이펙트의 지속 시간을 처리
-        return duration % 40 == 0; // 매 40틱마다 이펙트 적용
+        return true; 
     }
 
 }

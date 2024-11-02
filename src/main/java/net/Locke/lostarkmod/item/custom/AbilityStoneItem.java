@@ -5,6 +5,7 @@ import net.Locke.lostarkmod.item.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -16,11 +17,8 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.Level;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
@@ -99,6 +97,8 @@ public class AbilityStoneItem extends Item implements ICurioItem {
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag unused) {
         return CuriosApi.createCurioProvider(new ICurio() {
 
+            private boolean isBuffApplied = false;
+
             @Override
             public ItemStack getStack() {
                 return stack;
@@ -106,12 +106,27 @@ public class AbilityStoneItem extends Item implements ICurioItem {
 
             @Override
             public void curioTick(SlotContext slotContext) {
-                // applyBuffs(player, stack, 1);
+                if (slotContext.entity() instanceof Player player) {
+                    if (!isBuffApplied) {
+                        AbilityStoneEffects(player, stack);
+                        isBuffApplied = true;
+                    }
+                }
+            }
+
+            @Override
+            public void onUnequip(SlotContext slotContext, ItemStack newStack) {
+                if (slotContext.entity() instanceof Player player) {
+                    isBuffApplied = false;
+                    System.out.println("123");
+                    AbilityStoneRemoved(player, stack);
+                }
             }
         });
     }
 
-    private void ApplyBuffs(Player player, ItemStack stack, int index) {
+    private void AbilityStoneEffects(Player player, ItemStack stack) {
+        int duration = -1;
         CompoundTag tag = stack.getOrCreateTag();
         int opt1 = tag.getInt("opt1.index");
         int opt2 = tag.getInt("opt2.index");
@@ -121,8 +136,28 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         int opt2Level = tag.getInt("opt2.level");
         int opt3Level = tag.getInt("opt3.level");
 
-        player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 100, 1));
+        if (opt1Level != 0)
+            ApplyBuff(player, duration, opt1, opt1Level - 1, false, false);
 
+        if (opt2Level != 0)
+            ApplyBuff(player, duration, opt2, opt2Level - 1, false, false);
+
+        if (opt3Level != 0)
+            ApplyBuff(player, duration, opt3, opt3Level - 1, true, false);
+
+    }
+
+    private void AbilityStoneRemoved(Player player, ItemStack stack) {
+        CompoundTag tag = stack.getOrCreateTag();
+        int opt1 = tag.getInt("opt1.index");
+        int opt2 = tag.getInt("opt2.index");
+        int opt3 = tag.getInt("opt3.index");
+
+        System.out.println(Integer.toString(opt1) + " " + Integer.toString(opt2) + " " + Integer.toString(opt3));
+
+        ApplyBuff(player, 1, opt1, 0, false, true);
+        ApplyBuff(player, 1, opt2, 0, false, true);
+        ApplyBuff(player, 1, opt3, 0, true, true);
     }
 
     @Override
@@ -148,4 +183,90 @@ public class AbilityStoneItem extends Item implements ICurioItem {
         return true; // 장착 가능 여부를 설정
     }
 
+    private void ApplyBuff(Player player, int duration, int option, int amplifier, boolean isDisable,
+            boolean isRemove) {
+
+        MobEffect effect = MobEffects.LUCK; // 초기화 목적으로 설정해두었습니다.
+
+        if (!isDisable) {
+            switch (option) {
+                case 1:
+                    effect = ModEffects.MELEE_DAMAGE.get();
+                    break;
+                case 2:
+                    effect = ModEffects.MAGIC_DAMAGE.get();
+                    break;
+                case 3:
+                    effect = ModEffects.ATTACK_SPEED.get();
+                    break;
+                case 4:
+                    effect = ModEffects.DEFENCE.get();
+                    break;
+                case 5:
+                    effect = ModEffects.MOVE_SPEED.get();
+                    break;
+                case 6:
+                    effect = ModEffects.ADD_HEART.get();
+                    break;
+                case 7:
+                    effect = ModEffects.ADD_MANA.get();
+                    break;
+                case 8:
+                    effect = ModEffects.BUFF_ATTACK.get();
+                    break;
+                case 9:
+                    effect = ModEffects.BUFF_SHIELD.get();
+                    break;
+                case 10:
+                    effect = ModEffects.MINING_SPEED.get();
+                    break;
+                case 11:
+                    effect = ModEffects.RANGED_DAMAGE.get();
+                    break;
+                case 12:
+                    effect = ModEffects.MANA_REGEN.get();
+                    break;
+                case 13:
+                    effect = ModEffects.HEALTH_REGEN.get();
+                    break;
+                case 14:
+                    effect = ModEffects.LESS_COOLDOWN.get();
+                    break;
+                case 15:
+                    effect = ModEffects.LUCKY.get();
+                    break;
+
+                default:
+                    break;
+            }
+        } else if (isDisable) {
+            switch (option) {
+                case 1:
+                    effect = ModEffects.LESS_DAMAGE.get();
+                    break;
+                case 2:
+                    effect = ModEffects.SLOW_ATKSPEED.get();
+                    break;
+                case 3:
+                    effect = ModEffects.DAMAGE_INCOME.get();
+                    break;
+                case 4:
+                    effect = ModEffects.SLOW_MOVESPEED.get();
+                    break;
+                case 5:
+                    effect = ModEffects.REMOVE_HEART.get();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        
+        if (!isRemove) {
+            player.addEffect(new MobEffectInstance(effect, duration, amplifier));
+
+        } else if (isRemove) {
+            player.removeEffect(effect);
+        }
+    }
 }

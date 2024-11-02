@@ -2,7 +2,6 @@ package net.Locke.lostarkmod.effect.custom.harmful;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.LivingEntity;
 
 public class DamageIncomeEffect extends MobEffect {
     public DamageIncomeEffect() {
@@ -10,15 +9,9 @@ public class DamageIncomeEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
-        // 이펙트가 적용될 때마다 실행되는 로직
-        // 예를 들어, 체력을 회복시키거나, 속도를 증가시키는 등의 작업
-    }
-
-    @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        // 이펙트의 지속 시간을 처리
-        return duration % 40 == 0; // 매 40틱마다 이펙트 적용
+        return true; // 매 틱마다 효과 적용
     }
 
 }
+// 데미지 증가 코드 구현은 event/DamageAdjustHandler.java에서 관리하고 있습니다

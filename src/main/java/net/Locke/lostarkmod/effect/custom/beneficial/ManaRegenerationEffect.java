@@ -15,17 +15,23 @@ public class ManaRegenerationEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if(entity instanceof Player player)
-        {
+        if (entity instanceof Player player) {
             IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElse(new Mana());
-            mana.manaRegen((amplifier + 1 ) * 5);
+            mana.manaRegen(5);
         }
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        // 이펙트의 지속 시간을 처리
-        return duration % 40 == 0; // 매 40틱마다 이펙트 적용
+        switch (amplifier) {
+            case 0:
+                return duration % 50 == 0;
+            case 1:
+                return duration % 40 == 0;
+            case 2:
+                return duration % 20 == 0;
+            default:
+                return duration % 20 == 0;
+        }
     }
-
 }

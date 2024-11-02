@@ -26,13 +26,15 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> MELEE_DAMAGE = EFFECTS.register("melee_damage", () -> new MeleeDamageEffect());
     public static final RegistryObject<MobEffect> MINING_SPEED = EFFECTS.register("mining_speed", () -> new MiningSpeedEffect());
     public static final RegistryObject<MobEffect> RANGED_DAMAGE = EFFECTS.register("ranged_damage", () -> new RangedDamageEffect());
-    public static final RegistryObject<MobEffect> MOVE_SPEED = EFFECTS.register("move_speed", () -> new MoveSpeed());
+    public static final RegistryObject<MobEffect> MOVE_SPEED = EFFECTS.register("move_speed", () -> new MoveSpeedEffect());
 
     public static final RegistryObject<MobEffect> DAMAGE_INCOME = EFFECTS.register("damage_income", () -> new DamageIncomeEffect());
     public static final RegistryObject<MobEffect> LESS_DAMAGE = EFFECTS.register("less_damage", () -> new LessDamageEffect());
     public static final RegistryObject<MobEffect> REMOVE_HEART = EFFECTS.register("remove_heart", () -> new RemoveHeartEffect());
     public static final RegistryObject<MobEffect> SLOW_ATKSPEED = EFFECTS.register("slow_atkspeed", () -> new SlowAttackSpeedEffect());
     public static final RegistryObject<MobEffect> SLOW_MOVESPEED = EFFECTS.register("slow_movespeed", () -> new SlowMoveSpeedEffect());
+
+    public static Object[] abilities;
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);
