@@ -30,7 +30,7 @@ public class MoveSpeedEffect extends MobEffect {
                 AttributeModifier.Operation.ADDITION);
 
         if (!player.getAttribute(Attributes.MOVEMENT_SPEED).hasModifier(speedModifier)) {
-            player.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(speedModifier);
+            player.getAttribute(Attributes.MOVEMENT_SPEED).addTransientModifier(speedModifier);
         }
 
     }

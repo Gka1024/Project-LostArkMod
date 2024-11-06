@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.event;
+package net.Locke.lostarkmod.event.effects.mining_speed;
 
 import net.Locke.lostarkmod.effect.ModEffects;
 import net.minecraft.world.entity.player.Player;

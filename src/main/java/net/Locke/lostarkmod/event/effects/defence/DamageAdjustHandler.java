@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.event;
+package net.Locke.lostarkmod.event.effects.defence;
 
 import net.Locke.lostarkmod.effect.ModEffects;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;

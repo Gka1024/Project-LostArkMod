@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "lostarkmod:block/stone_carving_table",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "lostarkmod:block/stone_carving_table"
+    },
+    "facing=south": {
+      "model": "lostarkmod:block/stone_carving_table",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "lostarkmod:block/stone_carving_table",
+      "y": 270
+    }
+  }
+}

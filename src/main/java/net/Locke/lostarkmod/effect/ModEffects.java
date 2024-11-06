@@ -1,6 +1,7 @@
 package net.Locke.lostarkmod.effect;
 
 import net.Locke.lostarkmod.LostArkMod;
+import net.Locke.lostarkmod.effect.custom.armorset.*;
 import net.Locke.lostarkmod.effect.custom.beneficial.*;
 import net.Locke.lostarkmod.effect.custom.harmful.*;
 import net.minecraft.world.effect.MobEffect;
@@ -34,7 +35,14 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> SLOW_ATKSPEED = EFFECTS.register("slow_atkspeed", () -> new SlowAttackSpeedEffect());
     public static final RegistryObject<MobEffect> SLOW_MOVESPEED = EFFECTS.register("slow_movespeed", () -> new SlowMoveSpeedEffect());
 
-    public static Object[] abilities;
+
+    public static final RegistryObject<MobEffect> SET_SALVATION = EFFECTS.register("set_salvation", () -> new SalvationSetEffect());
+    public static final RegistryObject<MobEffect> SET_HALLUCINATION = EFFECTS.register("set_hallucination", () -> new HallucinationSetEffect());
+    public static final RegistryObject<MobEffect> SET_YEARNING = EFFECTS.register("set_yearning", () -> new YearningSetEffect());
+    public static final RegistryObject<MobEffect> SET_DOMINION = EFFECTS.register("set_dominion", () -> new DominionSetEffect());
+    public static final RegistryObject<MobEffect> SET_ENTROPY = EFFECTS.register("set_entropy", () -> new EntropySetEffect());
+    public static final RegistryObject<MobEffect> SET_NIGHTMARE = EFFECTS.register("set_nightmare", () -> new NightmareSetEffect());
+
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);

@@ -25,7 +25,7 @@ public class ModBlockStateProvider extends BlockStateProvider{
         blockWithItem(ModBlocks.DESTRUCTION_DEEPSLATE_ORE);
         blockWithItem(ModBlocks.GUARDIAN_DEEPSLATE_ORE);
 
-        simpleBlockWithItem(ModBlocks.STONE_CARVING_TABLE.get(), new ModelFile.UncheckedModelFile(modLoc("block/stone_carving_table")));
+        //simpleBlockWithItem(ModBlocks.STONE_CARVING_TABLE.get(), new ModelFile.UncheckedModelFile(modLoc("block/stone_carving_table")));
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject)

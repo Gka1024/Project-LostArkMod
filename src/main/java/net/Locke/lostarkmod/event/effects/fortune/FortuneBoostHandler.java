@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.event;
+package net.Locke.lostarkmod.event.effects.fortune;
 
 import java.util.HashMap;
 import java.util.Map;

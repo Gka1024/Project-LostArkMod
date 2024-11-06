@@ -8,10 +8,7 @@ import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.client.ManaHUDRenderer;
 import net.Locke.lostarkmod.effect.ModEffects;
-import net.Locke.lostarkmod.event.AttackDamageHandler;
-import net.Locke.lostarkmod.event.BlockBreakSpeedHandler;
-import net.Locke.lostarkmod.event.DamageAdjustHandler;
-import net.Locke.lostarkmod.event.FortuneBoostHandler;
+import net.Locke.lostarkmod.event.ModEventsHandler;
 import net.Locke.lostarkmod.item.ModCreativeItemsRegister;
 import net.Locke.lostarkmod.item.ModCreativeModTabs;
 import net.Locke.lostarkmod.item.ModItems;
@@ -64,10 +61,7 @@ public class LostArkMod {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
         ModMessages.register();
-        new DamageAdjustHandler();
-        new FortuneBoostHandler();
-        new BlockBreakSpeedHandler();
-        new AttackDamageHandler();
+        ModEventsHandler.registerAll();
     }
 
     // Add the example block item to the building blocks tab

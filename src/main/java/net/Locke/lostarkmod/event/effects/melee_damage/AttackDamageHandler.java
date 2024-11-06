@@ -1,8 +1,6 @@
-package net.Locke.lostarkmod.event;
+package net.Locke.lostarkmod.event.effects.melee_damage;
 
 import net.Locke.lostarkmod.effect.ModEffects;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
