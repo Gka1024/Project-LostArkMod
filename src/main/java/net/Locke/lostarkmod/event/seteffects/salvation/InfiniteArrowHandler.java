@@ -61,7 +61,6 @@ public class InfiniteArrowHandler {
                 float power = BowItem.getPowerForTime(charge); // 당긴 시간에 따른 화살 속도
                 AbstractArrow arrow = new Arrow(level, player);
                 arrow.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, power * 3.0F, 1.0F); // 화살 속도
-                                                                                                               // 조절
                 arrow.setCritArrow(power == 1.0F); // 최대 당겼을 때 치명타 적용
                 arrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY; // 화살 소모 방지
                 level.addFreshEntity(arrow); // 발사된 화살 추가
@@ -73,25 +72,29 @@ public class InfiniteArrowHandler {
         }
     }
 
-    private static final int CHARGE_DURATION = 20; // 20틱 이상 우클릭 유지 시 장전
+    private static final int CHARGE_DURATION = 25;
     private static final Map<Player, Integer> playerUseTime = new HashMap<>();
+    private static boolean isPlayerUsingCrossbow = false;
 
     @SubscribeEvent
     public static void onCrossbowUse(PlayerInteractEvent.RightClickItem event) {
         Player player = event.getEntity();
         ItemStack crossbowStack = event.getItemStack();
 
+        // 석궁 아이템인지 확인
         if (crossbowStack.getItem() instanceof CrossbowItem) {
-            event.setCanceled(true);
-            System.out.println("crossbow use");
+            event.setCanceled(true); // 기본 동작 취소
 
+            // 석궁이 장전되지 않았다면 장전 시작
             if (!CrossbowItem.isCharged(crossbowStack)) {
-                player.startUsingItem(event.getHand()); // 장전 애니메이션 시작
+                player.startUsingItem(event.getHand()); // 장전 시작
                 playerUseTime.put(player, 0);
+                //tryLoadProjectiles(player, crossbowStack);
+                System.out.println("Crossbow charging started without consuming arrows.");
             } else {
-                // 석궁이 장전된 상태라면 발사
+                // 석궁이 이미 장전된 상태라면 발사
                 CrossbowItem.performShooting(player.level(), player, event.getHand(), crossbowStack, 1.0f, 1.0f);
-                CrossbowItem.setCharged(crossbowStack, false); // 발사 후 석궁을 다시 미장전 상태로 설정
+                CrossbowItem.setCharged(crossbowStack, false); // 발사 후 미장전 상태로 변경
             }
         }
     }
@@ -99,105 +102,59 @@ public class InfiniteArrowHandler {
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         Player player = event.player;
-
-        if (playerUseTime.containsKey(player)) {
-            if (player.isUsingItem()) {
-                int curTime = playerUseTime.get(player) + 1;
-                playerUseTime.put(player, curTime);
-
-            } else {
-                ItemStack crossbow = player.getUseItem();
-                int useTime = playerUseTime.get(player);
-
-                if (useTime >= 20) {
-                    crossbow.getOrCreateTag().putBoolean("Charged", true);
-                    tryLoadProjectiles(player, crossbow);
-                    player.stopUsingItem();
-                    player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
-                            SoundEvents.CROSSBOW_LOADING_END, SoundSource.PLAYERS, 1.0F, 1.0F);
-                }
-
-                playerUseTime.remove(player);
-            }
+        ItemStack item = player.getUseItem();
+        if (player.isUsingItem() && playerUseTime.containsKey(player)) { // 장전 하는 중
+            playerUseTime.put(player, playerUseTime.get(player) + 1);
+            isPlayerUsingCrossbow = true;
+        } else if (isPlayerUsingCrossbow && !player.isUsingItem()) { // 장전이 끝난 시점
+            isPlayerUsingCrossbow = false;
+            int chargetime = playerUseTime.remove(player);
+            tryLoadProjectiles(player, item);
+            // 여기서 tryLoadProjectiles를 실행해야 하는건 맞는데, player가 client-side에서밖에 실행되지 않아 화살이 계속 소모됨. 차후 패킷을 구현하여 문제 수정 예정
         }
-
     }
 
-    private static boolean tryLoadProjectiles(LivingEntity pShooter, ItemStack pCrossbowStack) {
-        System.out.println("tryloadProjectile");
-        int i = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, pCrossbowStack);
-        int j = i == 0 ? 1 : 3;
-        boolean flag = pShooter instanceof Player && ((Player) pShooter).getAbilities().instabuild;
-        ItemStack itemstack = pShooter.getProjectile(pCrossbowStack);
-        ItemStack itemstack1 = itemstack.copy();
+    private static boolean tryLoadProjectiles(LivingEntity shooter, ItemStack crossbowStack) {
+        // 멀티샷 인챈트 확인
+        int multishotLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.MULTISHOT, crossbowStack);
+        int quickChargeLevel = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.QUICK_CHARGE, crossbowStack);
+        int projectileCount = multishotLevel == 0 ? 1 : 3;
+        int maxChargeDuration = 25 - quickChargeLevel * 5;
 
-        for (int k = 0; k < j; ++k) {
-            if (k > 0) {
-                itemstack = itemstack1.copy();
-            }
+        // 크리에이티브 모드 여부 확인
+        boolean isCreativeMode = shooter instanceof Player && ((Player) shooter).getAbilities().instabuild;
 
-            if (itemstack.isEmpty() && flag) {
-                itemstack = new ItemStack(Items.ARROW);
-                itemstack1 = itemstack.copy();
-            }
+        // 가상의 화살 생성 (화살이 없어도 장전되도록)
+        ItemStack virtualArrow = new ItemStack(Items.ARROW);
 
-            if (!loadProjectile(pShooter, pCrossbowStack, itemstack, k > 0, flag)) {
-                return false;
+        for (int i = 0; i < projectileCount; ++i) {
+            if (!loadProjectile(shooter, crossbowStack, virtualArrow, i > 0, isCreativeMode)) {
+                return false; // 실패 시 false 반환
             }
         }
 
+        CrossbowItem.setCharged(crossbowStack, true); // 석궁을 장전된 상태로 설정
+        System.out.println("Crossbow charged without consuming arrows.");
         return true;
     }
 
-    private static boolean loadProjectile(LivingEntity pShooter, ItemStack pCrossbowStack, ItemStack pAmmoStack,
-            boolean pHasAmmo, boolean pIsCreative) {
-        System.out.println("loadProjectile");
-        System.out.println(pHasAmmo);
-
-        
-        if (pAmmoStack.isEmpty()) 
-        {
-
-            System.out.println("empty");
-
-            return false;
-        } 
-        else 
-        {
-            boolean flag = pIsCreative && pAmmoStack.getItem() instanceof ArrowItem;
-            ItemStack itemstack;
-
-            if (!flag && !pIsCreative && !pHasAmmo) 
-            {
-                itemstack = pAmmoStack.split(1);
-                if (pAmmoStack.isEmpty() && pShooter instanceof Player) 
-                {
-                    ((Player) pShooter).getInventory().removeItem(pAmmoStack);
-                }
-            } 
-            else 
-            {
-                itemstack = pAmmoStack.copy();
-            }
-
-            addChargedProjectile(pCrossbowStack, itemstack);
-            return true;
-        }
+    private static boolean loadProjectile(LivingEntity shooter, ItemStack crossbowStack, ItemStack ammoStack,
+            boolean hasAmmo, boolean isCreative) {
+        // 아무런 아이템도 소모하지 않고 바로 성공 처리
+        addChargedProjectile(crossbowStack, new ItemStack(Items.ARROW)); // 가상으로 화살을 추가
+        return true;
     }
 
-    private static void addChargedProjectile(ItemStack pCrossbowStack, ItemStack pAmmoStack) {
-        System.out.println("addChargedProjectile");
-        CompoundTag compoundtag = pCrossbowStack.getOrCreateTag();
-        ListTag listtag;
-        if (compoundtag.contains("ChargedProjectiles", 9)) {
-            listtag = compoundtag.getList("ChargedProjectiles", 10);
-        } else {
-            listtag = new ListTag();
-        }
+    private static void addChargedProjectile(ItemStack crossbowStack, ItemStack ammo) {
+        CompoundTag tag = crossbowStack.getOrCreateTag();
+        ListTag projectiles = tag.contains("ChargedProjectiles", 9) ? tag.getList("ChargedProjectiles", 10)
+                : new ListTag();
 
-        CompoundTag compoundtag1 = new CompoundTag();
-        pAmmoStack.save(compoundtag1);
-        listtag.add(compoundtag1);
-        compoundtag.put("ChargedProjectiles", listtag);
+        CompoundTag ammoTag = new CompoundTag();
+        ammo.save(ammoTag);
+        projectiles.add(ammoTag);
+
+        tag.put("ChargedProjectiles", projectiles);
     }
+
 }
