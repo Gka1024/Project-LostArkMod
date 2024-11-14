@@ -1,6 +1,6 @@
 package net.Locke.lostarkmod.block.custom;
 
-import net.Locke.lostarkmod.block.entity.StoneCarvingTableBlockEntity;
+import net.Locke.lostarkmod.block.entity.ArmorForgingTableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -20,11 +20,11 @@ import net.minecraftforge.network.NetworkHooks;
 
 import org.jetbrains.annotations.Nullable;
 
-public class StoneCarvingTable extends BaseEntityBlock {
+public class ArmorForgingTable extends BaseEntityBlock {
 
     public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
 
-    public StoneCarvingTable(Properties pProperties) {
+    public ArmorForgingTable(Properties pProperties) {
         super(pProperties);
     }
 
@@ -41,8 +41,8 @@ public class StoneCarvingTable extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
             BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof StoneCarvingTableBlockEntity) {
-                ((StoneCarvingTableBlockEntity) blockEntity).drops();
+            if (blockEntity instanceof ArmorForgingTableBlockEntity) {
+                ((ArmorForgingTableBlockEntity) blockEntity).drops();
             }
         }
     }
@@ -52,8 +52,8 @@ public class StoneCarvingTable extends BaseEntityBlock {
             BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if (entity instanceof StoneCarvingTableBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (StoneCarvingTableBlockEntity) entity, pPos);
+            if (entity instanceof ArmorForgingTableBlockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (ArmorForgingTableBlockEntity) entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -65,7 +65,7 @@ public class StoneCarvingTable extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new StoneCarvingTableBlockEntity(pPos, pState);
+        return new ArmorForgingTableBlockEntity(pPos, pState);
     }
 
 }

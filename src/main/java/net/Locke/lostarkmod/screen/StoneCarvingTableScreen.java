@@ -20,7 +20,6 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
     private static final ResourceLocation ICON_TEXTURE = new ResourceLocation(LostArkMod.MOD_ID,
             "textures/gui/buff_icon.png");
 
-    private int opt1Cur = 0, opt2Cur = 0, opt3Cur = 0;
     StoneCarvingTableBlockEntity blockEntity = (StoneCarvingTableBlockEntity) this.menu.getBlockEntity();
 
     public StoneCarvingTableScreen(StoneCarvingTableMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
@@ -140,9 +139,6 @@ public class StoneCarvingTableScreen extends AbstractContainerScreen<StoneCarvin
             guiGraphics.blit(ICON_TEXTURE, imageX, imageY + 53, (opt3Index % 10 + 5) * offset, offset, 18, 18); // 디버프
 
     }
-
-
-
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {

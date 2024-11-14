@@ -98,6 +98,7 @@ public class ModCreativeModTabs {
                         pOutput.accept(ModBlocks.DESTRUCTION_DEEPSLATE_ORE.get());
                         pOutput.accept(ModBlocks.GUARDIAN_DEEPSLATE_ORE.get());
                         pOutput.accept(ModBlocks.STONE_CARVING_TABLE.get());
+                        pOutput.accept(ModBlocks.ARMOR_FORGING_TABLE.get());
 
                         pOutput.accept(Items.RAW_GOLD);
 

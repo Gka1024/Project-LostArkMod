@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import net.Locke.lostarkmod.block.ModBlocks;
+import net.Locke.lostarkmod.block.custom.ArmorForgingTable;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.client.ManaHUDRenderer;
 import net.Locke.lostarkmod.effect.ModEffects;
@@ -16,6 +17,7 @@ import net.Locke.lostarkmod.network.ModMessages;
 import net.Locke.lostarkmod.particle.ModParticles;
 import net.Locke.lostarkmod.screen.ModMenuTypes;
 import net.Locke.lostarkmod.screen.StoneCarvingTableScreen;
+import net.Locke.lostarkmod.screen.ArmorForgingTableScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -83,6 +85,7 @@ public class LostArkMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.STONE_CARVING_MENU.get(), StoneCarvingTableScreen::new);
+            MenuScreens.register(ModMenuTypes.ARMOR_FORGING_MENU.get(), ArmorForgingTableScreen::new);
             ManaHUDRenderer.register();
         }
     }

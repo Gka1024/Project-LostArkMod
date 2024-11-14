@@ -17,7 +17,9 @@ public class ModMenuTypes {
         public static final RegistryObject<MenuType<StoneCarvingTableMenu>> STONE_CARVING_MENU = registerMenuType(
                         "stone_carving_menu", StoneCarvingTableMenu::new);
 
-                        
+        public static final RegistryObject<MenuType<ArmorForgingTableMenu>> ARMOR_FORGING_MENU = registerMenuType(
+                        "armor_forging_menu", ArmorForgingTableMenu::new);
+
         // 메뉴 타입을 등록하는 공통 메서드
         private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(String name,
                         IContainerFactory<T> factory) {

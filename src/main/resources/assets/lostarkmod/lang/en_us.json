@@ -49,6 +49,7 @@
     "block.lostarkmod.destruction_deepslate_ore" : "Destruction Deepslate Ore",
     "block.lostarkmod.guardian_deepslate_ore" : "Guardian Deepslate Ore",
     "block.lostarkmod.stone_carving_table" : "Stone Carving Table",
+    "block.lostarkmod.armor_forging_table" : "Armor Forging Table",
 
     "effect.lostarkmod.melee_damage" : "Melee Damage",
     "effect.lostarkmod.add_heart" : "Add Heart",

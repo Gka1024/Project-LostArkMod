@@ -5,12 +5,10 @@ import net.Locke.lostarkmod.screen.StoneCarvingTableMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -18,12 +16,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
@@ -58,7 +52,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         }
     };
 
-    private static final int STONE_SLOT = 0;
+    private static final int ABILITY_STONE_SLOT = 0;
     private static final int SILLING_SLOT = 1;
     private static final int MAX_PROBABILITY = 75;
     private static final int MIN_PROBABILITY = 25;
@@ -132,7 +126,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
     public void stoneCarve(int option) {
 
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
 
         if (isNew(abilityStone)) {
             arrayClear(0);
@@ -207,7 +201,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public int getCurrentProbability() {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         if (abilityStone.hasTag()) {
             CompoundTag tag = abilityStone.getTag();
             return tag.contains("probability") ? tag.getInt("probability") : 75;
@@ -217,7 +211,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public boolean isCarvable(int index) {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         CompoundTag tag = abilityStone.getOrCreateTag();
 
         if(tag.getBoolean("isCarved"))
@@ -230,7 +224,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public byte[] getByteArray(int index) {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
 
         if (abilityStone.hasTag()) {
             CompoundTag tag = abilityStone.getTag();
@@ -241,7 +235,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public int getCurrent(int index) {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         if (abilityStone.hasTag()) {
             CompoundTag tag = abilityStone.getTag();
             return tag.getInt("opt" + Integer.toString(index) + ".current");
@@ -250,7 +244,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public int getOptionIndex(int index) {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         if (abilityStone.hasTag()) {
             CompoundTag tag = abilityStone.getTag();
             return tag.getInt("opt" + Integer.toString(index) + ".index");
@@ -259,7 +253,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public boolean isStoneHasNBT() {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
 
         if (isStoneExist()) {
             return abilityStone.hasTag();
@@ -283,7 +277,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public boolean isCarveComplete() {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         CompoundTag tag = abilityStone.getTag();
 
         if (tag.getInt("opt1.progress") == 10 && tag.getInt("opt2.progress") == 10
@@ -295,7 +289,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     private void MakeStone() {
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         CompoundTag tag = abilityStone.getTag();
 
         ItemStack newStone = new ItemStack(ModItems.ABILITY_STONE_CARVED.get());
@@ -320,7 +314,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
 
         newStone.setTag(nbt);
 
-        itemHandler.setStackInSlot(STONE_SLOT, newStone);
+        itemHandler.setStackInSlot(ABILITY_STONE_SLOT, newStone);
 
         resetCarvingState();
 
@@ -385,7 +379,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
 
-        ItemStack abilityStone = itemHandler.getStackInSlot(STONE_SLOT);
+        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         CompoundTag tag = abilityStone.getTag();
 
         pTag.putInt("probability", currentProbability);

@@ -1,16 +1,13 @@
 package net.Locke.lostarkmod.screen;
 
 import net.Locke.lostarkmod.block.ModBlocks;
-import net.Locke.lostarkmod.block.entity.StoneCarvingTableBlockEntity;
-import net.Locke.lostarkmod.item.ModItems;
+import net.Locke.lostarkmod.block.entity.ArmorForgingTableBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -19,21 +16,21 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class StoneCarvingTableMenu extends AbstractContainerMenu {
+public class ArmorForgingTableMenu extends AbstractContainerMenu {
 
-    public final StoneCarvingTableBlockEntity blockEntity;
+    public final ArmorForgingTableBlockEntity blockEntity;
     private final Level level;
     private final ContainerData data;
 
-    public StoneCarvingTableMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public ArmorForgingTableMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()),
-                new SimpleContainerData(2));
+                new SimpleContainerData(9));
     }
 
-    public StoneCarvingTableMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
-        super(ModMenuTypes.STONE_CARVING_MENU.get(), pContainerId);
-        checkContainerSize(inv, 2);
-        blockEntity = ((StoneCarvingTableBlockEntity) entity);
+    public ArmorForgingTableMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
+        super(ModMenuTypes.ARMOR_FORGING_MENU.get(), pContainerId);
+        checkContainerSize(inv, 7);
+        blockEntity = ((ArmorForgingTableBlockEntity) entity);
         this.level = inv.player.level();
         this.data = data;
 
@@ -41,8 +38,15 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 81, -18)); // Stone
-            this.addSlot(new CustomSlotItemHandler(iItemHandler, 1, -11, -18, 256)); // Silling
+            this.addSlot(new SlotItemHandler(iItemHandler, 0,-9, -16)); // 장비 위치
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 9, 50)); // 수호파괴
+            this.addSlot(new SlotItemHandler(iItemHandler, 2, 43, 50)); // 명예돌파
+            this.addSlot(new SlotItemHandler(iItemHandler, 3, 77, 50)); // 오레하
+            this.addSlot(new SlotItemHandler(iItemHandler, 4, 138, -18)); // 가호1
+            this.addSlot(new SlotItemHandler(iItemHandler, 5, 138, 4)); // 가호2
+            this.addSlot(new SlotItemHandler(iItemHandler, 6, 138, 26)); // 가호3
+            this.addSlot(new SlotItemHandler(iItemHandler, 7, 138, 59)); // 책
+            this.addSlot(new SlotItemHandler(iItemHandler, 8, -14, 61)); // 명예의 파편
         });
 
     }
@@ -61,10 +65,11 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu {
         }
     }
 
+
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer,
-                ModBlocks.STONE_CARVING_TABLE.get());
+                ModBlocks.ARMOR_FORGING_TABLE.get());
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -88,7 +93,7 @@ public class StoneCarvingTableMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 2; // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 9; // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
