@@ -74,6 +74,7 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         {
             int curLevel = tag.getInt("armor.level");
             tag.putInt("armor.level", curLevel + 1);
+            resetHShard();
         }
 
     }
@@ -145,6 +146,15 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         tag.putInt("armor.hshard", curHShard + 1);
 
         isHShardFull(tag);
+    }
+
+    private void resetHShard()
+    {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = armor.getOrCreateTag();
+
+        int curHShard = tag.getInt("armor.hshard");
+        tag.putInt("armor.hshard", 0);
     }
 
     private boolean isForgable()
