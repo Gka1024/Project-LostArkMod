@@ -28,6 +28,12 @@ public class ModMessages {
                                 .consumerMainThread(StoneCarvePacket::handle)
                                 .add();
 
+                INSTANCE.messageBuilder(ArmorForgingPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                                .encoder(ArmorForgingPacket::encode)
+                                .decoder(ArmorForgingPacket::decode)
+                                .consumerMainThread(ArmorForgingPacket::handle)
+                                .add();
+
                 INSTANCE.messageBuilder(ManaSyncPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                                 .encoder(ManaSyncPacket::encode)
                                 .decoder(ManaSyncPacket::decode)
