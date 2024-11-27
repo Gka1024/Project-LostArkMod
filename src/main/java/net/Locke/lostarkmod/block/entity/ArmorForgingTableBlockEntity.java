@@ -1,6 +1,13 @@
 package net.Locke.lostarkmod.block.entity;
 
+import java.util.Set;
+
 import javax.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
+import org.joml.Math;
+
+import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.screen.ArmorForgingTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,6 +20,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,7 +30,6 @@ import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
 
 public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuProvider {
 
@@ -31,10 +38,118 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         protected void onContentsChanged(int slot) {
             setChanged();
         }
+
+        @Override
+        public boolean isItemValid(int slot, ItemStack stack) {
+            if (slot == ARMOR_SLOT) {
+                return isAllowedArmorItem(stack.getItem());
+            }
+
+            if (slot == STONE_SLOT) {
+                return isAllowedStoneItem(stack.getItem());
+            }
+
+            if(slot == LEAPSTONE_SLOT)
+            {
+                return isAllowedLeapstoneItem(stack.getItem());
+            }
+
+            if(slot == OREHA_SLOT)
+            {
+                return isAllowedOrehaItem(stack.getItem());
+            }
+
+            if(slot == LEAPSTONE_SLOT)
+            {
+                return isAllowedLeapstoneItem(stack.getItem());
+            }
+
+            if(slot == BLESSING_SLOT)   return stack.getItem() == ModItems.SOLAR_BLESSING.get();
+            if(slot == GRACE_SLOT) return stack.getItem() == ModItems.SOLAR_GRACE.get();
+            if(slot == PROTECTION_SLOT) return stack.getItem() == ModItems.SOLAR_PROTECTION.get();
+            
+            if(slot == BOOK_SLOT) return stack.getItem() == ModItems.GUIDE_BOOK.get();
+            if(slot == HSHARD_SLOT) return stack.getItem() == ModItems.HONOR_SHARD.get();
+
+            return false;
+        };
     };
 
+    private final Set<Item> allowedArmorItems = Set.of(
+            ModItems.SALVATION_HAT.get(),
+            ModItems.SALVATION_CHESTPLATE.get(),
+            ModItems.SALVATION_LEGGINGS.get(),
+            ModItems.SALVATION_BOOTS.get(),
+            ModItems.SALVATION_SHOULDER.get(),
+
+            ModItems.ENTROPY_MASK.get(),
+            ModItems.ENTROPY_CHESTPIECE.get(),
+            ModItems.ENTROPY_LEGGINGS.get(),
+            ModItems.ENTROPY_BOOTS.get(),
+            ModItems.ENTROPY_SHOULDER.get(),
+
+            ModItems.HALLUCINATION_HELM.get(),
+            ModItems.HALLUCINATION_CHESTPIECE.get(),
+            ModItems.HALLUCINATION_PANTS.get(),
+            ModItems.HALLUCINATION_BOOTS.get(),
+            ModItems.HALLUCINATION_SHOULDER.get(),
+
+            ModItems.NIGHTMARE_HAT.get(),
+            ModItems.NIGHTMARE_CHESTPIECE.get(),
+            ModItems.NIGHTMARE_PANTS.get(),
+            ModItems.NIGHTMARE_BOOTS.get(),
+            ModItems.NIGHTMARE_SHOULDER.get(),
+
+            ModItems.YEARNING_HAT.get(),
+            ModItems.YEARNING_CHESTPIECE.get(),
+            ModItems.YEARNING_PANTS.get(),
+            ModItems.YEARNING_BOOTS.get(),
+            ModItems.YEARNING_SHOULDER.get());
+
+    private final Set<Item> allowedStoneItem = Set.of(
+            ModItems.DESTRUCTION_STONE.get(),
+            ModItems.DESTRUCTION_STONE_HONOR.get(),
+            ModItems.DESTRUCTION_STONE_GREAT_HONOR.get(),
+
+            ModItems.GUARDIAN_STONE.get(),
+            ModItems.GUARDIAN_STONE_HONOR.get(),
+            ModItems.GUARDIAN_STONE_GREAT_HONOR.get()
+
+    );
+
+    private final Set<Item> allowedLeapstoneItem = Set.of(
+            ModItems.HONOR_LEAPSTONE.get(),
+            ModItems.HONOR_LEAPSTONE_GREAT.get(),
+            ModItems.HONOR_LEAPSTONE_MARVELOUS.get(),
+            ModItems.HONOR_LEAPSTONE_SPLENDID.get()
+    );
+
+    private final Set<Item> allowedOrehaItem = Set.of(
+            ModItems.OREHA_FUSION_MATERIAL_ADVANCED.get(),
+            ModItems.OREHA_FUSION_MATERIAL_BASIC.get(),
+            ModItems.OREHA_FUSION_MATERIAL.get()
+    );
+
+    private boolean isAllowedArmorItem(Item item) {
+        return allowedArmorItems.contains(item);
+    }
+
+    private boolean isAllowedStoneItem(Item item) {
+        return allowedStoneItem.contains(item);
+    }
+
+    private boolean isAllowedLeapstoneItem(Item item) {
+        return allowedLeapstoneItem.contains(item);
+    }
+
+    private boolean isAllowedOrehaItem(Item item) {
+        return allowedOrehaItem.contains(item);
+    }
+
+
+
     private static int ARMOR_SLOT = 0; // 장비
-    private static int STONE_SLOT = 1; // 수호석|파괴석
+    private static int STONE_SLOT = 1; // 수호석 | 파괴석
     private static int LEAPSTONE_SLOT = 2; // 명예의 돌파석
     private static int OREHA_SLOT = 3; // 오레하 융화재료
     private static int BLESSING_SLOT = 4; // 가호1
@@ -42,6 +157,10 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
     private static int PROTECTION_SLOT = 6; // 가호3
     private static int BOOK_SLOT = 7; // 책(강화확률)
     private static int HSHARD_SLOT = 8; // 명예의 파편
+
+    int[] stone_use_array = { 16, 24, 32 };
+    int[] leap_use_array = { 8, 12, 16 };
+    int[] oreha_use_array = { 6, 10, 15 };
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     protected final ContainerData data;
@@ -67,42 +186,193 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     public void forge() {
-        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
-        CompoundTag tag = armor.getOrCreateTag();
 
-        if(isForgable())
-        {
-            int curLevel = tag.getInt("armor.level");
-            tag.putInt("armor.level", curLevel + 1);
-            resetHShard();
+        ItemStack item = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = item.getOrCreateTag();
+
+        if (!isForgable())
+            return;
+
+        if (!isResourceEnough(getItemLevel()))
+            return;
+
+        consumeResource(getItemLevel());
+        if (getItemLevel() != 0) {
+            consumeSolarResource();
+        }
+
+        float ranNum = (float) (Math.random() * 100); // 난수 생성
+        ranNum = Math.round(ranNum * 100) / 100.0f;
+
+        float curForgeProb = 30;
+        float addForgeProb = addProbability();
+
+        curForgeProb = Math.min(curForgeProb + addForgeProb, 100.0f);
+
+        System.out.println(Float.toString(ranNum) + " / " + Float.toString(curForgeProb));
+
+        if (ranNum < curForgeProb || getItemLevel() == 0) {
+            increaseItemLevel();
+        } else {
+            return;
         }
 
     }
 
-    public boolean hasArmor() {
-        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
-        return !armor.isEmpty();
-    }
-
-
-    public void tick(Level pLevel, BlockPos pPos, BlockState pBlockState)
-    {
-        if(hasArmor())
-        {
-            if(!isForgable())
-            {
-                if(hasEnoughItems(HSHARD_SLOT, 1))
-                {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pBlockState) {
+        if (hasArmor()) {
+            if (!isForgable()) {
+                if (hasEnoughItems(HSHARD_SLOT, 1)) {
                     removeItemFromSlot(HSHARD_SLOT, 1);
                     increaseHShard();
                     setChanged();
                 }
-            }
-            else
-            {
+            } else {
 
             }
         }
+    }
+
+    private void increaseItemLevel() {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = armor.getOrCreateTag();
+
+        if (isForgable()) {
+            int curLevel = tag.getInt("armor.level");
+            tag.putInt("armor.level", curLevel + 1);
+            resetHShard();
+            resetItemForgable();
+        }
+    }
+
+    private void HShardFull(CompoundTag tag) {
+        if (tag.getInt("armor.hshard") == 64) {
+            tag.putBoolean("armor.forgable", true);
+        }
+    }
+
+    private void increaseHShard() {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = armor.getOrCreateTag();
+
+        int curHShard = tag.getInt("armor.hshard");
+        tag.putInt("armor.hshard", curHShard + 1);
+
+        HShardFull(tag);
+    }
+
+    private void resetHShard() {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = armor.getOrCreateTag();
+        tag.putInt("armor.hshard", 0);
+    }
+
+    private void resetItemForgable() {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = armor.getOrCreateTag();
+
+        tag.putBoolean("armor.forgable", false);
+    }
+
+    private float addProbability() {
+        float rtnNum = 0;
+
+        rtnNum += addProbability(BLESSING_SLOT);
+        rtnNum += addProbability(GRACE_SLOT);
+        rtnNum += addProbability(PROTECTION_SLOT);
+        /*
+         * 각 아이템은 8개, 5개, 3개를 최대로 넣을 수 있습니다.
+         * 아이템을 전부 넣으면 장비의 레벨에 따라 3%, 2%, 1% 확률이 올라갑니다.
+         * 더 적게 넣는것도 가능합니다.
+         */
+        return rtnNum;
+    }
+
+    private float addProbability(int slot) {
+        int level = getItemLevel();
+        float probability = 0;
+        int index = slot - 4;
+
+        int quantity = getItemQuantity(slot);
+        int multiplyer = 0;
+        float baseProbability = 0;
+
+        switch (level / 5) {
+            case 0:
+                multiplyer = 3;
+                break;
+
+            case 1:
+                multiplyer = 2;
+                break;
+
+            case 2:
+                multiplyer = 1;
+                break;
+
+            default:
+                multiplyer = 1;
+                break;
+        }
+
+        switch (index) {
+            case 0:
+                baseProbability = 0.125f;
+                quantity = Math.min(quantity, 8);
+                break;
+
+            case 1:
+                baseProbability = 0.2f;
+                quantity = Math.min(quantity, 5);
+                break;
+
+            case 2:
+                baseProbability = 0.33f;
+                quantity = Math.min(quantity, 3);
+                break;
+
+            default:
+                break;
+        }
+
+        probability = quantity * multiplyer * baseProbability;
+
+        if (index == 2) {
+            probability = Math.round(probability * 10) / 10.0f;
+        } else {
+            probability = Math.round(probability * 1000) / 1000.0f;
+        }
+
+        return probability;
+    }
+
+    private boolean isResourceEnough(int level) {
+
+        boolean flag = true;
+        if (!hasEnoughItems(STONE_SLOT, stone_use_array[Math.min(level / 5, 2)])) {
+            flag = false;
+        }
+        if (!hasEnoughItems(LEAPSTONE_SLOT, leap_use_array[Math.min(level / 5, 2)])) {
+            flag = false;
+        }
+        if (!hasEnoughItems(OREHA_SLOT, oreha_use_array[Math.min(level / 5, 2)])) {
+            flag = false;
+        }
+
+        return flag;
+
+    }
+
+    private void consumeResource(int level) {
+        removeItemFromSlot(STONE_SLOT, stone_use_array[Math.min(level / 5, 2)]);
+        removeItemFromSlot(LEAPSTONE_SLOT, leap_use_array[Math.min(level / 5, 2)]);
+        removeItemFromSlot(OREHA_SLOT, oreha_use_array[Math.min(level / 5, 2)]);
+    }
+
+    private void consumeSolarResource() {
+        removeItemFromSlot(BLESSING_SLOT, 8);
+        removeItemFromSlot(GRACE_SLOT, 5);
+        removeItemFromSlot(PROTECTION_SLOT, 3);
     }
 
     public boolean hasEnoughItems(int slot, int count) {
@@ -121,50 +391,107 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         }
     }
 
-    private void isHShardFull(CompoundTag tag)
-    {
-        if(tag.getInt("armor.hshard") == 64)
-        {
-            tag.putBoolean("armor.forgable", true);
+    public int getItemLevel() {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = armor.getOrCreateTag();
+
+        return tag.getInt("armor.level");
+    }
+
+    public int getBasicProbability() {
+        int level = getItemLevel();
+        switch (level) {
+            case 0:
+                return 100;
+
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                return 20;
+
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+                return 15;
+
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                return 10;
+
+            case 15:
+                return 5;
+
+            default:
+                return 0;
         }
     }
 
-    public int getHShard()
-    {
-        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
-        CompoundTag tag = armor.getOrCreateTag();
-
-       return tag.getInt("armor.hshard");
-    }
-
-    private void increaseHShard()
-    {
-        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
-        CompoundTag tag = armor.getOrCreateTag();
-
-        int curHShard = tag.getInt("armor.hshard");
-        tag.putInt("armor.hshard", curHShard + 1);
-
-        isHShardFull(tag);
-    }
-
-    private void resetHShard()
-    {
-        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
-        CompoundTag tag = armor.getOrCreateTag();
-
-        int curHShard = tag.getInt("armor.hshard");
-        tag.putInt("armor.hshard", 0);
-    }
-
-    private boolean isForgable()
-    {
+    public boolean isForgable() {
         ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
         CompoundTag tag = armor.getOrCreateTag();
 
         return tag.getBoolean("armor.forgable");
     }
 
+    public int getHShard() {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        CompoundTag tag = armor.getOrCreateTag();
+
+        return tag.getInt("armor.hshard");
+    }
+
+    public boolean hasArmor() {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        return !armor.isEmpty();
+    }
+
+    public String getItemName() {
+        if (itemHandler.getStackInSlot(ARMOR_SLOT).isEmpty()) {
+            return "";
+        }
+
+        return itemHandler.getStackInSlot(ARMOR_SLOT).getHoverName().getString();
+    }
+
+    public int getResourceQuantity(int index) {
+
+        int level = getItemLevel();
+
+        switch (index) {
+            case 0:
+                return stone_use_array[Math.min(level / 3, 2)];
+
+            case 1:
+                return leap_use_array[Math.min(level / 3, 2)];
+
+            case 2:
+                return oreha_use_array[Math.min(level / 3, 2)];
+
+            default:
+                return 0;
+        }
+    }
+
+    public int getItemQuantity(int slot) {
+        ItemStack stack = itemHandler.getStackInSlot(slot);
+        return stack.getCount();
+    }
+
+    public float getAdditionalProbability() {
+        return addProbability();
+    }
+
+    public float getAdditionalProbability(int index) {
+        return addProbability(index + 4);
+    }
+
+    // 블록엔티티 기본 코드들입니다.
     public void drops() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {

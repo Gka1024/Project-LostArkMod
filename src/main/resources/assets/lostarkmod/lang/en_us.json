@@ -34,13 +34,35 @@
     "item.lostarkmod.ability_stone_uncarved" : "Uncarved Ability Stone",
     "item.lostarkmod.ability_stone_carved" : "Ability Stone",
 
-
-    
-    "item.lostarkmod.salvation_helmet" : "Salvation Helmet",
-    "item.lostarkmod.salvation_chestplate" : "Salvation Chestplate",
+    "item.lostarkmod.salvation_hat" : "Salvation Hat",
+    "item.lostarkmod.salvation_chestpiece" : "Salvation Chestpiece",
     "item.lostarkmod.salvation_leggings" : "Salvation Leggings",
     "item.lostarkmod.salvation_boots" : "Salvation Boots",
+    "item.lostarkmod.salvation_shoulder" : "Salvation Shoulder",
+
+    "item.lostarkmod.entropy_mask" : "Entropy Mask",
+    "item.lostarkmod.entropy_chestpiece" : "Entropy Chestpiece",
+    "item.lostarkmod.entropy_leggings" : "Entropy Leggings",
+    "item.lostarkmod.entropy_boots" : "Entropy Boots",
+    "item.lostarkmod.entropy_shoulder" : "Entropy Shoulder",
+
+    "item.lostarkmod.hallucination_helm" : "Hallucination Helm",
+    "item.lostarkmod.hallucination_chestplate" : "Hallucination Chestplate",
+    "item.lostarkmod.hallucination_pants" : "Hallucination Pants",
+    "item.lostarkmod.hallucination_boots" : "Hallucination Boots",
+    "item.lostarkmod.hallucination_shoulder" : "Hallucination Shoulder",
+
+    "item.lostarkmod.nightmare_hat" : "Nightmare Hat",
+    "item.lostarkmod.nightmare_chestpiece" : "Nightmare Chestpiece",
+    "item.lostarkmod.nightmare_pants" : "Nightmare Pants",
+    "item.lostarkmod.nightmare_boots" : "Nightmare Boots",
+    "item.lostarkmod.nightmare_shoulder" : "Nightmare Shoulder",
     
+    "item.lostarkmod.yearning_hat" : "Yearning Hat",
+    "item.lostarkmod.yearning_chestpiece" : "Yearning Chestpiece",
+    "item.lostarkmod.yearning_pants" : "Yearning Pants",
+    "item.lostarkmod.yearning_boots" : "Yearning Boots",
+    "item.lostarkmod.yearning_shoulder" : "Yearning Shoulder",
     
     "block.lostarkmod.silling_block" : "Block of Silling",
     "block.lostarkmod.gold_block" : "Block of gold",

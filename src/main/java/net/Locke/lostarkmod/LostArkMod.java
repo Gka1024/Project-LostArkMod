@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import com.mojang.logging.LogUtils;
 
 import net.Locke.lostarkmod.block.ModBlocks;
-import net.Locke.lostarkmod.block.custom.ArmorForgingTable;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.client.ManaHUDRenderer;
 import net.Locke.lostarkmod.effect.ModEffects;

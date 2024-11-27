@@ -29,23 +29,19 @@ import org.jetbrains.annotations.Nullable;
 
 public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuProvider {
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2){
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
-        protected void  onContentsChanged(int slot)
-        {
+        protected void onContentsChanged(int slot) {
             setChanged();
         }
 
         @Override
-        public boolean isItemValid(int slot, ItemStack stack)
-        {
-            if(slot == 0)
-            {
+        public boolean isItemValid(int slot, ItemStack stack) {
+            if (slot == 0) {
                 return stack.getItem() == ModItems.ABILITY_STONE_UNCARVED.get();
             }
 
-            if(slot == 1)
-            {
+            if (slot == 1) {
                 return stack.getItem() == ModItems.SILLING.get();
             }
             return false;
@@ -103,27 +99,6 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         };
     }
 
-    public boolean hasEnoughItems(int slot, int count) {
-        ItemStack stack = itemHandler.getStackInSlot(slot); // 지정한 슬롯에서 아이템 가져오기
-        return !stack.isEmpty() && stack.getCount() >= count; // 아이템이 있고, 수량이 충분한지 여부 반환
-    }
-
-    public boolean isStoneExist() {
-        ItemStack stack = itemHandler.getStackInSlot(0);
-        return !stack.isEmpty();
-    }
-
-    public void removeItemFromSlot(int slot, int count) {
-        ItemStack stack = itemHandler.getStackInSlot(slot); // itemHandler에서 슬롯 아이템을 가져옴
-        if (!stack.isEmpty() && stack.getCount() >= count) {
-            stack.shrink(count); // 지정된 개수만큼 아이템을 줄임
-            if (stack.isEmpty()) {
-                itemHandler.setStackInSlot(slot, ItemStack.EMPTY); // 아이템이 모두 소모되었을 때 빈 슬롯으로 설정
-            }
-            setChanged(); // 블록 엔티티가 변경되었음을 알림 (클라이언트와 동기화)
-        }
-    }
-
     public void stoneCarve(int option) {
 
         ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
@@ -177,6 +152,27 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         }
     }
 
+    public boolean hasEnoughItems(int slot, int count) {
+        ItemStack stack = itemHandler.getStackInSlot(slot); // 지정한 슬롯에서 아이템 가져오기
+        return !stack.isEmpty() && stack.getCount() >= count; // 아이템이 있고, 수량이 충분한지 여부 반환
+    }
+
+    public boolean isStoneExist() {
+        ItemStack stack = itemHandler.getStackInSlot(0);
+        return !stack.isEmpty();
+    }
+
+    public void removeItemFromSlot(int slot, int count) {
+        ItemStack stack = itemHandler.getStackInSlot(slot); // itemHandler에서 슬롯 아이템을 가져옴
+        if (!stack.isEmpty() && stack.getCount() >= count) {
+            stack.shrink(count); // 지정된 개수만큼 아이템을 줄임
+            if (stack.isEmpty()) {
+                itemHandler.setStackInSlot(slot, ItemStack.EMPTY); // 아이템이 모두 소모되었을 때 빈 슬롯으로 설정
+            }
+            setChanged(); // 블록 엔티티가 변경되었음을 알림 (클라이언트와 동기화)
+        }
+    }
+
     private boolean isNew(ItemStack abilityStone) {
         CompoundTag tag = abilityStone.getOrCreateTag();
         if (tag.getInt("opt1.progress") != 0 || tag.getInt("opt1.progress") != 0 || tag.getInt("opt1.progress") != 0) {
@@ -214,8 +210,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
         CompoundTag tag = abilityStone.getOrCreateTag();
 
-        if(tag.getBoolean("isCarved"))
-        {
+        if (tag.getBoolean("isCarved")) {
             return false;
         }
 
@@ -333,9 +328,6 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
         opt2Arr = new byte[10];
         opt3Arr = new byte[10];
     }
-
-   
-
 
     @Override
     public @NotNull <T> LazyOptional getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {

@@ -1,22 +1,28 @@
 package net.Locke.lostarkmod.item.custom;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMap;
 
 import net.Locke.lostarkmod.item.ModArmorMaterials;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 public class ModArmorItem extends ArmorItem {
     private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP = (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
             .put(ModArmorMaterials.SALVATION,
-                    new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 1, false, false, true))
+                    new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 1, false, false, false))
             .build();
 
     public ModArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
@@ -29,6 +35,32 @@ public class ModArmorItem extends ArmorItem {
             if (hasFullSuitOfArmorOn(player)) {
                 evaluateArmorEffects(player);
             }
+        }
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents,
+            TooltipFlag pIsAdvanced) {
+        if (pStack.hasTag()) {
+            CompoundTag tag = pStack.getTag();
+            int level = tag.getInt("armor.level");
+            pTooltipComponents.add(Component.literal("Armor Level : " + Integer.toString(level)));
+            String hshardBar = "| ";
+
+            int hshard = tag.getInt("armor.hshard");
+
+            for (int i = 0; i < 16; i++) {
+                if (i < hshard / 4) {
+                    hshardBar += "=";
+                } else {
+                    hshardBar += "-";
+                }
+            }
+
+            hshardBar += " |";
+
+            pTooltipComponents.add(Component.literal(hshardBar));
+
         }
     }
 
