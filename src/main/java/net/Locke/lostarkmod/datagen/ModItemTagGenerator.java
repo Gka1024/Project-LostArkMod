@@ -28,6 +28,14 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     protected void addTags(Provider pProvider) {
         TagKey<Item> abilityStoneTag = ItemTags.create(new ResourceLocation("curios", "ability_stone"));
         this.tag(abilityStoneTag).add(ModItems.ABILITY_STONE_CARVED.get());
+
+        TagKey<Item> shoulderTag = ItemTags.create(new ResourceLocation("curios", "shoulder_lostark"));
+        this.tag(shoulderTag).add(ModItems.SALVATION_SHOULDER.get());
+        this.tag(shoulderTag).add(ModItems.ENTROPY_SHOULDER.get());
+        this.tag(shoulderTag).add(ModItems.HALLUCINATION_SHOULDER.get());
+        this.tag(shoulderTag).add(ModItems.NIGHTMARE_SHOULDER.get());
+        this.tag(shoulderTag).add(ModItems.YEARNING_SHOULDER.get());
+
     }
 
 }

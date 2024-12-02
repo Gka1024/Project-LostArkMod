@@ -93,17 +93,13 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imgWidth, imgHeight); // mainRender
 
-        renderGauge(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
+        renderHshardGauge(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         renderUnderline(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         renderArrow(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
+        renderArtisanGauge(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
     }
 
-    private void renderGauge(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
-        int gaugeX = x + 49;
-        int gaugeY = y + 53;
-
-        guiGraphics.blit(TEXTURE, gaugeX, gaugeY, 0, 230, 57, 10);
-
+    private void renderHshardGauge(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
         int shardGaugeX = x + 15;
         int shardGaugeY = y + 39;
 
@@ -115,6 +111,18 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
             guiGraphics.blit(TEXTURE, shardGaugeX + 2, shardGaugeY + 52 - hshardRatio, 244, 38 + 52 - hshardRatio, 8,
                     hshardRatio);
         }
+    }
+
+    private void renderArtisanGauge(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y)
+    {
+        int gaugeX = x + 49;
+        int gaugeY = y + 53;
+
+        guiGraphics.blit(TEXTURE, gaugeX, gaugeY, 0, 230, 57, 10);
+
+        int artisanRatio = (int) (blockEntity.getArtisanEnergy() * 55) / 64;
+
+        guiGraphics.blit(TEXTURE, gaugeX+ 1, gaugeY + 1, 75, 231, artisanRatio, 8);
     }
 
     private void renderArrow(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
@@ -175,7 +183,7 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
                     0xffffff);
 
             MutableComponent totalProbability = Component.literal("[ "
-                    + Float.toString(Math.min(blockEntity.getBasicProbability() + blockEntity.getAdditionalProbability(), 100)) + " % ]");
+                    + Float.toString(Math.min(blockEntity.getBasicProbability() + blockEntity.getAdditionalProbability() + blockEntity.getFailureProbability(), 100)) + " % ]");
             guiGraphics.drawString(this.font, totalProbability,
                     52 - this.font.width(totalProbability) / 2, 37, 0xffffff, false);
         }

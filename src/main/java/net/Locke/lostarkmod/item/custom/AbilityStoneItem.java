@@ -118,7 +118,6 @@ public class AbilityStoneItem extends Item implements ICurioItem {
             public void onUnequip(SlotContext slotContext, ItemStack newStack) {
                 if (slotContext.entity() instanceof Player player) {
                     isBuffApplied = false;
-                    System.out.println("123");
                     AbilityStoneRemoved(player, stack);
                 }
             }

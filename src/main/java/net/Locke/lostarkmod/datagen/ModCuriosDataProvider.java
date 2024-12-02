@@ -24,11 +24,11 @@ public class ModCuriosDataProvider extends CuriosDataProvider {
             .addPlayer()
             .addSlots("ability_stone", "bracelet_lostark", "earings_lostark", "necklace_lostark", "rings_lostark", "sholder_lostark");
 
-        this.createSlot("sholder_lostark")
+        this.createSlot("shoulder_lostark")
         .order(1)
         .size(1)
         .addCosmetic(false)
-        .icon(new ResourceLocation("lostarkmod", "slot/sholder_lostark_icon")) // 아이콘
+        .icon(new ResourceLocation("lostarkmod", "slot/shoulder_lostark_icon")) // 아이콘
         .renderToggle(false) // 렌더 토글 여부
         .dropRule(ICurio.DropRule.ALWAYS_KEEP);
 

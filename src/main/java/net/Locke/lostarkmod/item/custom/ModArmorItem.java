@@ -18,24 +18,43 @@ import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
 public class ModArmorItem extends ArmorItem {
-    private static final Map<ArmorMaterial, MobEffectInstance> MATERIAL_TO_EFFECT_MAP = (new ImmutableMap.Builder<ArmorMaterial, MobEffectInstance>())
-            .put(ModArmorMaterials.SALVATION,
-                    new MobEffectInstance(MobEffects.NIGHT_VISION, 200, 1, false, false, false))
-            .build();
 
-    public ModArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties) {
+    private final String setId;
+
+    public ModArmorItem(ArmorMaterial pMaterial, Type pType, Properties pProperties, String set) {
+
         super(pMaterial, pType, pProperties);
+        this.setId = set;
+    }
+/*
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        // 예: 특정 세트 태그가 있는 아이템에 효과 추가
+        return stack.getOrCreateTag().contains("set_id") || super.isFoil(stack);
+    }
+         */
+
+    @Override
+    public void onCraftedBy(ItemStack stack, Level level, Player player) {
+        super.onCraftedBy(stack, level, player);
+
+        // 세트 태그를 아이템에 추가
+        CompoundTag tag = stack.getOrCreateTag();
+        if (!tag.contains("set_id")) {
+            tag.putString("set_id", setId);
+        }
     }
 
     @Override
-    public void onArmorTick(ItemStack stack, Level world, Player player) {
-        if (!world.isClientSide()) {
-            if (hasFullSuitOfArmorOn(player)) {
-                evaluateArmorEffects(player);
-            }
+    public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag unused) {
+        // 초기화 시에도 태그를 추가할 수 있음
+        if (!stack.getOrCreateTag().contains("set_id")) {
+            stack.getOrCreateTag().putString("set_id", setId);
         }
+        return super.initCapabilities(stack, unused);
     }
 
     @Override
@@ -62,51 +81,5 @@ public class ModArmorItem extends ArmorItem {
             pTooltipComponents.add(Component.literal(hshardBar));
 
         }
-    }
-
-    private void evaluateArmorEffects(Player player) {
-        for (Map.Entry<ArmorMaterial, MobEffectInstance> entry : MATERIAL_TO_EFFECT_MAP.entrySet()) {
-            ArmorMaterial mapArmorMaterial = entry.getKey();
-            MobEffectInstance mapStatusEffect = entry.getValue();
-
-            if (hasCorrectArmorOn(mapArmorMaterial, player)) {
-                addStatusEffectForMaterial(player, mapArmorMaterial, mapStatusEffect);
-            }
-        }
-    }
-
-    private void addStatusEffectForMaterial(Player player, ArmorMaterial mapArmorMaterial,
-            MobEffectInstance mapStatusEffect) {
-        boolean hasPlayerEffect = player.hasEffect(mapStatusEffect.getEffect());
-
-        if (hasCorrectArmorOn(mapArmorMaterial, player) && !hasPlayerEffect) {
-            player.addEffect(new MobEffectInstance(mapStatusEffect));
-        }
-    }
-
-    private boolean hasFullSuitOfArmorOn(Player player) {
-        ItemStack boots = player.getInventory().getArmor(0);
-        ItemStack leggings = player.getInventory().getArmor(1);
-        ItemStack breastplate = player.getInventory().getArmor(2);
-        ItemStack helmet = player.getInventory().getArmor(3);
-
-        return !helmet.isEmpty() && !breastplate.isEmpty()
-                && !leggings.isEmpty() && !boots.isEmpty();
-    }
-
-    private boolean hasCorrectArmorOn(ArmorMaterial material, Player player) {
-        for (ItemStack armorStack : player.getInventory().armor) {
-            if (!(armorStack.getItem() instanceof ArmorItem)) {
-                return false;
-            }
-        }
-
-        ArmorItem boots = ((ArmorItem) player.getInventory().getArmor(0).getItem());
-        ArmorItem leggings = ((ArmorItem) player.getInventory().getArmor(1).getItem());
-        ArmorItem breastplate = ((ArmorItem) player.getInventory().getArmor(2).getItem());
-        ArmorItem helmet = ((ArmorItem) player.getInventory().getArmor(3).getItem());
-
-        return helmet.getMaterial() == material && breastplate.getMaterial() == material &&
-                leggings.getMaterial() == material && boots.getMaterial() == material;
     }
 }

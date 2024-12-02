@@ -1,7 +1,7 @@
 {
   "add_cosmetic": false,
   "drop_rule": "ALWAYS_KEEP",
-  "icon": "lostarkmod:slot/sholder_lostark_icon",
+  "icon": "lostarkmod:slot/shoulder_lostark_icon",
   "order": 1,
   "render_toggle": false,
   "size": 1
