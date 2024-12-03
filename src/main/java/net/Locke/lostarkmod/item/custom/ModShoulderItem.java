@@ -1,6 +1,9 @@
 package net.Locke.lostarkmod.item.custom;
 
+import net.Locke.lostarkmod.effect.ModEffects;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -24,16 +27,12 @@ public class ModShoulderItem extends Item implements ICurioItem {
     private static final Map<String, MobEffectInstance> SET_EFFECTS = new HashMap<>();
 
     static {
-        SET_EFFECTS.put("set1", new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1, false, false));
-        SET_EFFECTS.put("set2", new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1, false, false));
-        // SET_EFFECTS.put("set3", new MobEffectInstance(MobEffects.REGENERATION, 200,
-        // 0, false, false));
-        // SET_EFFECTS.put("set4", new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE,
-        // 200, 1, false, false));
-        // SET_EFFECTS.put("set5", new MobEffectInstance(MobEffects.FIRE_RESISTANCE,
-        // 200, 0, false, false));
-        // SET_EFFECTS.put("set6", new MobEffectInstance(MobEffects.INVISIBILITY, 200,
-        // 0, false, false));
+        SET_EFFECTS.put("set_salvation", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, true));
+        SET_EFFECTS.put("set_hallucination", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, false));
+        SET_EFFECTS.put("set_entropy", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, false));
+        SET_EFFECTS.put("set_nightmare", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, false));
+        SET_EFFECTS.put("set_yearning", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, false));
+        SET_EFFECTS.put("set6", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, false));
     }
 
     public ModShoulderItem(Properties properties, String setId) {
@@ -59,11 +58,17 @@ public class ModShoulderItem extends Item implements ICurioItem {
 
             @Override
             public void curioTick(SlotContext slotContext) {
+
                 if (slotContext.entity() instanceof Player player) {
                     String setId = getSetId(stack); // 아이템의 세트 ID 가져오기
-                    if (!isBuffApplied && setId != null && isWearingFullSet(player, setId)) {
-                        applyBuff(player, setId);
-                        isBuffApplied = true;
+                    if (isWearingFullSet(player, setId)) {
+                        if (!isBuffApplied) {
+                            applyBuff(player, setId);
+                            isBuffApplied = true;
+                        }
+                    } else {
+                        isBuffApplied = false;
+                        removeAllBuffs(player);
                     }
                 }
             }
@@ -85,11 +90,14 @@ public class ModShoulderItem extends Item implements ICurioItem {
     }
 
     private boolean isWearingFullSet(Player player, String setId) {
-        ItemStack boots =  player.getInventory().getArmor(0);
-        ItemStack leggings =  player.getInventory().getArmor(1);
+        ItemStack boots = player.getInventory().getArmor(0);
+        ItemStack leggings = player.getInventory().getArmor(1);
         ItemStack breastplate = player.getInventory().getArmor(2);
         ItemStack helmet = player.getInventory().getArmor(3);
 
+        if (boots == null || leggings == null || breastplate == null || helmet == null) {
+            return false;
+        }
 
         String bootsId = boots.getOrCreateTag().getString("set_id");
         String leggingsId = leggings.getOrCreateTag().getString("set_id");
@@ -101,8 +109,7 @@ public class ModShoulderItem extends Item implements ICurioItem {
         return isAllArmorSame;
     }
 
-    private boolean isSetStringSame(String s1, String s2, String s3, String s4, String s5 )
-    {
+    private boolean isSetStringSame(String s1, String s2, String s3, String s4, String s5) {
         return s1.equals(s2) && s1.equals(s3) && s1.equals(s4) && s1.equals(s5);
     }
 

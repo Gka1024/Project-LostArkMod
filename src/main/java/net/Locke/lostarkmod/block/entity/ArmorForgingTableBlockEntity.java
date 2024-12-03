@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import org.antlr.v4.parse.ANTLRParser.elementOptions_return;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Math;
 
@@ -43,11 +44,11 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         @Override
         public boolean isItemValid(int slot, ItemStack stack) {
             if (slot == ARMOR_SLOT) {
-                return isAllowedArmorItem(stack.getItem());
+                return isAllowedArmorItem(stack.getItem()) || isAllowedWeaponItem(stack.getItem());
             }
 
             if (slot == STONE_SLOT) {
-                return isAllowedStoneItem(stack.getItem()) || isAllowedWeaponItem(stack.getItem());
+                return isAllowedStoneItem(stack.getItem());
             }
 
             if (slot == LEAPSTONE_SLOT) {
@@ -425,6 +426,74 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         return flag;
     }
 
+    public int getAppropriateResource(int level, boolean isWeapon, int slot) {
+        switch (level) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                if (slot == STONE_SLOT) {
+                    if (isWeapon) {
+                        return 8;
+                    } else {
+                        return 4;
+                    }
+                } else if (slot == OREHA_SLOT) {
+                    return 0;
+                } else if (slot == LEAPSTONE_SLOT) {
+                    return 12;
+                }
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+                if (slot == STONE_SLOT) {
+                    if (isWeapon) {
+                        return 9;
+                    } else {
+                        return 5;
+                    }
+                } else if (slot == OREHA_SLOT) {
+                    return 1;
+                } else if (slot == LEAPSTONE_SLOT) {
+                    return 13;
+                }
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                if (slot == STONE_SLOT) {
+                    if (isWeapon) {
+                        return 10;
+                    } else {
+                        return 6;
+                    }
+                } else if (slot == OREHA_SLOT) {
+                    return 2;
+                } else if (slot == LEAPSTONE_SLOT) {
+                    return 14;
+                }
+            default:
+                if (slot == STONE_SLOT) {
+                    if (isWeapon) {
+                        return 10;
+                    } else {
+                        return 6;
+                    }
+                } else if (slot == OREHA_SLOT) {
+                    return 2;
+                } else if (slot == LEAPSTONE_SLOT) {
+                    return 15;
+                }
+
+                break;
+        }
+        return 16;
+    }
+
     private boolean isResourceEnough(int level) {
 
         boolean flag = true;
@@ -613,6 +682,12 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         float prob = getBasicProbability();
         prob *= 0.1f;
         return prob * getFailureAttempt();
+    }
+
+    public boolean isItemWeapon()
+    {
+        ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
+        return !isAllowedArmorItem(armor.getItem());
     }
 
     // 블록엔티티 기본 코드들입니다.

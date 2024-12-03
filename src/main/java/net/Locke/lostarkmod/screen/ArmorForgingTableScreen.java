@@ -23,6 +23,8 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(LostArkMod.MOD_ID,
             "textures/gui/armor_forging_table_gui.png");
+    private static final ResourceLocation SHADOW = new ResourceLocation(LostArkMod.MOD_ID,
+            "textures/gui/armor_forging_table_shadow.png");
 
     ArmorForgingTableBlockEntity blockEntity = (ArmorForgingTableBlockEntity) this.menu.getBlockEntity();
 
@@ -97,9 +99,11 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
         renderUnderline(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         renderArrow(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         renderArtisanGauge(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
+        renderShadow(guiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
     }
 
-    private void renderHshardGauge(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
+    private void renderHshardGauge(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x,
+            int y) {
         int shardGaugeX = x + 15;
         int shardGaugeY = y + 39;
 
@@ -113,8 +117,8 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
         }
     }
 
-    private void renderArtisanGauge(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y)
-    {
+    private void renderArtisanGauge(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x,
+            int y) {
         int gaugeX = x + 49;
         int gaugeY = y + 53;
 
@@ -122,7 +126,7 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
 
         int artisanRatio = (int) (blockEntity.getArtisanEnergy() * 55) / 64;
 
-        guiGraphics.blit(TEXTURE, gaugeX+ 1, gaugeY + 1, 75, 231, artisanRatio, 8);
+        guiGraphics.blit(TEXTURE, gaugeX + 1, gaugeY + 1, 75, 231, artisanRatio, 8);
     }
 
     private void renderArrow(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
@@ -140,13 +144,34 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
         }
     }
 
+    private void renderShadow(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
+        guiGraphics.blit(SHADOW, 0, 0, 0, 0, 64, 64);
+        if (blockEntity.hasArmor()) {
+            int shadowX = x + 36;
+            int shadowY = y + 81;
+
+            int stoneIndex = blockEntity.getAppropriateResource(blockEntity.getItemLevel(), blockEntity.isItemWeapon(),
+                    1);
+            int leapIndex = blockEntity.getAppropriateResource(blockEntity.getItemLevel(), blockEntity.isItemWeapon(),
+                    2);
+            int orehaIndex = blockEntity.getAppropriateResource(blockEntity.getItemLevel(), blockEntity.isItemWeapon(),
+                    3);
+
+            guiGraphics.blit(SHADOW, shadowX, shadowY, (stoneIndex % 4) * 16, (stoneIndex / 4) * 16, 16, 16);
+            guiGraphics.blit(SHADOW, shadowX + 34, shadowY, (leapIndex % 4) * 16, (leapIndex / 4) * 16, 16, 16);
+            guiGraphics.blit(SHADOW, shadowX + 68, shadowY, (orehaIndex % 4) * 16, (orehaIndex / 4) * 16, 16, 16);
+        }
+
+    }
+
     @Override
     protected void renderLabels(GuiGraphics guiGraphics, int pMouseX, int pMouseY) {
         guiGraphics.drawString(this.font, Component.literal(blockEntity.getItemName()), 13, -8,
                 0xffffff);
 
         if (blockEntity.hasArmor()) {
-            guiGraphics.drawCenteredString(this.font, Component.literal( "+"+Integer.toString(blockEntity.getItemLevel())), 30, 9, 0xffffff);
+            guiGraphics.drawCenteredString(this.font,
+                    Component.literal("+" + Integer.toString(blockEntity.getItemLevel())), 30, 9, 0xffffff);
 
             guiGraphics.drawCenteredString(this.font,
                     Component.literal(Integer.toString(blockEntity.getResourceQuantity(0))), 18, 69, 0xffffff);
@@ -183,7 +208,9 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
                     0xffffff);
 
             MutableComponent totalProbability = Component.literal("[ "
-                    + Float.toString(Math.min(blockEntity.getBasicProbability() + blockEntity.getAdditionalProbability() + blockEntity.getFailureProbability(), 100)) + " % ]");
+                    + Float.toString(Math.min(blockEntity.getBasicProbability() + blockEntity.getAdditionalProbability()
+                            + blockEntity.getFailureProbability(), 100))
+                    + " % ]");
             guiGraphics.drawString(this.font, totalProbability,
                     52 - this.font.width(totalProbability) / 2, 37, 0xffffff, false);
         }
