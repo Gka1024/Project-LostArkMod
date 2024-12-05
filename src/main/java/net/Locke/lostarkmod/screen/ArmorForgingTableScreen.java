@@ -145,7 +145,6 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
     }
 
     private void renderShadow(GuiGraphics guiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
-        guiGraphics.blit(SHADOW, 0, 0, 0, 0, 64, 64);
         if (blockEntity.hasArmor()) {
             int shadowX = x + 36;
             int shadowY = y + 81;

@@ -4,8 +4,8 @@ import net.Locke.lostarkmod.event.effects.defence.DamageAdjustHandler;
 import net.Locke.lostarkmod.event.effects.fortune.FortuneBoostHandler;
 import net.Locke.lostarkmod.event.effects.melee_damage.AttackDamageHandler;
 import net.Locke.lostarkmod.event.effects.mining_speed.BlockBreakSpeedHandler;
-import net.Locke.lostarkmod.event.seteffects.salvation.InfiniteArrowHandler;
-import net.Locke.lostarkmod.event.seteffects.salvation.ProjectileDamageHandler;
+import net.Locke.lostarkmod.event.set_effects.salvation.InfiniteArrowHandler;
+import net.Locke.lostarkmod.event.set_effects.salvation.ProjectileDamageHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ModEventsHandler {

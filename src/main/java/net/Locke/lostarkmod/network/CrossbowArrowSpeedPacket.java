@@ -1,6 +1,6 @@
 package net.Locke.lostarkmod.network;
 
-import net.Locke.lostarkmod.event.seteffects.salvation.InfiniteArrowHandler;
+import net.Locke.lostarkmod.event.set_effects.salvation.InfiniteArrowHandler;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;

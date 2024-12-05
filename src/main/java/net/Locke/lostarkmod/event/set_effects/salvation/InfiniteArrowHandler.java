@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.event.seteffects.salvation;
+package net.Locke.lostarkmod.event.set_effects.salvation;
 
 import java.util.HashMap;
 import java.util.Map;
