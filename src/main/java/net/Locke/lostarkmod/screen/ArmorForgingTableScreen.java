@@ -6,6 +6,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.block.entity.ArmorForgingTableBlockEntity;
+import net.Locke.lostarkmod.datagen.ModItemModelProvider;
+import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.network.ArmorForgingPacket;
 import net.Locke.lostarkmod.network.ModMessages;
 import net.minecraft.client.gui.Font;
@@ -111,7 +113,7 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
 
         if (blockEntity.hasArmor()) {
             int hshard = blockEntity.getHShard();
-            int hshardRatio = (hshard * 52) / 64;
+            int hshardRatio = (hshard * 52) / blockEntity.getMaxHShard();
             guiGraphics.blit(TEXTURE, shardGaugeX + 2, shardGaugeY + 52 - hshardRatio, 244, 38 + 52 - hshardRatio, 8,
                     hshardRatio);
         }
@@ -136,7 +138,7 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
         guiGraphics.blit(TEXTURE, arrowX, arrowY, 57, 229, 16, 11);
 
         if (blockEntity.hasArmor()) {
-            if (blockEntity.isForgable()) {
+            if (blockEntity.isArmorForgable()) {
                 guiGraphics.blit(TEXTURE, arrowX + 2, arrowY + 1, 133, 230, 12, 9);
             } else {
                 guiGraphics.blit(TEXTURE, arrowX + 2, arrowY + 1, 146, 230, 12, 9);
@@ -170,7 +172,10 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
 
         if (blockEntity.hasArmor()) {
             guiGraphics.drawCenteredString(this.font,
-                    Component.literal("+" + Integer.toString(blockEntity.getItemLevel())), 30, 9, 0xffffff);
+                    Component.literal("+" + Integer.toString(blockEntity.getItemLevel())), 32, 9, 0xffffff);
+
+            guiGraphics.drawCenteredString(this.font,
+                    Component.literal("+" + Integer.toString(blockEntity.getItemLevel() + 1)), 70, 9, 0xffffff);
 
             guiGraphics.drawCenteredString(this.font,
                     Component.literal(Integer.toString(blockEntity.getResourceQuantity(0))), 18, 69, 0xffffff);
@@ -205,6 +210,16 @@ public class ArmorForgingTableScreen extends AbstractContainerScreen<ArmorForgin
             guiGraphics.drawString(this.font,
                     Component.literal("+ " + Float.toString(blockEntity.getAdditionalProbability()) + " %"), 150, 46,
                     0xffffff);
+
+            guiGraphics.drawString(this.font,
+                    Component.literal(Integer.toString(blockEntity.getRequireGoods(ModItems.HONOR_SHARD.get()))), 2, 84,
+                    0xffffff);
+            guiGraphics.drawString(this.font,
+                    Component.literal(Integer.toString(blockEntity.getRequireGoods(ModItems.SILLING.get()))), 48,
+                    84, 0xffffff);
+            guiGraphics.drawString(this.font,
+                    Component.literal(Integer.toString(blockEntity.getRequireGoods(ModItems.GOLD_LOSTARK.get()))), 92,
+                    84, 0xffffff);
 
             MutableComponent totalProbability = Component.literal("[ "
                     + Float.toString(Math.min(blockEntity.getBasicProbability() + blockEntity.getAdditionalProbability()

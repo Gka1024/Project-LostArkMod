@@ -14,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -121,7 +122,8 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
 
             ModItems.GUARDIAN_STONE.get(),
             ModItems.GUARDIAN_STONE_HONOR.get(),
-            ModItems.GUARDIAN_STONE_GREAT_HONOR.get()
+            ModItems.GUARDIAN_STONE_GREAT_HONOR.get(),
+            ModItems.MOKOKO.get()
 
     );
 
@@ -129,12 +131,14 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
             ModItems.HONOR_LEAPSTONE.get(),
             ModItems.HONOR_LEAPSTONE_GREAT.get(),
             ModItems.HONOR_LEAPSTONE_MARVELOUS.get(),
-            ModItems.HONOR_LEAPSTONE_SPLENDID.get());
+            ModItems.HONOR_LEAPSTONE_SPLENDID.get(),
+            ModItems.MOKOKO.get());
 
     private final Set<Item> allowedOrehaItem = Set.of(
             ModItems.OREHA_FUSION_MATERIAL_ADVANCED.get(),
             ModItems.OREHA_FUSION_MATERIAL_BASIC.get(),
-            ModItems.OREHA_FUSION_MATERIAL.get());
+            ModItems.OREHA_FUSION_MATERIAL.get(),
+            ModItems.MOKOKO.get());
 
     private boolean isAllowedArmorItem(Item item) {
         return allowedArmorItems.contains(item);
@@ -193,21 +197,34 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         };
     }
 
-    public void forge() {
-
+    public void forge(ServerPlayer player) {
+        System.out.println("forging");
         ItemStack item = itemHandler.getStackInSlot(ARMOR_SLOT);
         CompoundTag tag = item.getOrCreateTag();
 
-        if (!isForgable())
+        if (!isArmorForgable()) {
+            System.out.println("Forge Fail : UNFORGABLE");
             return;
+        }
 
-        if (!isResourceAppropriate(getItemLevel(), isAllowedWeaponItem(item.getItem())))
+        if (!isResourceAppropriate(getItemLevel(), isAllowedWeaponItem(item.getItem()))) {
+            System.out.println("Forge Fail : RESOURCE UNAPPROPRIATE");
             return;
+        }
 
-        if (!isResourceEnough(getItemLevel()))
+        if (!isResourceEnough(getItemLevel())) {
+            System.out.println("Forge Fail : RESOURCE LACK");
             return;
+        }
 
-        consumeResource(getItemLevel());
+        if (!isGoodsEnough(getItemLevel(), player)) {
+            System.out.println("Forge Fail : GOODS LACK");
+            return;
+        }
+
+        consumeResource();
+        consumeGoods(player);
+
         if (getItemLevel() != 0) {
             consumeSolarResource();
         }
@@ -240,7 +257,7 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
 
     public void tick(Level pLevel, BlockPos pPos, BlockState pBlockState) {
         if (hasArmor()) {
-            if (!isForgable()) {
+            if (!isArmorForgable()) {
                 if (hasEnoughItems(HSHARD_SLOT, 1)) {
                     removeItemFromSlot(HSHARD_SLOT, 1);
                     increaseHShard();
@@ -256,7 +273,7 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
         CompoundTag tag = armor.getOrCreateTag();
 
-        if (isForgable()) {
+        if (isArmorForgable()) {
             int curLevel = tag.getInt("armor.level");
             tag.putInt("armor.level", curLevel + 1);
             resetHShard();
@@ -265,9 +282,45 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
     }
 
     private void HShardFull(CompoundTag tag) {
-        if (tag.getInt("armor.hshard") == 64) {
+        if (tag.getInt("armor.hshard") == getMaxHShard()) {
             tag.putBoolean("armor.forgable", true);
         }
+    }
+
+    public int getMaxHShard() {
+        int level = getItemLevel();
+        int rtnNum = 0;
+
+        switch (level) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                rtnNum = 24;
+                break;
+
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+                rtnNum = 32;
+                break;
+
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+                rtnNum = 48;
+                break;
+
+            default:
+                rtnNum = 64;
+                break;
+        }
+        return rtnNum;
     }
 
     private void increaseHShard() {
@@ -374,7 +427,7 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
             case 3:
             case 4:
                 if (itemHandler.getStackInSlot(STONE_SLOT)
-                        .getItem() == (isWeapon ? ModItems.DESTRUCTION_STONE.get() : ModItems.GUARDIAN_STONE) &&
+                        .getItem() == (isWeapon ? ModItems.DESTRUCTION_STONE.get() : ModItems.GUARDIAN_STONE.get()) &&
                         itemHandler.getStackInSlot(LEAPSTONE_SLOT).getItem() == ModItems.HONOR_LEAPSTONE.get() &&
                         itemHandler.getStackInSlot(OREHA_SLOT).getItem() == ModItems.OREHA_FUSION_MATERIAL.get()) {
                     flag = true;
@@ -386,7 +439,7 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
             case 9:
                 if (itemHandler.getStackInSlot(STONE_SLOT)
                         .getItem() == (isWeapon ? ModItems.DESTRUCTION_STONE_HONOR.get()
-                                : ModItems.GUARDIAN_STONE_HONOR)
+                                : ModItems.GUARDIAN_STONE_HONOR.get())
                         &&
                         itemHandler.getStackInSlot(LEAPSTONE_SLOT).getItem() == ModItems.HONOR_LEAPSTONE_GREAT.get() &&
                         itemHandler.getStackInSlot(OREHA_SLOT).getItem() == ModItems.OREHA_FUSION_MATERIAL_BASIC
@@ -400,7 +453,7 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
             case 14:
                 if (itemHandler.getStackInSlot(STONE_SLOT)
                         .getItem() == (isWeapon ? ModItems.DESTRUCTION_STONE_GREAT_HONOR.get()
-                                : ModItems.GUARDIAN_STONE_GREAT_HONOR)
+                                : ModItems.GUARDIAN_STONE_GREAT_HONOR.get())
                         &&
                         itemHandler.getStackInSlot(LEAPSTONE_SLOT).getItem() == ModItems.HONOR_LEAPSTONE_MARVELOUS.get()
                         &&
@@ -511,10 +564,68 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
 
     }
 
-    private void consumeResource(int level) {
+    private void consumeResource() {
+        int level = getItemLevel();
         removeItemFromSlot(STONE_SLOT, stone_use_array[Math.min(level / 5, 2)]);
         removeItemFromSlot(LEAPSTONE_SLOT, leap_use_array[Math.min(level / 5, 2)]);
         removeItemFromSlot(OREHA_SLOT, oreha_use_array[Math.min(level / 5, 2)]);
+    }
+
+    private boolean isGoodsEnough(int level, Player player) {
+        boolean flag = true;
+        if (!hasItemInInventory(player, ModItems.SILLING.get(), getRequireGoods(ModItems.SILLING.get(), level))) {
+            flag = false;
+        }
+
+        if (!hasItemInInventory(player, ModItems.GOLD_LOSTARK.get(),
+                getRequireGoods(ModItems.GOLD_LOSTARK.get(), level))) {
+            flag = false;
+        }
+
+        ItemStack stack = itemHandler.getStackInSlot(HSHARD_SLOT);
+        int stackAmount = stack.getCount();
+
+        if (!hasItemInInventory(player, ModItems.HONOR_SHARD.get(),
+                getRequireGoods(ModItems.HONOR_SHARD.get(), level) - stackAmount))
+            flag = false;
+        return flag;
+    }
+
+    private void consumeGoods(Player player) {
+        consumeGoods(player, ModItems.SILLING.get(), getRequireGoods(ModItems.SILLING.get(), getItemLevel()));
+        consumeGoods(player, ModItems.GOLD_LOSTARK.get(), getRequireGoods(ModItems.GOLD_LOSTARK.get(), getItemLevel()));
+        consumeHshard(player, ModItems.HONOR_SHARD.get(), getRequireGoods(ModItems.HONOR_SHARD.get(), getItemLevel()));
+    }
+
+    private void consumeHshard(Player player, Item item, int amount) {
+        ItemStack stack = itemHandler.getStackInSlot(HSHARD_SLOT);
+        int stackAmount = stack.getCount();
+
+        if (stackAmount >= amount) {
+            stack.shrink(amount);
+            if (stack.isEmpty()) {
+                itemHandler.setStackInSlot(HSHARD_SLOT, ItemStack.EMPTY);
+            }
+        } else {
+            consumeGoods(player, item, amount - stackAmount);
+        }
+    }
+
+    private void consumeGoods(Player player, Item item, int amount) {
+        Inventory inv = player.getInventory();
+        int size = inv.getContainerSize();
+
+        for (int i = 0; i < size; i++) {
+            ItemStack stack = inv.getItem(i);
+
+            if (!stack.isEmpty() && stack.is(item) && stack.getCount() >= amount) {
+                stack.shrink(amount);
+                if (stack.isEmpty()) {
+                    inv.setItem(i, ItemStack.EMPTY);
+                }
+            }
+        }
+
     }
 
     private void consumeSolarResource() {
@@ -523,11 +634,28 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         removeItemFromSlot(PROTECTION_SLOT, 3);
     }
 
+    private boolean hasItemInInventory(Player player, Item targetItem, int count) {
+        int totalCount = 0;
+
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            ItemStack stack = player.getInventory().getItem(i);
+
+            if (!stack.isEmpty() && stack.is(targetItem)) {
+                totalCount += stack.getCount();
+
+                if (totalCount >= count) {
+                    return true;
+                }
+            }
+        }
+        return false; // 총 개수가 기준에 미달이면 false 반환
+    }
+
     private void putArtisanEnergy() {
         ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
         CompoundTag tag = armor.getOrCreateTag();
         float prob = getBasicProbability() + getAdditionalProbability();
-        prob *= 0.05f;
+        prob *= 0.1f;
 
         tag.putFloat("armor.artisan", tag.getFloat("armor.artisan") + prob);
     }
@@ -613,7 +741,7 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         }
     }
 
-    public boolean isForgable() {
+    public boolean isArmorForgable() {
         ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
         CompoundTag tag = armor.getOrCreateTag();
 
@@ -684,10 +812,36 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
         return prob * getFailureAttempt();
     }
 
-    public boolean isItemWeapon()
-    {
+    public boolean isItemWeapon() {
         ItemStack armor = itemHandler.getStackInSlot(ARMOR_SLOT);
         return !isAllowedArmorItem(armor.getItem());
+    }
+
+    public int getRequireGoods(Item item, int level) {
+        if (item == ModItems.SILLING.get()) {
+            return (level + 1) * 2;
+        }
+        if (item == ModItems.HONOR_SHARD.get()) {
+            return (level + 1) * 2;
+        }
+        if (item == ModItems.GOLD_LOSTARK.get()) {
+            return (level + 1) * 1;
+        }
+        return 0;
+    }
+
+    public int getRequireGoods(Item item) {
+        int level = getItemLevel();
+        if (item == ModItems.SILLING.get()) {
+            return (level + 1) * 3;
+        }
+        if (item == ModItems.HONOR_SHARD.get()) {
+            return (level + 1) * 3;
+        }
+        if (item == ModItems.GOLD_LOSTARK.get()) {
+            return (level + 1) * 2;
+        }
+        return 0;
     }
 
     // 블록엔티티 기본 코드들입니다.

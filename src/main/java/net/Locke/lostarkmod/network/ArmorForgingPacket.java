@@ -5,6 +5,7 @@ import net.Locke.lostarkmod.block.entity.StoneCarvingTableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -36,10 +37,11 @@ public class ArmorForgingPacket {
             if (context.getSender() != null) {
                 // getCommandSenderWorld()로 월드를 가져옵니다.
                 ServerLevel level = (ServerLevel) context.getSender().getCommandSenderWorld();
+                ServerPlayer player = contextSupplier.get().getSender();
                 ArmorForgingTableBlockEntity blockEntity = (ArmorForgingTableBlockEntity) level
                         .getBlockEntity(packet.pos);
                 if (blockEntity != null) {
-                    blockEntity.forge();
+                    blockEntity.forge(player);
                 }
             }
         });
