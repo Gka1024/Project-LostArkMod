@@ -12,9 +12,11 @@ import net.Locke.lostarkmod.item.ModItems;
 import net.Locke.lostarkmod.screen.ArmorForgingTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -35,6 +37,8 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuProvider {
+
+    private final NonNullList<ItemStack> items = NonNullList.withSize(9, ItemStack.EMPTY);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(9) {
         @Override
@@ -885,14 +889,18 @@ public class ArmorForgingTableBlockEntity extends BlockEntity implements MenuPro
 
     @Override
     protected void saveAdditional(CompoundTag pTag) {
-        // TODO Auto-generated method stub
+
+        pTag.put("inventory", itemHandler.serializeNBT());
+        ContainerHelper.saveAllItems(pTag, this.items);
         super.saveAdditional(pTag);
+
     }
 
     @Override
     public void load(CompoundTag pTag) {
-        // TODO Auto-generated method stub
         super.load(pTag);
+        itemHandler.deserializeNBT(pTag.getCompound("inventory"));
+        ContainerHelper.loadAllItems(pTag, items);
     }
 
 }

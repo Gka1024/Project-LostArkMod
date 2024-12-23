@@ -112,66 +112,70 @@ public class ModItems {
                         () -> new ModArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.LEGGINGS,
                                         new Item.Properties(), "set_salvation"));
         public static final RegistryObject<Item> SALVATION_BOOTS = ITEMS.register("salvation_boots",
-                        () -> new ModArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.BOOTS, new Item.Properties(), "set_salvation"));
+                        () -> new ModArmorItem(ModArmorMaterials.SALVATION, ArmorItem.Type.BOOTS,
+                                        new Item.Properties(), "set_salvation"));
         public static final RegistryObject<Item> SALVATION_SHOULDER = ITEMS.register("salvation_shoulder",
-                        () -> new ModShoulderItem(new Item.Properties(),"set_salvation"));
+                        () -> new ModShoulderItem(new Item.Properties(), "set_salvation"));
 
         public static final RegistryObject<Item> ENTROPY_MASK = ITEMS.register("entropy_mask",
                         () -> new ModArmorItem(ModArmorMaterials.ENTROPY, ArmorItem.Type.HELMET,
-                                        new Item.Properties(), "set_salvation"));
+                                        new Item.Properties(), "set_entropy"));
         public static final RegistryObject<Item> ENTROPY_CHESTPIECE = ITEMS.register("entropy_chestpiece",
-                        () -> new ArmorItem(ModArmorMaterials.ENTROPY, ArmorItem.Type.CHESTPLATE,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.ENTROPY, ArmorItem.Type.CHESTPLATE,
+                                        new Item.Properties(), "set_entropy"));
         public static final RegistryObject<Item> ENTROPY_LEGGINGS = ITEMS.register("entropy_leggings",
-                        () -> new ArmorItem(ModArmorMaterials.ENTROPY, ArmorItem.Type.LEGGINGS,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.ENTROPY, ArmorItem.Type.LEGGINGS,
+                                        new Item.Properties(), "set_entropy"));
         public static final RegistryObject<Item> ENTROPY_BOOTS = ITEMS.register("entropy_boots",
-                        () -> new ArmorItem(ModArmorMaterials.ENTROPY, ArmorItem.Type.BOOTS, new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.ENTROPY, ArmorItem.Type.BOOTS,
+                                        new Item.Properties(), "set_entropy"));
         public static final RegistryObject<Item> ENTROPY_SHOULDER = ITEMS.register("entropy_shoulder",
-                        () -> new Item(new Item.Properties()));
+                        () -> new ModShoulderItem(new Item.Properties(), "set_entropy"));
 
         public static final RegistryObject<Item> HALLUCINATION_HELM = ITEMS.register("hallucination_helm",
                         () -> new ModArmorItem(ModArmorMaterials.HALLUCINATION, ArmorItem.Type.HELMET,
-                                        new Item.Properties(), "set_salvation"));
+                                        new Item.Properties(), "set_hallucination"));
         public static final RegistryObject<Item> HALLUCINATION_CHESTPIECE = ITEMS.register("hallucination_chestplate",
-                        () -> new ArmorItem(ModArmorMaterials.HALLUCINATION, ArmorItem.Type.CHESTPLATE,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.HALLUCINATION, ArmorItem.Type.CHESTPLATE,
+                                        new Item.Properties(), "set_hallucination"));
         public static final RegistryObject<Item> HALLUCINATION_PANTS = ITEMS.register("hallucination_pants",
-                        () -> new ArmorItem(ModArmorMaterials.HALLUCINATION, ArmorItem.Type.LEGGINGS,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.HALLUCINATION, ArmorItem.Type.LEGGINGS,
+                                        new Item.Properties(), "set_hallucination"));
         public static final RegistryObject<Item> HALLUCINATION_BOOTS = ITEMS.register("hallucination_boots",
-                        () -> new ArmorItem(ModArmorMaterials.HALLUCINATION, ArmorItem.Type.BOOTS,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.HALLUCINATION, ArmorItem.Type.BOOTS,
+                                        new Item.Properties(), "set_hallucination"));
         public static final RegistryObject<Item> HALLUCINATION_SHOULDER = ITEMS.register("hallucination_shoulder",
-                        () -> new Item(new Item.Properties()));
+                        () -> new ModShoulderItem(new Item.Properties(), "set_hallucination"));
 
         public static final RegistryObject<Item> NIGHTMARE_HAT = ITEMS.register("nightmare_hat",
                         () -> new ModArmorItem(ModArmorMaterials.NIGHTMARE, ArmorItem.Type.HELMET,
-                                        new Item.Properties(), "set_salvation"));
+                                        new Item.Properties(), "set_nightmare"));
         public static final RegistryObject<Item> NIGHTMARE_CHESTPIECE = ITEMS.register("nightmare_chestpiece",
-                        () -> new ArmorItem(ModArmorMaterials.NIGHTMARE, ArmorItem.Type.CHESTPLATE,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.NIGHTMARE, ArmorItem.Type.CHESTPLATE,
+                                        new Item.Properties(), "set_nightmare"));
         public static final RegistryObject<Item> NIGHTMARE_PANTS = ITEMS.register("nightmare_pants",
-                        () -> new ArmorItem(ModArmorMaterials.NIGHTMARE, ArmorItem.Type.LEGGINGS,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.NIGHTMARE, ArmorItem.Type.LEGGINGS,
+                                        new Item.Properties(), "set_nightmare"));
         public static final RegistryObject<Item> NIGHTMARE_BOOTS = ITEMS.register("nightmare_boots",
-                        () -> new ArmorItem(ModArmorMaterials.NIGHTMARE, ArmorItem.Type.BOOTS, new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.NIGHTMARE, ArmorItem.Type.BOOTS,
+                                        new Item.Properties(), "set_nightmare"));
         public static final RegistryObject<Item> NIGHTMARE_SHOULDER = ITEMS.register("nightmare_shoulder",
-                        () -> new Item(new Item.Properties()));
+                        () -> new ModShoulderItem(new Item.Properties(), "set_nightmare"));
 
         public static final RegistryObject<Item> YEARNING_HAT = ITEMS.register("yearning_hat",
                         () -> new ModArmorItem(ModArmorMaterials.YEARNING, ArmorItem.Type.HELMET,
-                                        new Item.Properties(), "set_salvation"));
+                                        new Item.Properties(), "set_yearning"));
         public static final RegistryObject<Item> YEARNING_CHESTPIECE = ITEMS.register("yearning_chestpiece",
-                        () -> new ArmorItem(ModArmorMaterials.YEARNING, ArmorItem.Type.CHESTPLATE,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.YEARNING, ArmorItem.Type.CHESTPLATE,
+                                        new Item.Properties(), "set_yearning"));
         public static final RegistryObject<Item> YEARNING_PANTS = ITEMS.register("yearning_pants",
-                        () -> new ArmorItem(ModArmorMaterials.YEARNING, ArmorItem.Type.LEGGINGS,
-                                        new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.YEARNING, ArmorItem.Type.LEGGINGS,
+                                        new Item.Properties(), "set_yearning"));
         public static final RegistryObject<Item> YEARNING_BOOTS = ITEMS.register("yearning_boots",
-                        () -> new ArmorItem(ModArmorMaterials.YEARNING, ArmorItem.Type.BOOTS, new Item.Properties()));
+                        () -> new ModArmorItem(ModArmorMaterials.YEARNING, ArmorItem.Type.BOOTS,
+                                        new Item.Properties(), "set_yearning"));
         public static final RegistryObject<Item> YEARNING_SHOULDER = ITEMS.register("yearning_shoulder",
-                        () -> new Item(new Item.Properties()));
+                        () -> new ModShoulderItem(new Item.Properties(), "set_yearning"));
 
         public static void register(IEventBus eventbus) {
                 ITEMS.register(eventbus);

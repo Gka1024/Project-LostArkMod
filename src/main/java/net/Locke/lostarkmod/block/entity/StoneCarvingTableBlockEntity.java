@@ -370,10 +370,7 @@ public class StoneCarvingTableBlockEntity extends BlockEntity implements MenuPro
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         pTag.put("inventory", itemHandler.serializeNBT());
-
-        ItemStack abilityStone = itemHandler.getStackInSlot(ABILITY_STONE_SLOT);
-        CompoundTag tag = abilityStone.getTag();
-
+        
         pTag.putInt("probability", currentProbability);
 
         pTag.putInt("opt1.current", opt1Cur);

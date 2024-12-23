@@ -4,6 +4,7 @@ import net.Locke.lostarkmod.event.effects.defence.DamageAdjustHandler;
 import net.Locke.lostarkmod.event.effects.fortune.FortuneBoostHandler;
 import net.Locke.lostarkmod.event.effects.melee_damage.AttackDamageHandler;
 import net.Locke.lostarkmod.event.effects.mining_speed.BlockBreakSpeedHandler;
+import net.Locke.lostarkmod.event.set_effects.hallucination.OnAttackShieldCooldown;
 import net.Locke.lostarkmod.event.set_effects.salvation.InfiniteArrowHandler;
 import net.Locke.lostarkmod.event.set_effects.salvation.ProjectileDamageHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,10 +19,15 @@ public class ModEventsHandler {
         MinecraftForge.EVENT_BUS.register(new AttackDamageHandler());
 
         registerSalvation();
+        registerHallucination();
     }
 
     private static void registerSalvation() {
         MinecraftForge.EVENT_BUS.register(new InfiniteArrowHandler());
         MinecraftForge.EVENT_BUS.register(new ProjectileDamageHandler());
+    }
+
+    private static void registerHallucination() {
+        MinecraftForge.EVENT_BUS.register(new OnAttackShieldCooldown());
     }
 }
