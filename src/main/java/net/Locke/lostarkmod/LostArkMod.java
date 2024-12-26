@@ -7,6 +7,7 @@ import com.mojang.logging.LogUtils;
 import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
 import net.Locke.lostarkmod.client.ManaHUDRenderer;
+import net.Locke.lostarkmod.command.CommandRegister;
 import net.Locke.lostarkmod.effect.ModEffects;
 import net.Locke.lostarkmod.event.ModEventsHandler;
 import net.Locke.lostarkmod.item.ModCreativeItemsRegister;
@@ -56,6 +57,7 @@ public class LostArkMod {
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new ModCreativeItemsRegister());
+        MinecraftForge.EVENT_BUS.register(new CommandRegister());
 
         modEventBus.addListener(this::addCreative);
     }

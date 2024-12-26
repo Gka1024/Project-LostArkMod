@@ -23,11 +23,10 @@ public class ManaCheckItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 
-        
+        IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElse(new Mana());
 
         Minecraft.getInstance().player.displayClientMessage(
-                Component.literal(Float.toString(player.getHealth()) + " / " + Float.toString(player.getMaxHealth())),
-                true);
+                Component.literal(Integer.toString(mana.getMaxMana())), true);
 
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }
