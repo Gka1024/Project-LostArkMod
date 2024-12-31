@@ -46,5 +46,10 @@ public class ModMessages {
                                 .consumerMainThread(CrossbowArrowSpeedPacket::handle)
                                 .add();
 
+                INSTANCE.messageBuilder(SkillUsePacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                                .encoder(SkillUsePacket::encode)
+                                .decoder(SkillUsePacket::decode)
+                                .consumerMainThread(SkillUsePacket::handle)
+                                .add();
         }
 }

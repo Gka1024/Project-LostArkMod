@@ -24,6 +24,12 @@ public class PartyCommand {
                                         .argument("player", net.minecraft.commands.arguments.EntityArgument.player())
                                         .executes(context -> giveParty(context.getSource(),
                                                 net.minecraft.commands.arguments.EntityArgument.getPlayer(context,
+                                                        "player")))))
+                        .then(net.minecraft.commands.Commands.literal("kick")
+                                .then(net.minecraft.commands.Commands
+                                        .argument("player", net.minecraft.commands.arguments.EntityArgument.player())
+                                        .executes(context -> kickOnParty(context.getSource(),
+                                                net.minecraft.commands.arguments.EntityArgument.getPlayer(context,
                                                         "player"))))));
     }
 
@@ -61,6 +67,11 @@ public class PartyCommand {
             source.sendFailure(Component.literal("파티를 탈퇴하는데 실패했읍니다. 관리자에게 문의 ㄱㄱ"));
         }
 
+        return 1;
+    }
+
+    private static int kickOnParty(CommandSourceStack source, ServerPlayer targetPlayer)
+    {
         return 1;
     }
 

@@ -6,7 +6,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
-
 public class CrossbowArrowSpeedPacket {
     private final int arrowSpeed;
 
