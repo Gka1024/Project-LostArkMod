@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.network;
+package net.Locke.lostarkmod.network.packets;
 
 import net.Locke.lostarkmod.block.entity.StoneCarvingTableBlockEntity;
 import net.minecraft.core.BlockPos;

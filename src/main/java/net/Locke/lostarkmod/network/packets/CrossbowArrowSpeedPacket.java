@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.network;
+package net.Locke.lostarkmod.network.packets;
 
 import net.Locke.lostarkmod.event.set_effects.salvation.InfiniteArrowHandler;
 import net.minecraft.network.FriendlyByteBuf;

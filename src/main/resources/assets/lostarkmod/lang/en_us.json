@@ -80,8 +80,8 @@
 
     "curios.identifier.ability_stone": "Ability Stone Slot",
     "key.categories.lostarkmod": "LostArk Mod",
-    "key.categories.use_skill1": "Skill 1 Button",
-    "key.categories.use_skill2": "Skill 2 Button",
+    "key.lostarkmod.use_skill1": "Skill 1 Button",
+    "key.lostarkmod.use_skill2": "Skill 2 Button",
 
     
     "creativetab.lostark_tab" : "LostArk Mod Tab"

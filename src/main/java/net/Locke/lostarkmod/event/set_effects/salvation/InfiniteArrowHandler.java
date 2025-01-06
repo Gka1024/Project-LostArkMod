@@ -5,8 +5,8 @@ import java.util.Map;
 
 import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.effect.ModEffects;
-import net.Locke.lostarkmod.network.CrossbowArrowSpeedPacket;
 import net.Locke.lostarkmod.network.ModMessages;
+import net.Locke.lostarkmod.network.packets.CrossbowArrowSpeedPacket;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.sounds.SoundEvents;

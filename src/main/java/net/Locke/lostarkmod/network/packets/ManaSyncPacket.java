@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.network;
+package net.Locke.lostarkmod.network.packets;
 
 import net.Locke.lostarkmod.capability.ManaProvider;
 import net.minecraft.client.Minecraft;

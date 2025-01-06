@@ -6,9 +6,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.block.entity.StoneCarvingTableBlockEntity;
-import net.Locke.lostarkmod.network.StoneCarvePacket;
 import net.Locke.lostarkmod.network.ModMessages;
-import net.Locke.lostarkmod.network.RemoveItemPacket;
+import net.Locke.lostarkmod.network.packets.RemoveItemPacket;
+import net.Locke.lostarkmod.network.packets.StoneCarvePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;

@@ -72,15 +72,43 @@ public class PartyCommand {
 
     private static int kickOnParty(CommandSourceStack source, ServerPlayer targetPlayer)
     {
+        ServerPlayer player = source.getPlayer();
+        String partyName = PartyManager.getPartyOfPlayer(player);
+        if(!isPartyChief(source, player))
+        {
+            source.sendFailure(Component.literal("파티장이 아닙니다!"));
+            return 0;
+        }
+
+        if(targetPlayer.getName().toString().equals(player.getName().toString()))
+        {
+            source.sendFailure(Component.literal("본인을 강퇴할 수 없습니다!"));
+            return 0;
+        }
+
+        boolean isRemoved = PartyManager.removePlayerFromParty(targetPlayer, partyName);
+        if(isRemoved)
+        {
+            source.sendSuccess(() -> Component.literal(targetPlayer.getName().toString() + " 을(를) 강퇴했습니다."), true);
+        }
+        else
+        {
+            source.sendFailure(Component.literal("파티에서 강퇴하는데 실패했읍니다. 관리자에게 문의 ㄱㄱ"));
+        }
+
         return 1;
+    }
+
+    private static boolean isPartyChief(CommandSourceStack source, ServerPlayer player)
+    {
+        return player.getName().toString().equals(PartyManager.getPartyOfPlayer(player));
     }
 
     private static int giveParty(CommandSourceStack source, ServerPlayer targetPlayer) {
         ServerPlayer player = source.getPlayer();
 
-        if (!player.getName().toString().equalsIgnoreCase(PartyManager.getPartyOfPlayer(player))) {
-            source.sendFailure(Component.literal("파티장이 아닙니다!"));
-            return 0;
+        if (!isPartyChief(source, player)) {
+            
         }
 
         if (player.getName().toString().equalsIgnoreCase(targetPlayer.getName().toString())) {

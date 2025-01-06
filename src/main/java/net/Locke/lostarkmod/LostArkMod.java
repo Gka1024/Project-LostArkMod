@@ -6,7 +6,7 @@ import com.mojang.logging.LogUtils;
 
 import net.Locke.lostarkmod.block.ModBlocks;
 import net.Locke.lostarkmod.block.entity.ModBlockEntities;
-import net.Locke.lostarkmod.client.ClientEventSubscriber;
+import net.Locke.lostarkmod.client.SkillEventHandler;
 import net.Locke.lostarkmod.client.ManaHUDRenderer;
 import net.Locke.lostarkmod.command.CommandRegister;
 import net.Locke.lostarkmod.effect.ModEffects;
@@ -54,7 +54,7 @@ public class LostArkMod {
         ModMenuTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
-        modEventBus.addListener(ClientEventSubscriber::registerKeyMappings);
+        modEventBus.addListener(SkillEventHandler::registerKeyMappings);
     
 
         MinecraftForge.EVENT_BUS.register(this);
