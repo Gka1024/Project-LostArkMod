@@ -8,20 +8,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 public class SalvationSkill1 {
-    public static void skillUse(Player player)
-    {
+
+ 
+    public static void tick() {
+
+    }
+
+    public static void skillUse(Player player) {
         ItemStack item = player.getMainHandItem();
-        if(item.getItem() instanceof BowItem)
-        {
-            ItemStack crossbow = new ItemStack(Items.CROSSBOW);
+            if (item.getItem() instanceof BowItem) {
+                ItemStack crossbow = new ItemStack(Items.CROSSBOW);
 
-            player.setItemInHand(InteractionHand.MAIN_HAND, crossbow);
-        }
-        if(item.getItem() instanceof CrossbowItem)
-        {
-            ItemStack bow = new ItemStack(Items.BOW);
+                player.setItemInHand(InteractionHand.MAIN_HAND, crossbow);
+            }
+            if (item.getItem() instanceof CrossbowItem) {
+                ItemStack bow = new ItemStack(Items.BOW);
 
-            player.setItemInHand(InteractionHand.MAIN_HAND, bow);
-        }
+                player.setItemInHand(InteractionHand.MAIN_HAND, bow);
+            }
+
     }
 }

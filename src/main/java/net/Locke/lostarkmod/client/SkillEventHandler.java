@@ -25,10 +25,10 @@ import net.minecraftforge.fml.common.Mod;
 public class SkillEventHandler {
     private static final String CATEGORY = "key.categories.lostarkmod";
     public static final KeyMapping SKILL_KEY_1 = new KeyMapping("key.lostarkmod.use_skill1", InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_C, CATEGORY);
+            GLFW.GLFW_KEY_X, CATEGORY);
 
     public static final KeyMapping SKILL_KEY_2 = new KeyMapping("key.lostarkmod.use_skill2", InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_X, CATEGORY);
+            GLFW.GLFW_KEY_C, CATEGORY);
 
     @SubscribeEvent
     public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
@@ -50,7 +50,7 @@ public class SkillEventHandler {
                 isSkillKey1Pressed = true;
                 key1PressTick = getGameTicks();
             }
-            
+
         } else {
             if (isSkillKey1Pressed) {
                 isSkillKey1Pressed = false;
@@ -84,38 +84,13 @@ public class SkillEventHandler {
     private static void handleSkillUse(int key) {
         LocalPlayer player = Minecraft.getInstance().player;
         IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElse(new Mana());
-
-        System.out.println(Integer.toString(mana.getMana()));
         ModMessages.INSTANCE.sendToServer(new SkillUsePacket(mana.getMana(), key, 0));
     }
 
     private static void handleKeyDownSkillUse(long KeydownTime, int key) {
         LocalPlayer player = Minecraft.getInstance().player;
         IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElse(new Mana());
-
-        System.out.println(Integer.toString(mana.getMana()));
         ModMessages.INSTANCE.sendToServer(new SkillUsePacket(mana.getMana(), key, (int) KeydownTime));
     }
 
-    private static void showCurrentKeyDown(long timeTicks) // 50
-    {
-
-        showCurrentKeyDown(getGameTicks() - key1PressTick);
-
-        LocalPlayer player = Minecraft.getInstance().player;
-        String displayString = "";
-
-        for (int i = 0; i < 15; i++) {
-            if (timeTicks > (i * 10) / 3) {
-                displayString += "=";
-            } else {
-                displayString += "-";
-            }
-            if (i == 9 || i == 12) {
-                displayString += "|";
-            }
-        }
-
-        player.displayClientMessage(Component.literal(displayString), true);
-    }
 }

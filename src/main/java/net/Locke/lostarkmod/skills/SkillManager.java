@@ -2,9 +2,7 @@ package net.Locke.lostarkmod.skills;
 
 import net.Locke.lostarkmod.effect.ModEffects;
 import net.Locke.lostarkmod.skills.salvation.*;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CrossbowItem;
 
 public class SkillManager {
@@ -33,5 +31,11 @@ public class SkillManager {
                 SalvationSkill2.skillUse(player, chargeTime);
             }
         }
+    }
+
+    public static void tick()
+    {
+        SalvationSkill1.tick();
+        SalvationSkill2.tick();
     }
 }
