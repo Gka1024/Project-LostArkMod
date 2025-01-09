@@ -31,13 +31,14 @@ public class NightmareSetEffect extends MobEffect { // 악몽 세트입니다. �
                 if (!player.getPersistentData().getBoolean("NightmareEffectApplied")) {
                     originalMaxMana = mana.getMaxMana();
 
+                    int curMana = mana.getMana();
                     int newMana = mana.getMaxMana() + (amplifier + 1) * 10;
 
                     mana.setMaxMana(newMana);
                     player.getPersistentData().putBoolean("NightmareEffectApplied", true);
 
                     ModMessages.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-                            new ManaSyncPacket(newMana));
+                            new ManaSyncPacket(curMana, newMana));
 
                 }
             }
@@ -60,12 +61,12 @@ public class NightmareSetEffect extends MobEffect { // 악몽 세트입니다. �
         if (entity instanceof Player player) {
             IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElse(new Mana());
             mana.setMaxMana(originalMaxMana);
-
+            
             // 이펙트가 끝날 때 플래그 초기화
             player.getPersistentData().putBoolean("NightmareEffectApplied", false);
 
             ModMessages.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-                    new ManaSyncPacket(originalMaxMana));
+                    new ManaSyncPacket(mana.getMana(), originalMaxMana));
         }
         super.removeAttributeModifiers(entity, attributeMap, amplifier);
     }

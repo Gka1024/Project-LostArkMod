@@ -28,13 +28,14 @@ public class AddManaEffect extends MobEffect {
             if (!player.getPersistentData().getBoolean("AddManaEffectApplied")) {
                 originalMaxMana = mana.getMaxMana();
 
+                int curMana = mana.getMana();
                 int newMana = mana.getMaxMana() + (amplifier + 1) * 10;
 
                 mana.setMaxMana(newMana);
                 player.getPersistentData().putBoolean("AddManaEffectApplied", true);
 
                 ModMessages.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-                        new ManaSyncPacket(newMana));
+                        new ManaSyncPacket(curMana, newMana));
 
             }
         }
@@ -50,7 +51,7 @@ public class AddManaEffect extends MobEffect {
             player.getPersistentData().putBoolean("AddManaEffectApplied", false);
 
             ModMessages.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player),
-                    new ManaSyncPacket(originalMaxMana));
+                    new ManaSyncPacket(mana.getMana(), originalMaxMana));
         }
         super.removeAttributeModifiers(entity, attributeMap, amplifier);
     }

@@ -19,15 +19,15 @@ public class ManaCheckItem extends Item {
         super(pProperties);
         // TODO Auto-generated constructor stub
     }
-
+    
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-
-        IMana mana = player.getCapability(ManaProvider.MANA_CAPABILITY).orElse(new Mana());
-
-        Minecraft.getInstance().player.displayClientMessage(
-                Component.literal(Integer.toString(mana.getMaxMana())), true);
-
+    
+        player.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(mana -> {
+            Minecraft.getInstance().player.displayClientMessage(
+                    Component.literal("현재 마나: " + mana.getMana() + "/" + mana.getMaxMana()), true);
+        });
+    
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }
 }

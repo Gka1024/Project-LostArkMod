@@ -1,5 +1,11 @@
 package net.Locke.lostarkmod.capability;
 
+import net.Locke.lostarkmod.network.ModMessages;
+import net.Locke.lostarkmod.network.packets.ManaSyncPacket;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.network.PacketDistributor;
+
 public class Mana implements IMana {
 
     private int mana;
@@ -36,7 +42,7 @@ public class Mana implements IMana {
 
     @Override
     public boolean useMana(int amount) {
-        if(this.mana > amount)
+        if(this.mana >= amount)
         {
             this.mana -= amount;
             return true;
@@ -63,6 +69,18 @@ public class Mana implements IMana {
         if (this.mana < this.maxMana) {
             this.mana += regenMana;
         }
+    }
+
+    @Override
+    public boolean checkMana(int mana) {
+        return this.mana >= mana;
+    }
+
+    public static void syncManaToClient(Player player) {
+        player.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(mana -> {
+            ManaSyncPacket packet = new ManaSyncPacket(mana.getMana(), mana.getMaxMana());
+            ModMessages.INSTANCE.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) player), packet);
+        });
     }
 
 }
