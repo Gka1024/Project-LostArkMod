@@ -1,8 +1,8 @@
 package net.Locke.lostarkmod.skills.salvation;
 
-import net.Locke.lostarkmod.capability.IMana;
 import net.Locke.lostarkmod.capability.Mana;
 import net.Locke.lostarkmod.capability.ManaProvider;
+import net.Locke.lostarkmod.skills.SkillUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
@@ -20,13 +20,13 @@ public class SalvationSkill2 {
     private static boolean isSkillHolding = false;
 
     static long LAST_BOW_SKILL_USED_TIME = 0;
-    static int BOW_SKILL_COOLTIME = 60; // 3sec
+    static int BOW_SKILL_COOLDOWN = 60; // 3sec
     static Boolean isBowSkillAvailable = true;
     static int BOW_SKILL_MANA_COST = 20;
 
     static long LAST_CROSSBOW_SKILL_USED_TIME = 0;
     static long CHARGE_START_TIME = 0;
-    static int CROSSBOW_SKILL_COOLTIME = 00; // 10sec
+    static int CROSSBOW_SKILL_COOLDOWN = 00; // 10sec
     static Boolean isCrossbowSkillAvailable = true;
     static int CROSSBOW_SKILL_MANA_COST = 40;
 
@@ -40,13 +40,6 @@ public class SalvationSkill2 {
         if (isSkillHolding && isCrossbowSkillAvailable) {
             showCurrentKeyDown(getCurrentGameTime() - CHARGE_START_TIME, 30, 40);
         }
-    }
-
-    private static long getCurrentGameTime() {
-        if (Minecraft.getInstance().level != null) {
-            return Minecraft.getInstance().level.getGameTime();
-        }
-        return 0;
     }
 
     public static void skillUse(Player player) {
@@ -70,52 +63,61 @@ public class SalvationSkill2 {
     }
 
     private static void bowSkillUse(Player player) {
-        if (!checkPlayerMana(player, 20)) {
-            player.displayClientMessage(Component.literal("마나가 부족합니다."), true);
+
+        if (!isBowSkillAvailable) {
+            player.displayClientMessage(Component.literal("아직 사용할 수 없습니다."), true);
             return;
         }
 
-        if (isBowSkillAvailable) {
+        if (SkillUtil.checkPlayerMana(player, 20)) {
             playerKnockBack(player);
             createArrow(player, 2.0f);
             LAST_BOW_SKILL_USED_TIME = getCurrentGameTime();
             isBowSkillAvailable = false;
-            useMana(player, 20);
-        }
-    }
-
-    private static void checkBowSkillCooltime() {
-        if (LAST_BOW_SKILL_USED_TIME + BOW_SKILL_COOLTIME < getCurrentGameTime()) {
-            isBowSkillAvailable = true;
-        }
-    }
-
-    private static void checkCrossbowSkillCooltime() {
-        if (LAST_CROSSBOW_SKILL_USED_TIME + CROSSBOW_SKILL_COOLTIME < getCurrentGameTime()) {
-            isCrossbowSkillAvailable = true;
-        }
-    }
-
-    private static Vec3 getLookVector(Player player) {
-        return player.getLookAngle().normalize();
-    }
-
-    private static void crossBowSkillUse(Player player, int time) {
-        if (!checkPlayerMana(player, CROSSBOW_SKILL_MANA_COST)) {
+            SkillUtil.useMana(player, 20);
+        } else {
             player.displayClientMessage(Component.literal("마나가 부족합니다."), true);
             return;
         }
-        if (isCrossbowSkillAvailable) {
+    }
+
+    private static void crossBowSkillUse(Player player, int time) {
+
+        if (!isCrossbowSkillAvailable) {
+            player.displayClientMessage(Component.literal("아직 사용할 수 없습니다."), true);
+            return;
+        }
+
+        if (SkillUtil.checkPlayerMana(player, CROSSBOW_SKILL_MANA_COST)) {
             LAST_CROSSBOW_SKILL_USED_TIME = getCurrentGameTime();
             isCrossbowSkillAvailable = false;
-            useMana(player, CROSSBOW_SKILL_MANA_COST);
+            SkillUtil.useMana(player, CROSSBOW_SKILL_MANA_COST);
             if (time > CROSSBOW_SKILL_CHARGE_MIN && time < CROSSBOW_SKILL_CHARGE_MAX) {
                 playerKnockBack(player);
                 createArrow(player, 3.5f);
             } else {
                 createArrow(player, 1.0f);
             }
+        } else {
+            player.displayClientMessage(Component.literal("마나가 부족합니다."), true);
+            return;
         }
+    }
+
+    private static void checkBowSkillCooltime() {
+        if (LAST_BOW_SKILL_USED_TIME + BOW_SKILL_COOLDOWN < getCurrentGameTime()) {
+            isBowSkillAvailable = true;
+        }
+    }
+
+    private static void checkCrossbowSkillCooltime() {
+        if (LAST_CROSSBOW_SKILL_USED_TIME + CROSSBOW_SKILL_COOLDOWN < getCurrentGameTime()) {
+            isCrossbowSkillAvailable = true;
+        }
+    }
+
+    private static Vec3 getLookVector(Player player) {
+        return player.getLookAngle().normalize();
     }
 
     private static void showCurrentKeyDown(long timeTicks, int startTick, int endTick) // 50
@@ -160,23 +162,8 @@ public class SalvationSkill2 {
         world.addFreshEntity(arrow);
     }
 
-    private static void useMana(Player player, int manaCost) {
-        player.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaCap -> {
-            if (manaCap.useMana(manaCost)) {
-                // 마나 소모 성공 시 스킬 발동
-                Mana.syncManaToClient(player);
-
-            } else {
-                // 마나 부족 시 메시지 표시
-                player.displayClientMessage(Component.literal("마나가 부족합니다."), true);
-            }
-        });
-    }
-
-    private static boolean checkPlayerMana(Player player, int manaCost) {
-        return player.getCapability(ManaProvider.MANA_CAPABILITY)
-                .map(manaCap -> manaCap.checkMana(manaCost))
-                .orElse(false);
+    private static long getCurrentGameTime() {
+        return SkillUtil.getCurrentGameTime();
     }
 
 }

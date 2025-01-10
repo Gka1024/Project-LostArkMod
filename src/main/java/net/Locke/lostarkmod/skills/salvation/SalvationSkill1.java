@@ -9,7 +9,6 @@ import net.minecraft.world.item.Items;
 
 public class SalvationSkill1 {
 
- 
     public static void tick() {
 
     }

@@ -4,6 +4,7 @@ import net.Locke.lostarkmod.LostArkMod;
 import net.Locke.lostarkmod.effect.custom.armorset.*;
 import net.Locke.lostarkmod.effect.custom.beneficial.*;
 import net.Locke.lostarkmod.effect.custom.harmful.*;
+import net.Locke.lostarkmod.effect.custom.special.StunEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -35,6 +36,7 @@ public class ModEffects {
     public static final RegistryObject<MobEffect> SLOW_ATKSPEED = EFFECTS.register("slow_atkspeed", () -> new SlowAttackSpeedEffect());
     public static final RegistryObject<MobEffect> SLOW_MOVESPEED = EFFECTS.register("slow_movespeed", () -> new SlowMoveSpeedEffect());
 
+    public static final RegistryObject<MobEffect> STUN_EFFECT = EFFECTS.register("stun_effect", () -> new StunEffect());
 
     public static final RegistryObject<MobEffect> SET_SALVATION = EFFECTS.register("set_salvation", () -> new SalvationSetEffect());
     public static final RegistryObject<MobEffect> SET_HALLUCINATION = EFFECTS.register("set_hallucination", () -> new HallucinationSetEffect());
