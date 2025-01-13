@@ -1,7 +1,7 @@
 package net.Locke.lostarkmod.skills;
 
 import net.Locke.lostarkmod.effect.ModEffects;
-import net.Locke.lostarkmod.skills.hallucination.HallucinationSkill1;
+import net.Locke.lostarkmod.skills.hallucination.*;
 import net.Locke.lostarkmod.skills.salvation.*;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.CrossbowItem;
@@ -29,7 +29,7 @@ public class SkillManager {
             }
             else if(key == 2)
             {
-                HallucinationSkill1.skillUse(player);
+                HallucinationSkill2.skillUse(player);
             }
         }
     }

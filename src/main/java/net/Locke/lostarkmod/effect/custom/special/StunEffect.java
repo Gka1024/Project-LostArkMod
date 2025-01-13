@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -22,6 +23,16 @@ public class StunEffect extends MobEffect {
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         entity.setDeltaMovement(0, entity.getDeltaMovement().y, 0);
         entity.setJumping(false);
+
+        if (!entity.hasEffect(MobEffects.BLINDNESS)) {
+        entity.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                MobEffects.BLINDNESS, -1, 0, false, false, false)); // showIcon=false
+    }
+
+    if (!entity.hasEffect(MobEffects.JUMP)) {
+        entity.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                MobEffects.JUMP, -1, 128, false, false, false)); // showIcon=false
+    }
         EntityStop(entity);
     }
 
@@ -37,6 +48,8 @@ public class StunEffect extends MobEffect {
     @Override
     public void removeAttributeModifiers(LivingEntity pLivingEntity, AttributeMap pAttributeMap, int pAmplifier) {
         pLivingEntity.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(MODIFIER_UUID);
+        pLivingEntity.removeEffect(MobEffects.BLINDNESS);
+        pLivingEntity.removeEffect(MobEffects.JUMP);
     }
 
     @Override
