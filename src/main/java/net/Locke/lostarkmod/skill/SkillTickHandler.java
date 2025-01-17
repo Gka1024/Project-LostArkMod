@@ -1,9 +1,7 @@
-package net.Locke.lostarkmod.skills;
+package net.Locke.lostarkmod.skill;
 
 import net.Locke.lostarkmod.LostArkMod;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.network.chat.Component;
+import net.Locke.lostarkmod.skill.salvation.SalvationSkill1;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
@@ -14,10 +12,13 @@ import net.minecraftforge.fml.common.Mod;
 public class SkillTickHandler {
 
     @SubscribeEvent
-    public static void onClientTick(TickEvent.ClientTickEvent event)
-    {
-        SkillManager.tick();
+    public void onPlayerTick(TickEvent.PlayerTickEvent event) {
+
+        if (event.phase == TickEvent.Phase.END) { // 틱 끝에 실행
+            Player player = event.player;
+            SkillManager.tick(player);
+        }
+
     }
 
-    
 }

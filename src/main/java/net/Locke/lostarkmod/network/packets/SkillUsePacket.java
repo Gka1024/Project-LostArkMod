@@ -2,28 +2,25 @@ package net.Locke.lostarkmod.network.packets;
 
 import java.util.function.Supplier;
 
-import net.Locke.lostarkmod.skills.SkillManager;
+import net.Locke.lostarkmod.skill.SkillManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 
 public class SkillUsePacket {
 
-    int mana = 0;
     int skillNum = 0;
     int chargeTime = 0;
     
 
-    public SkillUsePacket(int currentMana, int num, int chargeTime)
+    public SkillUsePacket(int num, int chargeTime)
     {
-        this.mana = currentMana;
         this.skillNum = num;
         this.chargeTime = chargeTime;
     }
 
     public static void encode(SkillUsePacket packet, FriendlyByteBuf buffer)
     {
-        buffer.writeInt(packet.mana);
         buffer.writeInt(packet.skillNum);
         buffer.writeInt(packet.chargeTime);
     }
@@ -31,10 +28,9 @@ public class SkillUsePacket {
 
     public static SkillUsePacket decode(FriendlyByteBuf buffer)
     {
-        int mana = buffer.readInt();
         int skillNum = buffer.readInt();
         int chargeTime = buffer.readInt();
-        return new SkillUsePacket(mana, skillNum, chargeTime);
+        return new SkillUsePacket( skillNum, chargeTime);
     }
 
     public void handle(Supplier<NetworkEvent.Context> contextSupplier)
@@ -59,11 +55,11 @@ public class SkillUsePacket {
 
     private void handleSkillUse(ServerPlayer player, int skillNum)
     {
-        SkillManager.executeSkill(player, skillNum);
+        SkillManager.useSkill(player, skillNum);
     }
 
     private void handleKeyDownSkillUse(ServerPlayer player, int skillNum, int chargeTime)
     {
-        SkillManager.executeKeydownSkill(player, skillNum, chargeTime);
+       // SkillManager.executeKeydownSkill(player, skillNum, chargeTime);
     }
 }

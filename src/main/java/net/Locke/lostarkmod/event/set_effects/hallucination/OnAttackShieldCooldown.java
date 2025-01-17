@@ -45,7 +45,6 @@ public class OnAttackShieldCooldown {
                 if (tag.contains("lastShieldTime")) {
                     long lastShieldTime = tag.getLong("lastShieldTime");
                     long newShieldTime = lastShieldTime - COOLDOWN_REDUCTION_TICKS;
-                    System.out.println(newShieldTime);
                     tag.putLong("lastShieldTime", newShieldTime);
                 }
             }

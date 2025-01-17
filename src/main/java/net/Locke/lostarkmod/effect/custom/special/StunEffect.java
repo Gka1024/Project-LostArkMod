@@ -25,14 +25,14 @@ public class StunEffect extends MobEffect {
         entity.setJumping(false);
 
         if (!entity.hasEffect(MobEffects.BLINDNESS)) {
-        entity.addEffect(new net.minecraft.world.effect.MobEffectInstance(
-                MobEffects.BLINDNESS, -1, 0, false, false, false)); // showIcon=false
-    }
+            entity.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    MobEffects.BLINDNESS, -1, 0, false, false, false)); // showIcon=false
+        }
 
-    if (!entity.hasEffect(MobEffects.JUMP)) {
-        entity.addEffect(new net.minecraft.world.effect.MobEffectInstance(
-                MobEffects.JUMP, -1, 128, false, false, false)); // showIcon=false
-    }
+        if (!entity.hasEffect(MobEffects.JUMP)) {
+            entity.addEffect(new net.minecraft.world.effect.MobEffectInstance(
+                    MobEffects.JUMP, -1, 128, false, false, false)); // showIcon=false
+        }
         EntityStop(entity);
     }
 

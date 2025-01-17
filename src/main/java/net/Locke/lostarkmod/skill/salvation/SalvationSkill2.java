@@ -1,8 +1,7 @@
-package net.Locke.lostarkmod.skills.salvation;
+package net.Locke.lostarkmod.skill.salvation;
 
-import net.Locke.lostarkmod.capability.Mana;
-import net.Locke.lostarkmod.capability.ManaProvider;
-import net.Locke.lostarkmod.skills.SkillUtil;
+import net.Locke.lostarkmod.skill.Skill;
+import net.Locke.lostarkmod.skill.SkillUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
@@ -15,7 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
-public class SalvationSkill2 {
+public class SalvationSkill2 extends Skill {
 
     private static boolean isSkillHolding = false;
 
@@ -33,7 +32,13 @@ public class SalvationSkill2 {
     static int CROSSBOW_SKILL_CHARGE_MIN = 30;
     static int CROSSBOW_SKILL_CHARGE_MAX = 40;
 
-    public static void tick() {
+    public SalvationSkill2()
+    {
+        super("Shoot", 0, 30);
+    }
+
+    @Override
+    public void tick(Player player) {
         checkBowSkillCooltime();
         checkCrossbowSkillCooltime();
 
@@ -164,6 +169,18 @@ public class SalvationSkill2 {
 
     private static long getCurrentGameTime() {
         return SkillUtil.getCurrentGameTime();
+    }
+
+    @Override
+    public void useSkill(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'useSkill'");
+    }
+
+    @Override
+    protected void activateSkill(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'activateSkill'");
     }
 
 }

@@ -1,9 +1,10 @@
-package net.Locke.lostarkmod.skills.hallucination;
+package net.Locke.lostarkmod.skill.hallucination;
 
 import java.util.List;
 
 import net.Locke.lostarkmod.effect.ModEffects;
-import net.Locke.lostarkmod.skills.SkillUtil;
+import net.Locke.lostarkmod.skill.Skill;
+import net.Locke.lostarkmod.skill.SkillUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -17,7 +18,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
-public class HallucinationSkill2 {
+public class HallucinationSkill2 extends Skill {
     private static final double SKILL_RANGE = 5.0d;
     private static final float SKILL_DAMAGE = 2.0f;
     private static final long LAST_SKILL_USED_TIME = 0;
@@ -25,8 +26,14 @@ public class HallucinationSkill2 {
     private static final int SKILL_MANA_COST = 60;
     private static boolean isSkillAvailable = true;
 
-    public static void tick() {
+    @Override
+    public void tick(Player player) {
         checkSkillAvailable();
+    }
+
+    public HallucinationSkill2()
+    {
+        super("SKILLNAME",0, 0);
     }
 
     public static void skillUse(Player player) {
@@ -72,5 +79,17 @@ public class HallucinationSkill2 {
 
     private static long getCurrentGameTime() {
         return SkillUtil.getCurrentGameTime();
+    }
+
+    @Override
+    public void useSkill(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'useSkill'");
+    }
+
+    @Override
+    protected void activateSkill(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'activateSkill'");
     }
 }

@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.skills;
+package net.Locke.lostarkmod.skill;
 
 import net.Locke.lostarkmod.capability.Mana;
 import net.Locke.lostarkmod.capability.ManaProvider;
@@ -24,6 +24,13 @@ public class SkillUtil {
         return player.getCapability(ManaProvider.MANA_CAPABILITY)
                 .map(manaCap -> manaCap.checkMana(manaCost))
                 .orElse(false);
+    }
+
+    public static void regainMana(Player player, int mana) {
+        player.getCapability(ManaProvider.MANA_CAPABILITY).ifPresent(manaCap -> {
+            manaCap.manaRegen(mana);
+            Mana.syncManaToClient(player);
+        });
     }
 
     public static long getCurrentGameTime() {

@@ -1,5 +1,6 @@
-package net.Locke.lostarkmod.skills.salvation;
+package net.Locke.lostarkmod.skill.salvation;
 
+import net.Locke.lostarkmod.skill.Skill;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
@@ -7,10 +8,16 @@ import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
-public class SalvationSkill1 {
+public class SalvationSkill1 extends Skill{
 
-    public static void tick() {
+    @Override
+    public void tick(Player player) {
 
+    }
+
+    public SalvationSkill1()
+    {
+        super("change", 0, 0);
     }
 
     public static void skillUse(Player player) {
@@ -27,4 +34,18 @@ public class SalvationSkill1 {
             }
 
     }
+
+    @Override
+    public void useSkill(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'useSkill'");
+    }
+
+    @Override
+    protected void activateSkill(Player player) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'activateSkill'");
+    }
+
+
 }

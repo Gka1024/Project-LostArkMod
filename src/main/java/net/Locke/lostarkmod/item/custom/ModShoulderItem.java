@@ -29,10 +29,11 @@ public class ModShoulderItem extends Item implements ICurioItem {
     static {
         SET_EFFECTS.put("set_salvation", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, true));
         SET_EFFECTS.put("set_hallucination", new MobEffectInstance(ModEffects.SET_HALLUCINATION.get(), -1, 0, false, false));
-        SET_EFFECTS.put("set_entropy", new MobEffectInstance(ModEffects.SET_DOMINION.get(), -1, 0, false, false));
+        SET_EFFECTS.put("set_entropy", new MobEffectInstance(ModEffects.SET_ENTROPY.get(), -1, 0, false, false));
         SET_EFFECTS.put("set_nightmare", new MobEffectInstance(ModEffects.SET_NIGHTMARE.get(), -1, 0, false, false));
         SET_EFFECTS.put("set_yearning", new MobEffectInstance(ModEffects.SET_YEARNING.get(), -1, 0, false, false));
-        //SET_EFFECTS.put("set6", new MobEffectInstance(ModEffects.SET_SALVATION.get(), -1, 0, false, false));
+        // SET_EFFECTS.put("set6", new MobEffectInstance(ModEffects.SET_SALVATION.get(),
+        // -1, 0, false, false));
     }
 
     public ModShoulderItem(Properties properties, String setId) {
