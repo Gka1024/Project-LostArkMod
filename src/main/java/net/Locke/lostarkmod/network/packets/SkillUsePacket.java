@@ -60,6 +60,6 @@ public class SkillUsePacket {
 
     private void handleKeyDownSkillUse(ServerPlayer player, int skillNum, int chargeTime)
     {
-       // SkillManager.executeKeydownSkill(player, skillNum, chargeTime);
+        SkillManager.useSkill(player, skillNum, chargeTime);
     }
 }

@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.skill;
+package net.Locke.lostarkmod.skill.common;
 
 public class SkillState {
     public long LAST_SKILL_USED_TIME;

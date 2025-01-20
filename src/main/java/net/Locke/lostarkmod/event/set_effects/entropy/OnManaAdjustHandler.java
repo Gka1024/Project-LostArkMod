@@ -2,7 +2,7 @@ package net.Locke.lostarkmod.event.set_effects.entropy;
 
 import net.Locke.lostarkmod.capability.Mana;
 import net.Locke.lostarkmod.capability.ManaProvider;
-import net.Locke.lostarkmod.skill.SkillUtil;
+import net.Locke.lostarkmod.skill.common.SkillUtil;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;

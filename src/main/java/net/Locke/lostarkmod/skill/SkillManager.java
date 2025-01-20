@@ -3,8 +3,10 @@ package net.Locke.lostarkmod.skill;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.Locke.lostarkmod.armorset.ArmorSet;
-import net.Locke.lostarkmod.armorset.PlayerArmorSetState;
+import net.Locke.lostarkmod.armorset.*;
+import net.Locke.lostarkmod.armorset.playerarmor.*;
+import net.Locke.lostarkmod.skill.common.Skill;
+import net.Locke.lostarkmod.skill.common.SkillState;
 import net.Locke.lostarkmod.skill.entropy.*;
 import net.Locke.lostarkmod.skill.hallucination.*;
 import net.Locke.lostarkmod.skill.salvation.*;
@@ -17,6 +19,10 @@ public class SkillManager {
 
     static {
         // 스킬을 등록
+        registerSkill();
+    }
+
+    private static void registerSkill() {
         registerSkill(new EntropySkill1());
         registerSkill(new EntropySkill2());
         registerSkill(new HallucinationSkill1());
@@ -29,6 +35,10 @@ public class SkillManager {
         skillRegistry.put(skill.getName(), skill);
     }
 
+    public static void removePlayerSkills(Player player) {
+        playerSkillStates.remove(player);
+    }
+
     public static Skill getSkillByName(String name) {
         return skillRegistry.get(name);
     }
@@ -37,6 +47,12 @@ public class SkillManager {
         return playerSkillStates
                 .computeIfAbsent(player, k -> new HashMap<>())
                 .computeIfAbsent(skill, k -> new SkillState());
+    }
+
+    public static void setSkillState(Player player, Skill skill, SkillState state) {
+        playerSkillStates
+                .computeIfAbsent(player, k -> new HashMap<>())
+                .put(skill, state);
     }
 
     public static void tick(Player player) {
@@ -53,9 +69,20 @@ public class SkillManager {
         }
     }
 
+    public static void useSkill(Player player, int skillIndex, int chargeTime) {
+        Skill skill = getSkillByIndex(player, skillIndex);
+        if (skill != null) {
+            if (skill instanceof SalvationSkill2) {
+                SalvationSkill2.useSkill(player, chargeTime);
+            } else {
+                return;
+            }
+        }
+    }
+
     private static Skill getSkillByIndex(Player player, int skillIndex) {
         ArmorSet set = PlayerArmorSetState.getSet(player);
-        Skill skill = set.getSkill(skillIndex);
+        Skill skill = set.getSkill(skillIndex - 1);
         return skill;
     }
 

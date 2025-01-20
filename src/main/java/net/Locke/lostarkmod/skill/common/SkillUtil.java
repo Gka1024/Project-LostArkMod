@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.skill;
+package net.Locke.lostarkmod.skill.common;
 
 import net.Locke.lostarkmod.capability.Mana;
 import net.Locke.lostarkmod.capability.ManaProvider;

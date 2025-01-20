@@ -3,8 +3,8 @@ package net.Locke.lostarkmod.skill.hallucination;
 import java.util.List;
 
 import net.Locke.lostarkmod.effect.ModEffects;
-import net.Locke.lostarkmod.skill.Skill;
-import net.Locke.lostarkmod.skill.SkillUtil;
+import net.Locke.lostarkmod.skill.common.Skill;
+import net.Locke.lostarkmod.skill.common.SkillUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
@@ -42,7 +42,7 @@ public class HallucinationSkill1 extends Skill {
 
     public HallucinationSkill1()
     {
-        super("SKILLNAME", 0, 0);
+        super("Bash", 0, 0);
     }
 
     public static void skillUse(Player player) {

@@ -1,6 +1,7 @@
-package net.Locke.lostarkmod.skill;
+package net.Locke.lostarkmod.skill.common;
 
 import net.Locke.lostarkmod.LostArkMod;
+import net.Locke.lostarkmod.skill.SkillManager;
 import net.Locke.lostarkmod.skill.salvation.SalvationSkill1;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;

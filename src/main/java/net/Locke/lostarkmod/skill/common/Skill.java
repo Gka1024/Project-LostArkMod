@@ -1,4 +1,4 @@
-package net.Locke.lostarkmod.skill;
+package net.Locke.lostarkmod.skill.common;
 
 import net.minecraft.world.entity.player.Player;
 
@@ -7,7 +7,7 @@ public abstract class Skill {
     private final int manaCost;
     private int coolDownTime;
     private int currentCoolDown;
-    private boolean isActive = false;
+    protected boolean isActive = false;
 
     public Skill(String SkillName, int manaCost, int coolDownTime) {
         this.SkillName = SkillName;
@@ -45,18 +45,24 @@ public abstract class Skill {
 
     }
 
-    protected abstract void activateSkill(Player player); // 스킬 발동
+    protected void activateSkill(Player player)
+    {
+        
+    } // 스킬 발동
 
     protected void applyEffects(Player player) {
         // 지속 효과용 스킬
     }
 
     protected void deactivateSkill(Player player) {
-        isActive = false;
     } // 스킬 해제
 
     public boolean isActive() {
         return isActive;
+    }
+
+    protected void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getSkillName() {

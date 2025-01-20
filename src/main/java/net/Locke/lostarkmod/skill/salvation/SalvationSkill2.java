@@ -1,7 +1,7 @@
 package net.Locke.lostarkmod.skill.salvation;
 
-import net.Locke.lostarkmod.skill.Skill;
-import net.Locke.lostarkmod.skill.SkillUtil;
+import net.Locke.lostarkmod.skill.common.Skill;
+import net.Locke.lostarkmod.skill.common.SkillUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
@@ -47,7 +47,8 @@ public class SalvationSkill2 extends Skill {
         }
     }
 
-    public static void skillUse(Player player) {
+    @Override
+    public void useSkill(Player player) {
         ItemStack item = player.getMainHandItem();
         if (item.getItem() instanceof BowItem) {
             bowSkillUse(player);
@@ -59,7 +60,7 @@ public class SalvationSkill2 extends Skill {
         }
     }
 
-    public static void skillUse(Player player, int chargeTime) {
+    public static void useSkill(Player player, int chargeTime) {
         ItemStack item = player.getMainHandItem();
         if (item.getItem() instanceof CrossbowItem) {
             crossBowSkillUse(player, chargeTime);
@@ -171,11 +172,7 @@ public class SalvationSkill2 extends Skill {
         return SkillUtil.getCurrentGameTime();
     }
 
-    @Override
-    public void useSkill(Player player) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'useSkill'");
-    }
+    
 
     @Override
     protected void activateSkill(Player player) {

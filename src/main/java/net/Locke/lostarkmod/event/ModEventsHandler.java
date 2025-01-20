@@ -18,6 +18,7 @@ public class ModEventsHandler {
         MinecraftForge.EVENT_BUS.register(new FortuneBoostHandler());
         MinecraftForge.EVENT_BUS.register(new DamageAdjustHandler());
         MinecraftForge.EVENT_BUS.register(new AttackDamageHandler());
+        MinecraftForge.EVENT_BUS.register(new PlayerArmorSetEventHandler());
 
         registerSalvation();
         registerHallucination();
