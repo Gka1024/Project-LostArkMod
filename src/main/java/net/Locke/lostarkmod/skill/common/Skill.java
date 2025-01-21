@@ -1,5 +1,9 @@
 package net.Locke.lostarkmod.skill.common;
 
+import net.Locke.lostarkmod.skill.SkillManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
 public abstract class Skill {
@@ -43,6 +47,15 @@ public abstract class Skill {
         activateSkill(player);
         currentCoolDown = coolDownTime;
 
+    }
+
+    public int getCoolDownTime()
+    {
+        return coolDownTime;
+    }
+
+    protected SkillState getSkillState(Player player) {
+        return SkillManager.getSkillState(player, this);
     }
 
     protected void activateSkill(Player player)

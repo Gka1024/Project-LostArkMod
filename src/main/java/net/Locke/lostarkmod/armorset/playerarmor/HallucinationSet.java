@@ -3,13 +3,12 @@ package net.Locke.lostarkmod.armorset.playerarmor;
 import java.util.List;
 
 import net.Locke.lostarkmod.armorset.ArmorSet;
-import net.Locke.lostarkmod.skill.salvation.SalvationSkill1;
-import net.Locke.lostarkmod.skill.salvation.SalvationSkill2;
+import net.Locke.lostarkmod.skill.hallucination.*;
 
 public class HallucinationSet extends ArmorSet {
 
     public HallucinationSet() {
-        super("HallucinationSet", List.of(new SalvationSkill1(), new SalvationSkill2()));
+        super("HallucinationSet", List.of(new HallucinationSkill1(), new HallucinationSkill2()));
     }
 
 }

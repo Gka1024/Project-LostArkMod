@@ -11,6 +11,8 @@ import net.Locke.lostarkmod.skill.entropy.*;
 import net.Locke.lostarkmod.skill.hallucination.*;
 import net.Locke.lostarkmod.skill.salvation.*;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 public class SkillManager {
 
@@ -28,7 +30,8 @@ public class SkillManager {
         registerSkill(new HallucinationSkill1());
         registerSkill(new HallucinationSkill2());
         registerSkill(new SalvationSkill1());
-        registerSkill(new SalvationSkill2());
+        registerSkill(new SalvationSkillBow());
+        registerSkill(new SalvationSkillCrossbow());
     }
 
     private static void registerSkill(Skill skill) {
@@ -62,20 +65,41 @@ public class SkillManager {
         }
     }
 
+    public static boolean isSkillReady(Player player, Skill skill) {
+        SkillState state = getSkillState(player, skill);
+        return state.isSkillReady();
+    }
+
     public static void useSkill(Player player, int skillIndex) {
         Skill skill = getSkillByIndex(player, skillIndex);
-        if (skill != null) {
-            skill.useSkill(player);
+        ArmorSet set = PlayerArmorSetState.getSet(player);
+        if (skill != null && set != null) {
+            if (set.getName() == "Salvation" && skillIndex == 2) {
+                if (player.getMainHandItem().getItem() == Items.CROSSBOW) {
+                    skill = getSkillByIndex(player, skillIndex + 1);
+                }
+            }
+            SkillState state = getSkillState(player, skill);
+            if (state.isSkillReady()) {
+                skill.useSkill(player);
+                state.setCooltime(skill.getCoolDownTime());
+            }
+
         }
+
     }
 
     public static void useSkill(Player player, int skillIndex, int chargeTime) {
         Skill skill = getSkillByIndex(player, skillIndex);
-        if (skill != null) {
-            if (skill instanceof SalvationSkill2) {
-                SalvationSkill2.useSkill(player, chargeTime);
-            } else {
-                return;
+        ArmorSet set = PlayerArmorSetState.getSet(player);
+        if (skill != null && set != null) {
+            if (set.getName() == "Salvation" && skillIndex == 2) {
+                if (player.getMainHandItem().getItem() == Items.CROSSBOW) {
+                    skill = getSkillByIndex(player, skillIndex + 1);
+                }
+            }
+            if (skill instanceof SalvationSkillCrossbow) {
+                SalvationSkillCrossbow.crossBowSkillUse(player, chargeTime);
             }
         }
     }
