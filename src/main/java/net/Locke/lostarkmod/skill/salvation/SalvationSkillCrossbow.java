@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 public class SalvationSkillCrossbow extends Skill {
 
     public SalvationSkillCrossbow() {
-        super("Shoot", 60, 200);
+        super("ChargeShoot", 60, 200);
     }
 
     private static final int CROSSBOW_SKILL_CHARGE_MIN = 30;
@@ -24,16 +24,20 @@ public class SalvationSkillCrossbow extends Skill {
     public void tick(Player player) {
         getSkillState(player).tick(player);
         super.tick(player);
+        if (getSkillState(player).isSkillHolding) {
+            showCurrentKeyDown(player, CROSSBOW_SKILL_CHARGE_MAX, CROSSBOW_SKILL_CHARGE_MIN, CROSSBOW_SKILL_CHARGE_MAX);
+        }
     }
 
     @Override
     public void useSkill(Player player) {
-
-        super.useSkill(player);
+        getSkillState(player).isSkillHolding = true;
     }
 
-    public static void crossBowSkillUse(Player player, int time) {
-
+    @Override
+    public void useSkill(Player player, int time) {
+        getSkillState(player).isSkillHolding = false;
+        super.useSkill(player);
         if (time > CROSSBOW_SKILL_CHARGE_MIN && time < CROSSBOW_SKILL_CHARGE_MAX) {
             playerKnockBack(player);
             createArrow(player, 3.5f);
@@ -62,5 +66,27 @@ public class SalvationSkillCrossbow extends Skill {
         arrow.setOwner(player);
         arrow.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
         world.addFreshEntity(arrow);
+    }
+
+    protected static void showCurrentKeyDown(Player player, long timeTicks, int startTick, int endTick) // 키 다운 시간 표시 최대
+    {
+        if (player == null) {
+            return;
+        }
+
+        String displayString = "";
+
+        for (int i = 0; i < 15; i++) {
+            if (timeTicks > (i * 10) / 3) {
+                displayString += "=";
+            } else {
+                displayString += "-";
+            }
+            if (i == (startTick * 3) / 10 || i == (endTick * 3) / 10) {
+                displayString += "|";
+            }
+        }
+
+        player.displayClientMessage(Component.literal(displayString), true);
     }
 }

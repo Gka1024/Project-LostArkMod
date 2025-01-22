@@ -65,11 +65,6 @@ public class SkillManager {
         }
     }
 
-    public static boolean isSkillReady(Player player, Skill skill) {
-        SkillState state = getSkillState(player, skill);
-        return state.isSkillReady();
-    }
-
     public static void useSkill(Player player, int skillIndex) {
         Skill skill = getSkillByIndex(player, skillIndex);
         ArmorSet set = PlayerArmorSetState.getSet(player);
@@ -79,10 +74,9 @@ public class SkillManager {
                     skill = getSkillByIndex(player, skillIndex + 1);
                 }
             }
-            SkillState state = getSkillState(player, skill);
-            if (state.isSkillReady()) {
-                skill.useSkill(player);
-                state.setCooltime(skill.getCoolDownTime());
+
+            if (skill.isSkillReady(player)) {
+                skillActivate(player, skill);
             }
 
         }
@@ -99,9 +93,21 @@ public class SkillManager {
                 }
             }
             if (skill instanceof SalvationSkillCrossbow) {
-                SalvationSkillCrossbow.crossBowSkillUse(player, chargeTime);
+                applySkillCooldown(player, skill);
+                skill.useSkill(player, chargeTime);
             }
         }
+    }
+
+    private static void skillActivate(Player player, Skill skill)
+    {
+        applySkillCooldown(player, skill);
+        skill.useSkill(player);
+    }
+
+    private static void applySkillCooldown(Player player, Skill skill)
+    {
+        SkillState state = getSkillState(player, skill);
     }
 
     private static Skill getSkillByIndex(Player player, int skillIndex) {

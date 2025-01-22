@@ -5,49 +5,18 @@ import net.minecraft.world.entity.player.Player;
 
 public class SkillState {
     public long LAST_SKILL_USED_TIME;
-    public int coolDownTime;
-    public int tickCounter;
-    public boolean isSkillHolding;
+    public boolean isSkillHolding = false;
 
-    public void resetCooltime()
-    {
-        this.coolDownTime = 0;
-        this.tickCounter = 0;
-    }
-
-    public void setCooltime(int coolDownTime)
-    {
-        this.coolDownTime = coolDownTime;
-    }
-
-    public void tick(Player player)
-    {
-        if (this.coolDownTime > 0)
-        {
-            this.tickCounter++;
-            if (this.tickCounter >= this.coolDownTime)
-            {
-                this.coolDownTime = 0;
-                this.tickCounter = 0;
-            }
-        }
-        if(isSkillHolding)
-        {
-
+    public void tick(Player player) {
+        System.out.println("tickCounter: ");
+        if (isSkillHolding) {
+            showCurrentKeyDown(player, player.level().getGameTime() - LAST_SKILL_USED_TIME, 30, 40);
+        } else {
+            LAST_SKILL_USED_TIME = player.level().getGameTime();
         }
     }
 
-    public boolean isManaAvailable(Player player, int manaCost)
-    {
-        return SkillUtil.checkPlayerMana(player, manaCost);
-    }
-
-    public boolean isSkillReady()
-    {
-        return this.coolDownTime == 0;
-    }
-
-    protected static void showCurrentKeyDown(Player player, long timeTicks, int startTick, int endTick) // 키 다운 시간 표시 최대 50틱
+    protected static void showCurrentKeyDown(Player player, long timeTicks, int startTick, int endTick) // 키 다운 시간 표시 최대
     {
         if (player == null) {
             return;

@@ -16,16 +16,14 @@ public class SalvationSkillBow extends Skill{
     }
 
     public static void bowSkillUse(Player player) {
+        playerKnockBack(player);
+        createArrow(player, 2.0f);
+    }
 
-        if (SkillUtil.checkPlayerMana(player, 20)) {
-            playerKnockBack(player);
-            createArrow(player, 2.0f);
-
-            SkillUtil.useMana(player, 20);
-        } else {
-            player.displayClientMessage(Component.literal("마나가 부족합니다."), true);
-            return;
-        }
+    @Override
+    public void useSkill(Player player) {
+        super.useSkill(player);
+        bowSkillUse(player);
     }
 
     private static Vec3 getLookVector(Player player) {

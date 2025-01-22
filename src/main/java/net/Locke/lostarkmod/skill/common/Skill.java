@@ -29,16 +29,15 @@ public abstract class Skill {
     }
 
     public void tick(Player player) {
-        if (currentCoolDown > 0) {
+        if(currentCoolDown > 0) {
+            System.out.println("CoolDown: " + currentCoolDown);
             currentCoolDown--;
         }
+        getSkillState(player).tick(player);   
     }
 
     public void useSkill(Player player) {
-        if (currentCoolDown != 0) {
-            return;
-        }
-
+        
         if (!SkillUtil.checkPlayerMana(player, manaCost)) {
             return;
         }
@@ -47,6 +46,11 @@ public abstract class Skill {
         activateSkill(player);
         currentCoolDown = coolDownTime;
 
+    }
+
+    public void useSkill(Player player, int time)
+    {
+        useSkill(player);
     }
 
     public int getCoolDownTime()
@@ -80,5 +84,13 @@ public abstract class Skill {
 
     public String getSkillName() {
         return SkillName;
+    }
+
+    public boolean isSkillReady(Player player) {
+        return currentCoolDown == 0;
+    }
+
+    public void applySkillCooldown(Player player) {
+        currentCoolDown = coolDownTime;
     }
 }
